@@ -1,0 +1,45 @@
+ref_id,claim_or_usage,title,publisher,date_or_update,url,access_date,source_type,status
+ref01,FAV地址入住退房停車,FAV LUX 札幌すすきの,FAV HOTEL,,https://fav-hotels.com/hotels/lux/sapporosusukino/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref02,函館飯店地址與交通,PREMIER HOTEL-CABIN PRESIDENT-函館,Ken Hotels,,https://cabin.kenhotels.com/hakodate/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref03,函館飯店施工,3階宴会場改修工事公告,PREMIER HOTEL-CABIN PRESIDENT-函館,2026-08-03,https://cabin.kenhotels.com/hakodate/uploads/2026/07/db9ecca7881a740bf45b310dd69841c7.pdf,2026-08-10,official PDF,OFFICIAL_CONFIRMED
+ref04,洞爺飯店地址泳池狀態,洞爺サンパレス公式,Granbell Hotels,2026-08,https://www.toyasunpalace.co.jp/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref05,函館至洞爺交通估算,洞爺サンパレスアクセス,Granbell Hotels,,https://www.toyasunpalace.co.jp/access/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref06,白色戀人地址營業,白色戀人公園,HOKKAIDO LOVE,,https://www.visit-hokkaido.jp/tw/spot/detail_10028.html,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref07,啤酒博物館營業休館,札幌啤酒博物館,HOKKAIDO LOVE,,https://www.visit-hokkaido.jp/spot/detail_10025.html,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref08,北海道神宮時段地址,北海道神宮,北海道神宮,,https://www.hokkaidojingu.or.jp/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref09,2026大通啤酒花園日期,札幌的夏,札幌觀光協會,2026,https://www.sapporo.travel/spot/feature/summer/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref10,電視塔營業票價,展望台入場料金・営業時間,さっぽろテレビ塔,,https://www.tv-tower.co.jp/ch/pricetime.html,2026-08-10,official,OFFICIAL_CONFIRMED
+ref11,小樽停車場,観光駐車場,小樽観光協会,2026-07,https://otaru.gr.jp/shop/parking,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref12,GAjA地址營業,店舗情報,GAjA,,https://www.gajafan.com/store/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref13,二條市場地址營業,二条市場について,札幌二条市場,,https://nijomarket.com/about/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref14,Harvester八雲地址營業,ハーベスター八雲,Harvester八雲,2026,https://harvester-yakumo.com/menu/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref15,道之驛與烏賊飯,道の駅YOU・遊・もり,森町,,https://mori.hokkaido.jp/sightseeing/you_1/,2026-08-10,municipal tourism,OFFICIAL_CONFIRMED
+ref16,函館山營運票價,ロープウェイ営業時間・運賃,函館山ロープウェイ,,https://334.co.jp/ropeway/price/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref17,函館山混雜,混雑状況のご案内,函館山ロープウェイ,,https://334.co.jp/ropeway/konzatsu/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref18,函館朝市,函館朝市,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/hakodate-morning-market/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref19,五稜郭塔,五稜郭塔,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/view/goryokaku-tower/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref20,金森紅磚倉庫,金森紅磚倉庫,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/kanemori-red-brick-warehouse-stores/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref21,昭和新山熊牧場地址營業,会社概要,昭和新山熊牧場,,https://kumakuma.co.jp/会社概要/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref22,登別尼克斯營業,ご利用案内,登別マリンパークニクス,2026,https://nixe-aqua.com/guide/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref23,登別停車場,登別温泉駐車場のご案内,登別市,2026-07-03,https://www.city.noboribetsu.lg.jp/docs/2025103000052/,2026-08-10,municipal,OFFICIAL_CONFIRMED
+ref24,住宿稅,北海道宿泊税,北海道庁,2026-07,https://www.pref.hokkaido.lg.jp/kz/kkd/230824.html,2026-08-10,government,OFFICIAL_CONFIRMED
+media01,頁首旅程動線,本頁原創示意圖,Codex,2026-08-10,local-inline-svg-css,2026-08-10,original illustration,OFFICIAL_CONFIRMED
+media02,外部影像,未嵌入第三方照片或地圖圖磚,,,not-applicable,2026-08-10,media note,OFFICIAL_CONFIRMED
+ref25,狸小路店家與分區,狸小路商店街 店舗検索,札幌狸小路商店街振興組合,,https://tanukikoji.or.jp/shop-search/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref26,白色戀人園內甜點,Chocolate Lounge Oxford,石屋商事,,https://www.shiroikoibitopark.jp/restaurant/lounge/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref27,白色戀人園內商店,Shop Piccadilly,石屋商事,,https://www.shiroikoibitopark.jp/shop/shop-piccadilly/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref28,札幌啤酒園餐飲,餐廳一覽,札幌啤酒園,,https://sapporo-bier-garten.jp/shop/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref29,小樽蒲鉾推薦,かま栄工場直売店,小樽觀光協會,,https://otaru.gr.jp/shop/kamaei-chokubaiten,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref30,小樽甜點推薦,LeTAO本店,小樽觀光協會,,https://otaru.gr.jp/shop/letao_honten,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref31,小樽玻璃購物,北一硝子三号館,小樽觀光協會,,https://otaru.gr.jp/shop/kitaichiglass-building3,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref32,小樽音樂盒購物,小樽オルゴール堂本館,小樽觀光協會,,https://otaru.gr.jp/shop/orgel-doh-mainbuilding,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref33,函館山購物,函館山山頂ショップ,函館山ロープウェイ,,https://334.co.jp/shop/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref34,函館朝市餐飲,函館朝市いくら亭,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/food-drink-sushi-seafood-rice-bowl/hakodate-morning-market-ikura-tei/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref35,五稜郭甜點購物,六花亭五稜郭店,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/rokkatei-goryokaku-store/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref36,元町午茶,Victorian Rose,Travel Hakodate,,https://www.hakodate.travel/cht/sightseeing-spots/food-drink-cafe/victorian-rose-former-british-consulate-of-hakodate/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref37,函館灣甜點,函館咖啡甜點指南,Travel Hakodate,,https://www.hakodate.travel/cht/more-about-hakodate/cafe-sweets/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref38,熊牧場商店與餵食,昭和新山熊牧場,昭和新山熊牧場,2026-04-24,https://kumakuma.co.jp/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref39,洞爺飯店商店時段,日歸溫泉與館內設施,洞爺太陽皇宮,,https://www.toyasunpalace.co.jp/dayuse/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref40,尼克斯餐飲購物,グルメ&ショップ,登別マリンパークニクス,,https://nixe-aqua.com/food-shop/,2026-08-10,official,OFFICIAL_CONFIRMED
+ref41,登別溫泉購物時段,ショッピングについて,登別國際觀光協會,,https://noboribetsu-spa.jp/faq/shopping/,2026-08-10,official tourism,OFFICIAL_CONFIRMED
+ref42,登別東店,わかさいも本舗登別東店,登別國際觀光協會,,https://noboribetsu-spa.jp/spot/spot0223/,2026-08-10,official tourism,OFFICIAL_CONFIRMED

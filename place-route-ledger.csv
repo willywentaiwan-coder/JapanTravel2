@@ -1,0 +1,55 @@
+record_type,id,day,sequence,official_name,full_address,mode_or_category,estimated_duration,status,last_verified,official_url,traveler_caveat
+place,p01,1,1,新千歳空港,北海道千歳市美々,airport,,USER_ASSUMPTION,2026-08-10,https://www.new-chitose-airport.jp/,Excel未明示機場；依約1小時至札幌推定
+place,p02,1,2,FAV LUX 札幌すすきの,〒064-0806 北海道札幌市中央区南6条西7丁目2-2,hotel,,OFFICIAL_CONFIRMED,2026-08-10,https://fav-hotels.com/hotels/lux/sapporosusukino/,停車15格不可預約
+place,p03,1,3,狸小路商店街,北海道札幌市中央区南2・3条西1～7丁目,shopping street,,CROSS_CHECKED,2026-08-10,https://tanukikoji.or.jp/,街區地址非單一門牌
+place,p04,2,1,白い恋人パーク,〒063-0052 北海道札幌市西区宮の沢2条2丁目11-36,attraction,,OFFICIAL_CONFIRMED,2026-08-10,https://www.visit-hokkaido.jp/tw/spot/detail_10028.html,體驗課程需另查名額
+place,p05,2,2,北海道神宮,〒064-8505 北海道札幌市中央区宮ケ丘474,shrine,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hokkaidojingu.or.jp/,旺季停車可能擁擠
+place,p06,2,3,サッポロビール博物館,〒065-8633 北海道札幌市東区北7条東9丁目1-1, museum,,OFFICIAL_CONFIRMED,2026-08-10,https://www.visit-hokkaido.jp/spot/detail_10025.html,駕駛勿飲酒；Premium Tour需查預約
+place,p07,2,4,さっぽろテレビ塔,〒060-0042 札幌市中央区大通西1丁目,observation tower,,OFFICIAL_CONFIRMED,2026-08-10,https://www.tv-tower.co.jp/ch/pricetime.html,活動可能改變時段
+place,p08,2,5,福祉協賛さっぽろ大通ビアガーデン,大通公園西5～8・10・11丁目,event,,OFFICIAL_CONFIRMED,2026-08-10,https://www.sapporo.travel/summerfes/,2026-07-23至2026-08-18
+place,p09,3,1,小樽観光駐車場,〒047-0007 北海道小樽市港町4-2,parking,,OFFICIAL_CONFIRMED,2026-08-10,https://otaru.gr.jp/shop/parking,費率以現場為準
+place,p10,3,2,小樽運河,北海道小樽市港町5,attraction,,CROSS_CHECKED,2026-08-10,https://otaru.gr.jp/project/otaru-tourist-brochure,熱門時段人潮多
+place,p11,3,3,小樽堺町通り商店街,北海道小樽市堺町,shopping street,,CROSS_CHECKED,2026-08-10,https://otaru.gr.jp/project/otaru-tourist-brochure,街區地址非單一門牌
+place,p12,3,4,GAjA すすきの店,札幌市中央区南5条西2丁目 サイバーシティービル3F,restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://www.gajafan.com/store/,訂位由使用者確認
+place,p13,4,1,札幌二条市場,北海道札幌市中央区南3条東1～2丁目,market,,OFFICIAL_CONFIRMED,2026-08-10,https://nijomarket.com/about/,各店營業時間不同
+place,p14,4,2,ハーベスター八雲,〒049-3124 北海道二海郡八雲町浜松365,restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://harvester-yakumo.com/menu/,排隊時啟用森町備案
+place,p15,4,3,プレミアホテル-CABIN PRESIDENT-函館,〒040-0063 北海道函館市若松町14番10号,hotel,,OFFICIAL_CONFIRMED,2026-08-10,https://cabin.kenhotels.com/hakodate/,2026-08-10至08-17白天施工
+place,p16,4,4,函館山ロープウェイ山麓駅,北海道函館市元町19-7,ropeway,,OFFICIAL_CONFIRMED,2026-08-10,https://334.co.jp/ropeway/price/,日落前後候車可能很久
+place,p17,5,1,函館朝市,函館市若松町9-19,market,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/hakodate-morning-market/,各店營業時間不同
+place,p18,5,2,五稜郭タワー,函館市五稜郭町43-9,observation tower,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/view/goryokaku-tower/,無自有停車場
+place,p19,5,3,元町公園,函館市元町12-18,park,,CROSS_CHECKED,2026-08-10,https://www.hakodate.travel/cht/,坡道路面需留意
+place,p20,5,4,金森赤レンガ倉庫,函館市末廣町13-9,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/kanemori-red-brick-warehouse-stores/,商店19:00關門
+place,p21,6,1,道の駅 YOU・遊・もり,北海道茅部郡森町字上台町326-18,roadside station,,OFFICIAL_CONFIRMED,2026-08-10,https://mori.hokkaido.jp/sightseeing/you_1/,與Harvester二選一
+place,p22,6,2,昭和新山熊牧場,〒052-0102 北海道有珠郡壮瞥町字昭和新山183,animal attraction,,OFFICIAL_CONFIRMED,2026-08-10,https://kumakuma.co.jp/会社概要/,勿導向登別熊牧場
+place,p23,6,3,洞爺サンパレス リゾート＆スパ,〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1,hotel,,OFFICIAL_CONFIRMED,2026-08-10,https://www.toyasunpalace.co.jp/,泳池狀態出發前再查
+place,p24,7,1,登別マリンパークニクス,〒059-0492 北海道登別市登別東町1丁目22,aquarium,,OFFICIAL_CONFIRMED,2026-08-10,https://nixe-aqua.com/guide/,表演時刻前一晚再查
+place,p25,7,2,登別温泉駐車場,登別市登別温泉町1番地26・32・33・34,parking,,OFFICIAL_CONFIRMED,2026-08-10,https://www.city.noboribetsu.lg.jp/docs/2025103000052/,繁忙期費率不同
+place,p26,7,3,登別地獄谷,北海道登別市登別温泉町,natural attraction,,OFFICIAL_CONFIRMED,2026-08-10,https://www.visit-hokkaido.jp/tw/spot/detail_10157.html,天雨或行動不便時縮短步道
+route,r01,1,1,新千歳空港→FAV LUX,新千歳空港→札幌,driving,約1小時,ESTIMATED,2026-08-10,https://www.google.com/maps/dir/?api=1,交通與取車時間另加
+route,r02,3,1,FAV LUX→小樽観光駐車場,札幌→小樽,driving,約50至70分鐘,ESTIMATED,2026-08-10,https://www.google.com/maps/dir/?api=1,週六車流另加緩衝
+route,r03,4,1,札幌二条市場→函館飯店,札幌→八雲→函館,driving,純駕駛約4.5小時,ESTIMATED,2026-08-10,https://www.google.com/maps/dir/?api=1,餐飲休息另加約2小時
+route,r04,6,1,函館飯店→洞爺太陽皇宮,函館→八雲→昭和新山→洞爺,driving,純駕駛約3小時,ESTIMATED,2026-08-10,https://www.toyasunpalace.co.jp/access/,含停留建議5至6小時
+route,r05,7,1,洞爺太陽皇宮→登別→洞爺,洞爺→登別→洞爺,driving,單程約50至70分鐘,ESTIMATED,2026-08-10,https://www.google.com/maps/dir/?api=1,即時導航為準
+place,p27,1,4,狸小路6丁目・たぬきスクエア,札幌市中央区南3条西6丁目周邊,food district,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://tanukikoji.or.jp/shop-search/,各店營業不同
+place,p28,2,5,Chocolate Lounge Oxford,白い恋人パーク園內,cafe,,OFFICIAL_CONFIRMED,2026-08-10,https://www.shiroikoibitopark.jp/restaurant/lounge/,最後點餐17時
+place,p29,2,6,Shop Piccadilly,白い恋人パーク園內,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://www.shiroikoibitopark.jp/shop/shop-piccadilly/,夏季巧克力需保冷
+place,p30,2,7,六花亭 神宮茶屋店,北海道神宮境內・札幌市中央区宮ケ丘474,cafe,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://www.city.sapporo.jp/keizai/kanko/tourist/documents/maruyamakouenn2.pdf,供應與營業當日確認
+place,p31,2,8,札幌啤酒園,〒065-0007 札幌市東区北7条東9丁目2-10,restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://sapporo-bier-garten.jp/shop/,與大通晚餐擇一且駕駛不飲酒
+place,p32,3,4,かま栄 工場直売店,〒047-0027 小樽市堺町3-7,food and shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://otaru.gr.jp/shop/kamaei-chokubaiten,冷藏品留意保存
+place,p33,3,5,小樽洋菓子舗LeTAO本店,〒047-0027 小樽市堺町7-16,cafe,,OFFICIAL_CONFIRMED,2026-08-10,https://otaru.gr.jp/shop/letao_honten,排隊過長改外帶
+place,p34,3,6,北一硝子三号館,〒047-0027 小樽市堺町7-26,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://otaru.gr.jp/shop/kitaichiglass-building3,易碎品妥善固定
+place,p35,3,7,小樽オルゴール堂本館,〒047-0015 小樽市住吉町4-1,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://otaru.gr.jp/shop/orgel-doh-mainbuilding,堺町步行線南端
+place,p36,4,5,函館山山頂ショップ,函館山山頂展望台內,shopping,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://334.co.jp/shop/,以下山排隊為優先
+place,p37,5,5,函館朝市いくら亭,〒040-0063 函館市若松町9-15,restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/food-drink-sushi-seafood-rice-bowl/hakodate-morning-market-ikura-tei/,候位長可改市場其他店
+place,p38,5,6,六花亭五稜郭店,〒040-0001 函館市五稜郭町27-6,cafe and shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/rokkatei-goryokaku-store/,喫茶與商店時段不同
+place,p39,5,7,Victorian Rose,〒040-0054 函館市元町33-14,cafe,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/food-drink-cafe/victorian-rose-former-british-consulate-of-hakodate/,下午茶與晚餐份量需取捨
+place,p40,5,8,元町観光案内所,〒040-0054 函館市元町12-18,shopping and snack,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/sightseeing-spots/historic-building/motomachi-tourist-information-center/,無固定休息日
+place,p41,5,9,Petit Merveille BAY店,〒040-0065 函館市豊川町11-5,cafe and shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://www.hakodate.travel/cht/more-about-hakodate/cafe-sweets/,冷藏甜點留意保存
+place,p42,5,10,函館明治館,〒040-0065 函館市豊川町11-17,shopping,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://www.hakodate.travel/cht/experience/shopping/,出發前確認營業
+place,p43,6,5,昭和新山熊牧場売店,〒052-0102 有珠郡壮瞥町字昭和新山183,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://kumakuma.co.jp/,使用園方指定飼料
+place,p44,6,6,洞爺サンパレス1F売店,〒049-5731 有珠郡壮瞥町字洞爺湖温泉7-1,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://www.toyasunpalace.co.jp/dayuse/,旺季時段可能變動
+place,p45,7,4,セルフレストラン リーベ,登別マリンパークニクス園內,restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://nixe-aqua.com/food-shop/,需購票入園
+place,p46,7,5,ショップ アトランティス,登別マリンパークニクス・ニクス城內,shopping,,OFFICIAL_CONFIRMED,2026-08-10,https://nixe-aqua.com/food-shop/,需購票入園
+place,p47,7,6,温泉市場,北海道登別市登別温泉町50,restaurant and shopping,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://noboribetsu-spa.jp/faq/shopping/,當日確認營業
+place,p48,7,7,藤崎わさび園,北海道登別市登別温泉町49,shopping,,VERIFY_BEFORE_TRAVEL,2026-08-10,https://noboribetsu-spa.jp/faq/shopping/,冬季時段變動且食品需留意保存
+place,p49,7,8,わかさいも本舗登別東店,北海道登別市中登別町96-6,shopping and restaurant,,OFFICIAL_CONFIRMED,2026-08-10,https://noboribetsu-spa.jp/spot/spot0223/,不在溫泉街核心且時間不足可略過

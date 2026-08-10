@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#173c4b">
+  <title>北海道 8 日自駕旅｜札幌・小樽・函館・洞爺・登別</title>
+  <style>
+    :root{--ink:#20313a;--muted:#65737a;--paper:#fbfaf6;--sand:#efe9dd;--blue:#1e6075;--deep:#173c4b;--sky:#dcecf0;--orange:#b9552f;--gold:#e6b95c;--green:#3c765c;--red:#a33f35;--line:#d7d2c8;--shadow:0 18px 48px rgba(24,48,59,.12);--radius:22px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#e8f2f3 0,#fbfaf6 33rem);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7}
+    a{color:var(--blue);text-underline-offset:3px}
+    a:hover{text-decoration-thickness:2px}
+    button,input{font:inherit}
+    button,a.btn{min-height:44px}
+    .skip{position:absolute;left:-9999px;top:0;background:#fff;padding:.7rem 1rem;z-index:100}
+    .skip:focus{left:1rem;top:1rem}
+    .wrap{width:min(1140px,calc(100% - 32px));margin-inline:auto}
+    .hero{position:relative;overflow:hidden;padding:40px 0 22px}
+    .hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(255,255,255,.52);right:-150px;top:-260px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--orange);font-size:.86rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:34px;height:3px;background:var(--orange);border-radius:3px}
+    h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:clamp(2.45rem,7vw,5.4rem);line-height:.98;letter-spacing:-.055em;margin:.5rem 0 1rem;color:var(--deep)}
+    .lead{font-size:clamp(1.05rem,2vw,1.27rem);max-width:38rem;color:#49606a}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+    .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(30,96,117,.2);background:rgba(255,255,255,.72);padding:.45rem .75rem;border-radius:999px;font-size:.9rem;font-weight:700}
+    .route-art{background:var(--deep);color:#fff;border-radius:32px;padding:27px;box-shadow:var(--shadow);position:relative;min-height:420px}
+    .route-art h2{margin:0;font-size:1rem;color:#b9d8df;letter-spacing:.08em}
+    .route-line{position:absolute;left:48px;top:85px;bottom:52px;width:3px;background:linear-gradient(var(--gold),#fff);border-radius:3px}
+    .route-stop{position:relative;padding-left:56px;margin-top:24px;min-height:54px}
+    .route-stop::before{content:"";position:absolute;left:15px;top:5px;width:15px;height:15px;border:4px solid var(--gold);background:var(--deep);border-radius:50%;z-index:2}
+    .route-stop b{display:block;font-size:1.1rem}
+    .route-stop span{color:#bdd0d6;font-size:.88rem}
+    .route-note{position:absolute;right:18px;bottom:17px;color:#a9c4cc;font-size:.78rem}
+    .statusbar{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.94);backdrop-filter:blur(16px);border-block:1px solid rgba(32,49,58,.1)}
+    .statusbar-inner{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:9px 0;scrollbar-width:none}
+    .statusbar-inner::-webkit-scrollbar{display:none}
+    .nav-day,.control{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:.48rem .78rem;cursor:pointer;text-decoration:none;font-size:.86rem;font-weight:750}
+    .nav-day.active{background:var(--deep);border-color:var(--deep);color:#fff}
+    .controls{margin-left:auto;display:flex;gap:7px}
+    .control.primary{background:var(--orange);border-color:var(--orange);color:#fff}
+    .offline{display:none;background:#6e3a26;color:#fff;text-align:center;padding:7px 16px;font-size:.85rem}
+    body.is-offline .offline{display:block}
+    main{padding:34px 0 70px}
+    .section-title{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:30px 0 15px}
+    .section-title h2{font-size:clamp(1.65rem,4vw,2.55rem);line-height:1.15;margin:0;color:var(--deep)}
+    .section-title p{margin:0;color:var(--muted);max-width:32rem}
+    .alert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .alert{border-radius:18px;padding:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(24,48,59,.06)}
+    .alert.critical{border-top:5px solid var(--red)}
+    .alert.good{border-top:5px solid var(--green)}
+    .alert.warn{border-top:5px solid var(--gold)}
+    .alert h3{font-size:1rem;margin:0 0 5px}
+    .alert p{font-size:.9rem;margin:0;color:#53666f}
+    .alert a{font-weight:750}
+    .quick-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin:18px 0 34px}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 32px rgba(24,48,59,.07)}
+    .panel h3{margin:0 0 12px;color:var(--deep)}
+    .stay{display:grid;grid-template-columns:78px 1fr;gap:13px;padding:13px 0;border-top:1px solid #ece7de}
+    .stay:first-of-type{border-top:0}
+    .stay-date{color:var(--orange);font-weight:850;font-size:.86rem}
+    .stay b{display:block}
+    .mini{font-size:.86rem;color:var(--muted)}
+    .progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .progress{height:10px;background:#e8e4db;border-radius:999px;overflow:hidden}
+    .progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),#7fae78);transition:width .25s}
+    .search{width:100%;border:1px solid var(--line);border-radius:14px;padding:.75rem .9rem;background:#fff;margin:2px 0 13px}
+    .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{display:inline-flex;align-items:center;gap:6px;padding:.27rem .55rem;border-radius:999px;background:var(--sand);font-size:.76rem;font-weight:800}
+    .tag.confirmed{background:#e0efe7;color:#245d42}
+    .tag.verify{background:#fff0d4;color:#815610}
+    .tag.user{background:#e5e8f2;color:#3d4a75}
+    details.day{background:#fff;border:1px solid var(--line);border-radius:24px;margin:15px 0;box-shadow:0 10px 30px rgba(24,48,59,.065);overflow:clip;scroll-margin-top:82px}
+    details.day[open]{border-color:#b8cfd5}
+    summary.day-head{display:grid;grid-template-columns:86px 1fr auto;gap:16px;align-items:center;padding:20px 22px;cursor:pointer;list-style:none}
+    summary.day-head::-webkit-details-marker{display:none}
+    .day-no{display:grid;place-items:center;width:64px;height:64px;border-radius:19px;background:var(--sky);color:var(--deep);font-weight:900;line-height:1.1;text-align:center}
+    .day-no small{font-size:.68rem;letter-spacing:.08em}
+    .day-head h3{margin:0;font-size:1.25rem;color:var(--deep)}
+    .day-head p{margin:2px 0 0;color:var(--muted);font-size:.88rem}
+    .chev{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:transform .2s}
+    details[open] .chev{transform:rotate(180deg)}
+    .day-body{padding:0 22px 24px;border-top:1px solid #ebe6dc}
+    .day-intro{display:flex;justify-content:space-between;gap:16px;align-items:start;padding:17px 0}
+    .day-intro p{margin:0;max-width:48rem}
+    .route-btn{flex:0 0 auto}
+    .timeline{position:relative;margin:5px 0 0 12px;padding-left:27px;border-left:2px solid #c9dce0}
+    .stop{position:relative;padding:0 0 24px 9px}
+    .stop:last-child{padding-bottom:4px}
+    .stop::before{content:"";position:absolute;left:-36px;top:7px;width:13px;height:13px;border:3px solid var(--blue);background:#fff;border-radius:50%}
+    .time{font-size:.8rem;color:var(--orange);font-weight:900;letter-spacing:.05em}
+    .stop h4{font-size:1.08rem;margin:1px 0 4px}
+    .stop p{margin:4px 0;color:#53636a}
+    .address{display:block;margin:8px 0;color:#394e56;font-size:.88rem}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--blue);color:var(--blue);background:#fff;border-radius:12px;padding:.5rem .72rem;text-decoration:none;font-weight:800;font-size:.83rem;cursor:pointer}
+    .btn.map{background:var(--blue);color:#fff}
+    .btn.route{background:var(--deep);border-color:var(--deep);color:#fff}
+    .btn.copy{border-color:var(--line);color:var(--ink)}
+    .btn.official{border-color:#8c9aa0;color:#42555d}
+    .note{border-left:4px solid var(--gold);background:#fff8e9;padding:11px 13px;border-radius:0 12px 12px 0;margin:10px 0;font-size:.9rem}
+    .note.red{border-color:var(--red);background:#fff0ed}
+    .reco-block{margin:14px 0 3px;padding:14px;border:1px solid #d9e4e5;background:linear-gradient(135deg,#f4faf9,#fffaf1);border-radius:18px}
+    .reco-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;color:var(--deep)}
+    .reco-title b{font-size:.92rem;letter-spacing:.02em}.reco-title span{font-size:.76rem;color:var(--muted)}
+    .reco-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    details.reco-card{min-width:0;background:#fff;border:1px solid #d8d4ca;border-radius:15px;overflow:hidden;box-shadow:0 5px 16px rgba(24,48,59,.05)}
+    details.reco-card[open]{border-color:#91b5bd;box-shadow:0 8px 22px rgba(24,48,59,.09)}
+    details.reco-card summary{position:relative;display:grid;grid-template-columns:auto 1fr 22px;gap:8px 10px;align-items:start;padding:12px;cursor:pointer;list-style:none}
+    details.reco-card summary::-webkit-details-marker{display:none}
+    details.reco-card summary::after{content:"＋";grid-column:3;grid-row:1/3;align-self:center;color:var(--blue);font-weight:900;font-size:1.15rem}
+    details.reco-card[open] summary::after{content:"−"}
+    .reco-type{grid-column:1;grid-row:1/3;display:inline-grid;place-items:center;min-width:42px;padding:.24rem .42rem;border-radius:9px;font-size:.72rem;font-weight:900}
+    .reco-type.food{background:#fff0d8;color:#8a5410}.reco-type.shop{background:#e6edf8;color:#3c557e}.reco-type.break{background:#e3f1e7;color:#356746}
+    .reco-card summary b{grid-column:2;line-height:1.35;color:var(--deep)}
+    .reco-kicker{grid-column:2;color:var(--muted);font-size:.76rem;line-height:1.4}
+    .reco-body{padding:0 12px 13px;border-top:1px solid #eee9df;font-size:.86rem}
+    .reco-body p{margin:10px 0 6px;color:#4e626a}.reco-body .address{margin:5px 0}.reco-body .actions{margin-top:8px}
+    .check{display:flex;align-items:flex-start;gap:9px;margin-top:10px;font-weight:750;font-size:.88rem}
+    .check input{width:19px;height:19px;accent-color:var(--green);margin-top:3px}
+    .book-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .book-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px}
+    .book-item b{display:block}
+    .verify-list{columns:2;column-gap:34px}
+    .verify-list li{break-inside:avoid;margin-bottom:8px}
+    .references{font-size:.87rem}
+    .references li{margin-bottom:7px}
+    .foot{background:var(--deep);color:#d8e7ea;padding:30px 0}
+    .foot a{color:#fff}.foot .mini{color:#d8e7ea}
+    .foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .backtop{position:fixed;right:18px;bottom:18px;width:48px;height:48px;border:0;border-radius:50%;background:var(--orange);color:#fff;box-shadow:var(--shadow);cursor:pointer;display:none}
+    .backtop.show{display:block}
+    .hidden-by-search{display:none!important}
+    :focus-visible{outline:3px solid #f3b650;outline-offset:3px}
+    @media(max-width:820px){.hero-grid,.quick-grid,.alert-grid{grid-template-columns:1fr}.route-art{min-height:390px}.controls{margin-left:0}.statusbar-inner{padding-right:14px}.section-title{display:block}.section-title p{margin-top:7px}.book-list{grid-template-columns:1fr}.verify-list{columns:1}.foot-grid{grid-template-columns:1fr}}
+    @media(max-width:680px){.reco-grid{grid-template-columns:1fr}}
+    @media(max-width:560px){.wrap{width:min(100% - 22px,1140px)}.hero{padding-top:25px}.route-art{padding:21px}.route-line{left:39px}.route-stop{padding-left:48px}.route-stop::before{left:10px}summary.day-head{grid-template-columns:60px 1fr 34px;padding:16px 14px;gap:10px}.day-no{width:54px;height:54px}.day-head h3{font-size:1.03rem}.day-body{padding:0 14px 20px}.day-intro{display:block}.route-btn{margin-top:10px}.actions .btn{flex:1 1 calc(50% - 8px)}.reco-block{padding:10px}.reco-title{align-items:flex-start}.reco-title span{max-width:9rem;text-align:right}.stay{grid-template-columns:68px 1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+    @media print{body{background:#fff;font-size:10.5pt}.statusbar,.backtop,.offline,.controls,.search,.copy,.route-note{display:none!important}.hero{padding:0 0 12px}.hero-grid{grid-template-columns:1fr}.route-art{min-height:auto;padding:16px;box-shadow:none}.route-line,.route-stop::before{display:none}.route-stop{display:inline-block;padding:0;margin:0 16px 0 0;min-height:0}.alert-grid,.quick-grid{grid-template-columns:1fr 1fr}.panel,.alert,details.day,details.reco-card{box-shadow:none;break-inside:avoid}.day-body,.reco-body{display:block!important}.actions a::after{content:" ↗"}.foot{background:#fff;color:#222;padding:16px 0}.foot a{color:#222}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要內容</a>
+  <div class="offline" role="status">目前為離線狀態：行程與地址仍可閱讀，Google Maps、即時交通及官方網站需連網。</div>
+  <header class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Hokkaido road trip · Connected guide</div>
+        <h1>北海道<br>八日自駕旅</h1>
+        <p class="lead">從札幌的夏夜一路向南，到函館港灣、洞爺湖與登別地熱谷。保留原始行程節奏，補上可直接導航的地址、可展開每日詳情與出發前核對提醒。</p>
+        <div class="hero-meta">
+          <span class="chip">📅 2026/8/13–8/20</span><span class="chip">🚗 自駕＋市區計程車</span><span class="chip">🗺️ 札幌 → 函館 → 洞爺</span><span class="chip">✓ 2026/8/10 核對</span>
+        </div>
+      </div>
+      <aside class="route-art" aria-label="旅程動線示意圖">
+        <h2>ROUTE / 旅程動線示意</h2><div class="route-line" aria-hidden="true"></div>
+        <div class="route-stop"><b>新千歲機場 → 札幌</b><span>3 晚 · 夏祭、神宮、啤酒與城市散步</span></div>
+        <div class="route-stop"><b>小樽</b><span>運河與堺町通 · 當日往返</span></div>
+        <div class="route-stop"><b>函館</b><span>2 晚 · 山夜景、朝市、港灣與五稜郭</span></div>
+        <div class="route-stop"><b>洞爺湖</b><span>2 晚 · 熊牧場、湖景、泳池與溫泉</span></div>
+        <div class="route-stop"><b>登別 → 返程</b><span>水族館、溫泉街與地獄谷</span></div>
+        <span class="route-note">非比例地圖 · 車程以即時導航為準</span>
+      </aside>
+    </div>
+  </header>
+
+  <div class="statusbar" aria-label="每日快速導航與控制">
+    <div class="wrap statusbar-inner">
+      <a class="nav-day" href="#day-1">8/13</a><a class="nav-day" href="#day-2">8/14</a><a class="nav-day" href="#day-3">8/15</a><a class="nav-day" href="#day-4">8/16</a><a class="nav-day" href="#day-5">8/17</a><a class="nav-day" href="#day-6">8/18</a><a class="nav-day" href="#day-7">8/19</a><a class="nav-day" href="#day-8">8/20</a>
+      <div class="controls"><button class="control" id="expandAll">全部展開</button><button class="control" id="collapseAll">全部收合</button><button class="control primary" id="printGuide">列印 / PDF</button></div>
+    </div>
+  </div>
+
+  <main id="main" class="wrap">
+    <div class="section-title"><h2>先看這三件事</h2><p>行程能走，但有兩個 2026 年現況與一段車程估算值得先調整。</p></div>
+    <section class="alert-grid" aria-label="重要提醒">
+      <article class="alert critical"><h3>函館飯店 8/10–8/17 施工</h3><p>3 樓宴會場每日 9:00–18:00 改修，官方提醒可能有震動與噪音。8/16 入住、8/17 白天皆重疊；若需要午休，先向飯店確認房間樓層。<a href="https://cabin.kenhotels.com/hakodate/uploads/2026/07/db9ecca7881a740bf45b310dd69841c7.pdf" target="_blank" rel="noopener">官方公告 ↗</a></p></article>
+      <article class="alert good"><h3>8/14 大通晚餐有著落</h3><p>2026 大通啤酒花園已確認 7/23–8/18 舉辦，正好涵蓋 8/14。飲酒當日保留原行程的「停車回飯店、改搭計程車」安排。<a href="https://www.sapporo.travel/spot/feature/summer/" target="_blank" rel="noopener">札幌官方活動資訊 ↗</a></p></article>
+      <article class="alert warn"><h3>8/18 不只 2.5 小時</h3><p>函館到洞爺太陽皇宮，飯店官網估計純開車約 2 小時 50 分；再加八雲午餐與昭和新山熊牧場，建議把移動日視為約 5–6 小時的完整行程。</p></article>
+    </section>
+
+    <section class="quick-grid" aria-label="住宿與使用方式">
+      <article class="panel"><h3>三個住宿據點</h3>
+        <div class="stay"><span class="stay-date">8/13–16</span><div><b>FAV LUX 札幌すすきの</b><span class="mini">北海道札幌市中央区南6条西7丁目2-2 · 15:00 入住 / 10:00 退房 · 15 格停車位、不可預約，現場有空位才可使用。</span></div></div>
+        <div class="stay"><span class="stay-date">8/16–18</span><div><b>PREMIER HOTEL–CABIN PRESIDENT–函館</b><span class="mini">北海道函館市若松町14番10号 · 15:00 入住 / 11:00 退房 · JR 函館站、市電與朝市皆步行約 1 分鐘。</span></div></div>
+        <div class="stay"><span class="stay-date">8/18–20</span><div><b>洞爺サンパレス リゾート＆スパ</b><span class="mini">北海道有珠郡壮瞥町字洞爺湖温泉7-1 · 泳池官方排定 2026/7/18 恢復；到訪前再確認即時狀態。</span></div></div>
+      </article>
+      <article class="panel"><h3>旅行中怎麼用</h3>
+        <div class="progress-row"><b>準備完成度</b><span id="progressText">0 / 8</span></div><div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        <p class="mini">每一天底部可打勾，狀態只保存在這台裝置的瀏覽器內。</p>
+        <label for="guideSearch"><b>搜尋景點或地址</b></label><input id="guideSearch" class="search" type="search" placeholder="例如：啤酒、函館、熊牧場" autocomplete="off">
+        <div class="legend"><span class="tag confirmed">官方確認</span><span class="tag verify">出發前確認</span><span class="tag user">待你決定</span></div>
+      </article>
+    </section>
+
+    <div class="section-title"><h2>每日行程</h2><p>時間沿用 Excel 原始規劃；必要處加入較可行的緩衝與替代方案。</p></div>
+
+    <details class="day" id="day-1" open data-day="1"><summary class="day-head"><span class="day-no"><small>DAY 1</small>8/13</span><span><h3>落地、取車，走進札幌夏夜</h3><p>新千歲機場 → FAV LUX → 狸小路</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>第一晚只做三件事：順利取車、安頓行李、用狸小路的燈光與晚餐切換到旅行模式。機場未在原表命名，依「車程約 1 小時」判定為新千歲機場；若不同，請改用實際機場導航。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="新千歲空港 北海道千歳市美々" data-map-destination="FAV LUX 札幌すすきの 北海道札幌市中央区南6条西7丁目2-2" data-mode="driving" target="_blank" rel="noopener">整段駕車路線 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">15:00–17:00</span><h4>抵達、出關與取車</h4><p>預留行李、租車櫃檯與接駁時間。領車時拍攝車身、確認 ETC 卡/保險、導航語言、油種與還車加油規則。</p><span class="address">新千歲空港：北海道千歳市美々</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="新千歲空港 北海道千歳市美々" target="_blank" rel="noopener">Google Maps</a></div></article>
+          <article class="stop"><span class="time">18:30</span><h4>FAV LUX 札幌すすきの · Check-in</h4><p>官網入住 15:00、退房 10:00。停車位 15 格、不可事先預約；旺季建議先準備附近停車場備案。</p><span class="address">〒064-0806 北海道札幌市中央区南6条西7丁目2-2</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="FAV LUX 札幌すすきの 北海道札幌市中央区南6条西7丁目2-2" target="_blank" rel="noopener">地圖</a><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="駐車場 FAV LUX 札幌すすきの 周辺" target="_blank" rel="noopener">附近停車場</a><button class="btn copy" data-copy="〒064-0806 北海道札幌市中央区南6条西7丁目2-2">複製地址</button><a class="btn official" href="https://fav-hotels.com/hotels/lux/sapporosusukino/" target="_blank" rel="noopener">官網</a></div></article>
+          <article class="stop"><span class="time">19:30</span><h4>狸小路商店街</h4><p>由飯店步行約十多分鐘的夜間散步。先吃正餐再逛街，比第一晚塞更多景點舒服。</p><span class="address">北海道札幌市中央区南2・3条西1～7丁目</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="狸小路商店街 北海道札幌市中央区南2条西3丁目" target="_blank" rel="noopener">地圖</a><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="FAV LUX 札幌すすきの 北海道札幌市中央区南6条西7丁目2-2" data-map-destination="狸小路商店街 北海道札幌市中央区南2条西3丁目" data-mode="walking" target="_blank" rel="noopener">從飯店步行</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>狸小路｜晚餐與第一晚補貨</b><span>點方格展開詳情</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>6 丁目覓食路線</b><span class="reco-kicker">19:30 後・先正餐再逛街</span></summary><div class="reco-body"><p>以狸小路 6 丁目、狸小路市場與「たぬきスクエア」周邊找拉麵、海鮮或居酒屋，店家集中、遇排隊可快速換下一家。各店營業不同，當晚以現場與官方店鋪目錄為準。</p><span class="address">札幌市中央区南3条西6丁目周邊</span><div class="actions"><a class="btn map" href="#" data-map-query="狸小路6丁目 たぬきスクエア 札幌" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://tanukikoji.or.jp/shop-search/" target="_blank" rel="noopener">官方店鋪目錄</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>4–5 丁目伴手禮補貨</b><span class="reco-kicker">晚餐後 30–45 分鐘</span></summary><div class="reco-body"><p>把第一晚購物限縮在北海道食品、日用品與藥妝；冷藏品留到旅程末段。全區有頂棚，雨天也容易走，但每家關門時間不同。</p><span class="address">札幌市中央区南2・3条西4～5丁目</span><div class="actions"><a class="btn map" href="#" data-map-query="狸小路4丁目 札幌" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.sapporo.travel/spot/facility/tanukikoji_shopping_arcade/" target="_blank" rel="noopener">札幌官方介紹</a></div></div></details>
+          </div></div>
+        </div><label class="check"><input type="checkbox" data-day-check="1"> DAY 1 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-2" open data-day="2"><summary class="day-head"><span class="day-no"><small>DAY 2</small>8/14</span><span><h3>札幌：甜香、神宮、紅磚與夏祭</h3><p>白色戀人公園 → 北海道神宮 → 啤酒博物館 → 大通</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>上午自駕、下午把車留在飯店，改搭計程車；這個切換非常合理，因為啤酒博物館與大通啤酒花園都可能飲酒。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="FAV LUX 札幌すすきの" data-map-destination="北海道神宮 北海道札幌市中央区宮ケ丘474" data-waypoints="白い恋人パーク 北海道札幌市西区宮の沢2条2丁目11-36" data-mode="driving" target="_blank" rel="noopener">上午駕車路線 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">10:00</span><h4>白色戀人公園 <span class="tag confirmed">10:00–18:00</span></h4><p>原表只留約 1 小時；若要參加工坊，建議抓 1.5–2 小時並事先看體驗名額。入館最後受理 16:30。</p><span class="address">〒063-0052 北海道札幌市西区宮の沢2条2丁目11-36</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="白い恋人パーク 北海道札幌市西区宮の沢2条2丁目11-36" target="_blank" rel="noopener">地圖</a><button class="btn copy" data-copy="〒063-0052 北海道札幌市西区宮の沢2条2丁目11-36">複製地址</button><a class="btn official" href="https://www.visit-hokkaido.jp/tw/spot/detail_10028.html" target="_blank" rel="noopener">官方旅遊資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>白色戀人公園｜甜點與限定商品</b><span>同園區，不必另移車</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>Chocolate Lounge Oxford</b><span class="reco-kicker">甜點休息・10:00–17:30</span></summary><div class="reco-body"><p>適合把公園停留拉長到 1.5 小時時安排；以聖代、鬆餅等甜點為主，最後點餐 17:00。若要趕北海道神宮，只選一份共享即可。</p><span class="address">白い恋人パーク園內</span><div class="actions"><a class="btn map" href="#" data-map-query="チョコレートラウンジ・オックスフォード 白い恋人パーク" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.shiroikoibitopark.jp/restaurant/lounge/" target="_blank" rel="noopener">官方菜單</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>Shop Piccadilly</b><span class="reco-kicker">園區限定伴手禮・10:00–18:00</span></summary><div class="reco-body"><p>集中買白色戀人與公園限定商品；先確認保存方式與行李空間，夏季巧克力建議準備保冷袋。</p><span class="address">白い恋人パーク園內</span><div class="actions"><a class="btn map" href="#" data-map-query="ショップ・ピカデリー 白い恋人パーク" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.shiroikoibitopark.jp/shop/shop-piccadilly/" target="_blank" rel="noopener">官方商店資訊</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">11:30</span><h4>北海道神宮＋圓山一帶午餐 <span class="tag confirmed">6:00–17:00</span></h4><p>8 月神門開放時段為 6:00–17:00，御守與御朱印通常自 9:00 起。停車場週末與旺季可能擁擠。</p><span class="address">〒064-8505 北海道札幌市中央区宮ケ丘474</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="北海道神宮 北海道札幌市中央区宮ケ丘474" target="_blank" rel="noopener">地圖</a><button class="btn copy" data-copy="〒064-8505 北海道札幌市中央区宮ケ丘474">複製地址</button><a class="btn official" href="https://www.hokkaidojingu.or.jp/" target="_blank" rel="noopener">官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>北海道神宮｜參拜後的小點與紀念</b><span>境內順路</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>六花亭 神宮茶屋店</b><span class="reco-kicker">限定點心「判官さま」・短暫休息</span></summary><div class="reco-body"><p>在境內安排一份現做熱點心即可，當作午餐前的小點；供應與營業可能調整，遇售完就直接前往圓山午餐，不需等待。</p><span class="address">北海道神宮境內・札幌市中央区宮ケ丘474</span><div class="actions"><a class="btn map" href="#" data-map-query="六花亭 神宮茶屋店 北海道神宮" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.city.sapporo.jp/keizai/kanko/tourist/documents/maruyamakouenn2.pdf" target="_blank" rel="noopener">札幌官方區域指南</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>北海道神宮授與所</b><span class="reco-kicker">御守、御朱印・參拜後 10–15 分鐘</span></summary><div class="reco-body"><p>若要御朱印或御守，參拜後一次完成；不要把授與品當一般商品轉售。受理時段可能隨祭典調整，當日依神宮公告。</p><span class="address">北海道神宮境內・札幌市中央区宮ケ丘474</span><div class="actions"><a class="btn map" href="#" data-map-query="北海道神宮 授与所" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hokkaidojingu.or.jp/" target="_blank" rel="noopener">神宮官網</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">14:00</span><h4>札幌啤酒博物館 <span class="tag confirmed">11:00–18:00</span></h4><p>最後入館 17:30，週一休館（逢假日順延）；8/14 是週五。想參加 Premium Tour 應先看預約。駕駛請勿飲酒，依原計畫搭計程車最安全。</p><span class="address">〒065-8633 北海道札幌市東区北7条東9丁目1-1 サッポロガーデンパーク内</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="サッポロビール博物館 北海道札幌市東区北7条東9丁目1-1" target="_blank" rel="noopener">地圖</a><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="FAV LUX 札幌すすきの" data-map-destination="サッポロビール博物館 北海道札幌市東区北7条東9丁目1-1" data-mode="transit" target="_blank" rel="noopener">大眾運輸</a><a class="btn official" href="https://www.visit-hokkaido.jp/spot/detail_10025.html" target="_blank" rel="noopener">官方資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>啤酒博物館｜成吉思汗與原創商品</b><span>有晚餐者可只逛商店</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>札幌啤酒園 成吉思汗</b><span class="reco-kicker">11:30–21:00・可作大通晚餐備案</span></summary><div class="reco-body"><p>想把烤羊肉排進行程，可在園區用餐；但當晚已有大通啤酒花園，兩者擇一較舒服。駕駛全程不飲酒。</p><span class="address">〒065-0007 札幌市東区北7条東9丁目2-10</span><div class="actions"><a class="btn map" href="#" data-map-query="サッポロビール園 札幌市東区北7条東9丁目2-10" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://sapporo-bier-garten.jp/shop/" target="_blank" rel="noopener">餐廳比較</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>啤酒園 Shop</b><span class="reco-kicker">原創酒杯、T 恤與食品</span></summary><div class="reco-body"><p>適合買不需冷藏的原創商品；玻璃杯要評估自駕行李固定方式。酒類只帶回飯店飲用，駕駛不在行程中試飲。</p><span class="address">札幌啤酒園內・札幌市東区北7条東9丁目2-10</span><div class="actions"><a class="btn map" href="#" data-map-query="サッポロビール園 ガーデンショップ" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://sapporo-bier-garten.jp/" target="_blank" rel="noopener">啤酒園官網</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">15:30–晚間</span><h4>大通公園、札幌電視塔、2026 大通啤酒花園</h4><p>電視塔展望台通常 9:00–22:00（21:50 最後入場）。啤酒花園 2026/7/23–8/18 在大通西 5–8、10、11 丁目舉辦；各會場供餐與結帳方式不同。</p><span class="address">札幌電視塔：〒060-0042 札幌市中央区大通西1丁目</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="さっぽろテレビ塔 札幌市中央区大通西1丁目" target="_blank" rel="noopener">電視塔地圖</a><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="大通ビアガーデン 大通公園 札幌" target="_blank" rel="noopener">啤酒花園地圖</a><a class="btn official" href="https://www.sapporo.travel/summerfes/" target="_blank" rel="noopener">夏祭官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>大通｜夏祭晚餐與電視塔紀念品</b><span>晚間主行程</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>2026 大通啤酒花園</b><span class="reco-kicker">西 5–8、10、11 丁目・晚餐</span></summary><div class="reco-body"><p>先看各會場菜單再選一區入座，避免一路比較到餓。8/14 在活動期間內；熱門時段可能候位，駕駛不飲酒。</p><span class="address">札幌市中央区大通公園 西5～11丁目</span><div class="actions"><a class="btn map" href="#" data-map-query="大通ビアガーデン 大通公園 札幌" target="_blank" rel="noopener">會場地圖</a><a class="btn official" href="https://www.sapporo.travel/summerfes/" target="_blank" rel="noopener">2026 官方活動頁</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>札幌電視塔官方商店</b><span class="reco-kicker">登塔前後 10–20 分鐘</span></summary><div class="reco-body"><p>以電視塔角色、札幌城市紀念品為主；若當晚已在狸小路購物，可只看限定款，不必再買通路常見商品。</p><span class="address">〒060-0042 札幌市中央区大通西1丁目</span><div class="actions"><a class="btn map" href="#" data-map-query="さっぽろテレビ塔 札幌市中央区大通西1丁目" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.tv-tower.co.jp/" target="_blank" rel="noopener">電視塔官網</a></div></div></details>
+          </div></div>
+        </div><label class="check"><input type="checkbox" data-day-check="2"> DAY 2 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-3" data-day="3"><summary class="day-head"><span class="day-no"><small>DAY 3</small>8/15</span><span><h3>小樽：把車停一次，慢慢走</h3><p>小樽運河 → 堺町通 → 札幌 GAjA 晚餐</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>週六的小樽停車需求高。建議先直達官方觀光停車場，再用步行串起運河與堺町，避免頻繁找車位。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="FAV LUX 札幌すすきの" data-map-destination="小樽観光駐車場 北海道小樽市港町4-2" data-mode="driving" target="_blank" rel="noopener">札幌 → 小樽停車場 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">10:00 出發</span><h4>小樽觀光停車場</h4><p>官方資料顯示 24 小時、每 60 分鐘 300 日圓、當日最高 1,000 日圓；費率仍請以現場為準。離運河約 100 公尺。</p><span class="address">〒047-0007 北海道小樽市港町4-2</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="小樽観光駐車場 北海道小樽市港町4-2" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://otaru.gr.jp/shop/parking" target="_blank" rel="noopener">官方停車資訊</a></div></article>
+          <article class="stop"><span class="time">11:00–16:30</span><h4>小樽運河＋堺町通商店街</h4><p>運河拍照後沿堺町通散步，安排玻璃、音樂盒或甜點其中一至兩項即可。熱門店排隊會拉長停留時間。</p><span class="address">小樽運河：北海道小樽市港町5 ／ 堺町通：北海道小樽市堺町</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="小樽運河 北海道小樽市港町5" target="_blank" rel="noopener">運河</a><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="小樽堺町通り商店街 北海道小樽市堺町" target="_blank" rel="noopener">堺町通</a><a class="btn official" href="https://otaru.gr.jp/project/otaru-tourist-brochure" target="_blank" rel="noopener">2026 官方導覽</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>小樽｜一條順走的美食購物線</b><span>運河 → 堺町 → 南小樽方向</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>かま栄 工場直売店</b><span class="reco-kicker">現炸蒲鉾＋伴手禮・約 30 分鐘</span></summary><div class="reco-body"><p>推薦現吃工場限定「パンドーム」或人氣「ひら天」，也能一次買蒲鉾伴手禮。8 月通常 9:00–19:00；冷藏品需留意保存。</p><span class="address">〒047-0027 小樽市堺町3-7</span><div class="actions"><a class="btn map" href="#" data-map-query="かま栄 工場直売店 小樽市堺町3-7" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://otaru.gr.jp/shop/kamaei-chokubaiten" target="_blank" rel="noopener">小樽官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type food">甜點</span><b>LeTAO 本店</b><span class="reco-kicker">堺町甜點休息・視排隊取捨</span></summary><div class="reco-body"><p>安排一份招牌乳酪甜點即可；若排隊過長，改買外帶並把時間留給玻璃或音樂盒。冷藏蛋糕不適合在車內放整天。</p><span class="address">〒047-0027 小樽市堺町7-16</span><div class="actions"><a class="btn map" href="#" data-map-query="小樽洋菓子舗ルタオ本店 小樽市堺町7-16" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://otaru.gr.jp/shop/letao_honten" target="_blank" rel="noopener">小樽官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>北一硝子 三号館</b><span class="reco-kicker">玻璃器皿・9:00–18:00</span></summary><div class="reco-body"><p>優先看小樽玻璃器皿與小型、好包裝的作品；自駕仍要用衣物固定易碎品。若買大型燈具，先詢問寄送。</p><span class="address">〒047-0027 小樽市堺町7-26</span><div class="actions"><a class="btn map" href="#" data-map-query="北一硝子 三号館 小樽市堺町7-26" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://otaru.gr.jp/shop/kitaichiglass-building3" target="_blank" rel="noopener">小樽官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>小樽オルゴール堂 本館</b><span class="reco-kicker">音樂盒・9:00–18:00</span></summary><div class="reco-body"><p>位於堺町步行線南端，適合作最後一站再折返停車場。先選預算與尺寸，可避免在多個分館重複比較。</p><span class="address">〒047-0015 小樽市住吉町4-1</span><div class="actions"><a class="btn map" href="#" data-map-query="小樽オルゴール堂 本館 小樽市住吉町4-1" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://otaru.gr.jp/shop/orgel-doh-mainbuilding" target="_blank" rel="noopener">小樽官方介紹</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">18:30 已預訂</span><h4>GAjA すすきの店</h4><p>官網地址為 Cyber City Building 3F，17:00–翌日 5:00。由小樽返回札幌遇週六車流時，建議至少預留 90 分鐘含停車。</p><span class="address">北海道札幌市中央区南5条西2丁目 サイバーシティービル3F</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="GAjA すすきの店 札幌市中央区南5条西2丁目 サイバーシティービル3F" target="_blank" rel="noopener">地圖</a><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="小樽観光駐車場 北海道小樽市港町4-2" data-map-destination="GAjA すすきの店 札幌市中央区南5条西2丁目" data-mode="driving" target="_blank" rel="noopener">返札幌路線</a><a class="btn official" href="https://www.gajafan.com/store/" target="_blank" rel="noopener">官網</a></div></article>
+        </div><label class="check"><input type="checkbox" data-day-check="3"> DAY 3 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-4" data-day="4"><summary class="day-head"><span class="day-no"><small>DAY 4</small>8/16</span><span><h3>南下函館：市場早餐與山上夜景</h3><p>二條市場 → 八雲休息 → 函館飯店 → 函館山</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>這是長距離移動日。原表的 4.5 小時可作純開車概念；早餐、午餐、加油與休息另加 2 小時較穩妥。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="札幌二条市場 北海道札幌市中央区南3条東1丁目" data-map-destination="PREMIER HOTEL-CABIN PRESIDENT-函館 北海道函館市若松町14番10号" data-waypoints="ハーベスター八雲 北海道二海郡八雲町浜松365" data-mode="driving" target="_blank" rel="noopener">南下完整路線 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">09:30</span><h4>FAV LUX 退房 → 二條市場早餐</h4><p>市場約 7:00–17:00，但店家各自營業。吃完早餐再出發；市場沒有專用停車場，請使用周邊收費停車。</p><span class="address">北海道札幌市中央区南3条東1～2丁目</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="札幌二条市場 北海道札幌市中央区南3条東1丁目" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://nijomarket.com/about/" target="_blank" rel="noopener">官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>二條市場｜早餐與海產採買</b><span>南下前控制在 60 分鐘</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>海鮮丼早餐</b><span class="reco-kicker">先看當日魚料與候位</span></summary><div class="reco-body"><p>市場內多家食堂可選；以「有座位、清楚標價、當日魚料合意」為準，不必執著單一名店。長途開車前避免點過量。</p><span class="address">札幌市中央区南3条東1～2丁目</span><div class="actions"><a class="btn map" href="#" data-map-query="二条市場 海鮮丼 札幌" target="_blank" rel="noopener">周邊餐廳</a><a class="btn official" href="https://nijomarket.com/store/" target="_blank" rel="noopener">市場店家</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>乾貨與常溫海味</b><span class="reco-kicker">自駕旅前半段只買耐放品</span></summary><div class="reco-body"><p>優先昆布、乾貝等常溫品；鮮魚、海膽與需冷藏品不建議帶上前往函館的長途車程。購買前問清保存與入境規定。</p><span class="address">札幌二條市場內</span><div class="actions"><a class="btn map" href="#" data-map-query="札幌二条市場 北海道札幌市中央区南3条東1丁目" target="_blank" rel="noopener">市場地圖</a><a class="btn official" href="https://nijomarket.com/" target="_blank" rel="noopener">市場官網</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">約 13:30</span><h4>八雲午餐：Harvester 八雲</h4><p>8 月平日 10:30–19:00、週末假日 10:00–19:00；8/16 為週日。景觀好、適合長途休息。若已經疲累，勿為趕時間壓縮休息。</p><span class="address">〒049-3124 北海道二海郡八雲町浜松365</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="ハーベスター八雲 北海道二海郡八雲町浜松365" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://harvester-yakumo.com/menu/" target="_blank" rel="noopener">官網</a></div></article>
+          <article class="stop"><span class="time">15:00–16:30</span><h4>PREMIER HOTEL–CABIN PRESIDENT–函館 · Check-in</h4><p>正式中文常譯「函館普樂美雅凱賓總統酒店」。地下/合作停車場方式與費率請在入住前確認。</p><div class="note red"><b>施工提醒：</b>8/16 當日 9:00–18:00 仍在施工時段，可能有噪音與震動。</div><span class="address">〒040-0063 北海道函館市若松町14番10号</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="プレミアホテル-CABIN PRESIDENT-函館 北海道函館市若松町14番10号" target="_blank" rel="noopener">地圖</a><button class="btn copy" data-copy="〒040-0063 北海道函館市若松町14番10号">複製地址</button><a class="btn official" href="https://cabin.kenhotels.com/hakodate/" target="_blank" rel="noopener">官網</a></div></article>
+          <article class="stop"><span class="time">19:15 出發／20:00 夜景</span><h4>函館山纜車與夜景</h4><p>4/20–9/30 上行末班 21:30、下行末班 22:00。官方指出日落前後是尖峰，上山可能等逾 30 分鐘、下山最忙可到 1 小時；20:00 才到山麓站偏緊，建議 19:00–19:15 離開飯店。</p><span class="address">函館山ロープウェイ山麓駅：北海道函館市元町19-7</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="函館山ロープウェイ山麓駅 北海道函館市元町19-7" target="_blank" rel="noopener">地圖</a><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="プレミアホテル-CABIN PRESIDENT-函館" data-map-destination="函館山ロープウェイ山麓駅 北海道函館市元町19-7" data-mode="transit" target="_blank" rel="noopener">市電/步行</a><a class="btn official" href="https://334.co.jp/ropeway/price/" target="_blank" rel="noopener">班次票價</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>函館山｜等候時的輕食與紀念品</b><span>不要為購物錯過下山排隊</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">輕食</span><b>山頂餐飲備案</b><span class="reco-kicker">只在提早到、候景有空檔時</span></summary><div class="reco-body"><p>山頂有餐飲設施，但夜景尖峰不建議安排正式晚餐；若提早抵達，可用飲品或輕食補充體力。營業時段依纜車與季節調整。</p><span class="address">函館山山頂展望台</span><div class="actions"><a class="btn map" href="#" data-map-query="函館山 山頂 レストラン" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://334.co.jp/restaurant/" target="_blank" rel="noopener">官方餐飲資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>函館山山頂商店</b><span class="reco-kicker">夜景限定商品・下山前 10 分鐘</span></summary><div class="reco-body"><p>可看函館山與夜景主題商品；先留意下行候車時間，熱門夜景時段以排隊下山為優先。</p><span class="address">函館山山頂展望台內</span><div class="actions"><a class="btn map" href="#" data-map-query="函館山 山頂ショップ" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://334.co.jp/shop/" target="_blank" rel="noopener">官方商店資訊</a></div></div></details>
+          </div></div>
+        </div><label class="check"><input type="checkbox" data-day-check="4"> DAY 4 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-5" data-day="5"><summary class="day-head"><span class="day-no"><small>DAY 5</small>8/17</span><span><h3>函館一日遊：朝市、星堡、坡道與港灣</h3><p>原表空白日 · 建議用市電＋步行，車留飯店</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p><span class="tag user">建議補完</span> 飯店就在交通樞紐旁；這天用市電比開車找位更省心。早上先吃朝市，接著五稜郭，下午回到元町與金森紅磚倉庫。</p><a class="btn official route-btn" href="https://www.hakodate.travel/cht/courses/enjoy-exploring-hakodate-by-tram/" target="_blank" rel="noopener">函館官方市電玩法 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">08:00–09:15</span><h4>函館朝市早餐</h4><p>約 5:00–14:00，實際依各店。飯店步行約 1 分鐘，可早點去避開團客。</p><span class="address">北海道函館市若松町9-19</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="函館朝市 北海道函館市若松町9-19" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/hakodate-morning-market/" target="_blank" rel="noopener">官方資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>函館朝市｜一碗早餐＋最後再決定海產</b><span>步行往返飯店最方便</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>函館朝市 いくら亭</b><span class="reco-kicker">海鮮丼・7:00–14:30</span></summary><div class="reco-body"><p>想要明確目的地可選市場內的海鮮丼店；先看當日魚料與份量。若候位長，市場內其他店家同樣可作替代。</p><span class="address">〒040-0063 函館市若松町9-15</span><div class="actions"><a class="btn map" href="#" data-map-query="函館朝市 いくら亭 函館市若松町9-15" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/food-drink-sushi-seafood-rice-bowl/hakodate-morning-market-ikura-tei/" target="_blank" rel="noopener">函館官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>朝市海產與乾貨</b><span class="reco-kicker">先問冷藏寄送，不帶著逛整天</span></summary><div class="reco-body"><p>若買鮮貨，優先使用店家冷藏寄送；自行攜帶則只選能妥善保冷的品項。昆布、魷魚乾等常溫品較適合當日城市行程。</p><span class="address">函館市若松町9-19 周邊</span><div class="actions"><a class="btn map" href="#" data-map-query="函館朝市 函館市若松町9-19" target="_blank" rel="noopener">市場地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/hakodate-morning-market/" target="_blank" rel="noopener">官方資訊</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">10:00–12:00</span><h4>五稜郭塔與公園</h4><p>夏季展望塔官方列 8:00–19:00、全年開放。搭市電到「五稜郭公園前」後仍需步行約 15 分鐘。</p><span class="address">〒040-0001 北海道函館市五稜郭町43-9</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="五稜郭タワー 北海道函館市五稜郭町43-9" target="_blank" rel="noopener">地圖</a><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="函館駅前" data-map-destination="五稜郭タワー 北海道函館市五稜郭町43-9" data-mode="transit" target="_blank" rel="noopener">從函館站</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/view/goryokaku-tower/" target="_blank" rel="noopener">官方資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>五稜郭｜函館甜點與伴手禮一次完成</b><span>塔旁步行約數分鐘</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">甜點</span><b>六花亭 五稜郭店喫茶室</b><span class="reco-kicker">11:00–16:00・最後點餐 15:30</span></summary><div class="reco-body"><p>適合五稜郭散步後休息；若 12:00 要離開，可只外帶或縮短停留。喫茶與商店時段不同。</p><span class="address">〒040-0001 函館市五稜郭町27-6</span><div class="actions"><a class="btn map" href="#" data-map-query="六花亭 五稜郭店 函館市五稜郭町27-6" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/rokkatei-goryokaku-store/" target="_blank" rel="noopener">函館官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>六花亭 五稜郭店</b><span class="reco-kicker">9:30–17:30・常溫點心優先</span></summary><div class="reco-body"><p>把六花亭伴手禮集中在這站購買；旅程仍有數天，夏季優先選常溫品，需冷藏品留到返程前。</p><span class="address">〒040-0001 函館市五稜郭町27-6</span><div class="actions"><a class="btn map" href="#" data-map-query="六花亭 五稜郭店 函館市五稜郭町27-6" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/rokkatei-goryokaku-store/" target="_blank" rel="noopener">營業資訊</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">14:00–15:30</span><h4>元町公園、八幡坂與教會群</h4><p>從市電「末廣町」一路順坡走，穿好走的鞋。若下雨或腳力有限，可把坡道縮成八幡坂＋元町公園兩點。</p><span class="address">元町公園：北海道函館市元町12-18 ／ 八幡坂：函館市末廣町</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="元町公園 北海道函館市元町12-18" target="_blank" rel="noopener">元町公園</a><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="八幡坂 北海道函館市末広町" target="_blank" rel="noopener">八幡坂</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>元町｜坡道中的午茶與小物</b><span>二選一休息，不必全吃</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">午茶</span><b>Victorian Rose</b><span class="reco-kicker">舊英國領事館・夏季 9:00–19:00</span></summary><div class="reco-body"><p>英式庭園旁的茶室，適合在坡道途中坐下休息；下午茶份量較大，後面還要去金森用餐時可只點紅茶與點心。</p><span class="address">〒040-0054 函館市元町33-14</span><div class="actions"><a class="btn map" href="#" data-map-query="ヴィクトリアンローズ 函館市元町33-14" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/food-drink-cafe/victorian-rose-former-british-consulate-of-hakodate/" target="_blank" rel="noopener">函館官方介紹</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">小物</span><b>元町觀光案內所商店</b><span class="reco-kicker">10:00–18:00・霜淇淋與函館小物</span></summary><div class="reco-body"><p>就在元町公園旁，可買小型紀念品或外帶霜淇淋；想減少走路時，這站比繞去其他商店更順。</p><span class="address">〒040-0054 函館市元町12-18</span><div class="actions"><a class="btn map" href="#" data-map-query="元町観光案内所 函館市元町12-18" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/historic-building/motomachi-tourist-information-center/" target="_blank" rel="noopener">函館官方介紹</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">16:00–19:00</span><h4>金森紅磚倉庫＋港灣晚餐</h4><p>商店官方資訊為 9:30–19:00、全年營業。若想慢慢購物，17:30 前抵達較從容。</p><span class="address">北海道函館市末廣町13-9</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="金森赤レンガ倉庫 北海道函館市末広町13-9" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/kanemori-red-brick-warehouse-stores/" target="_blank" rel="noopener">官方資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>金森紅磚倉庫｜甜點、晚餐、函館限定購物</b><span>17:30 前先買、再吃晚餐</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">甜點</span><b>Petit Merveille BAY 店</b><span class="reco-kicker">Mel Cheese・9:30–19:00</span></summary><div class="reco-body"><p>可試函館代表性起司小蛋糕或南瓜布丁；若已在元町吃午茶，這站改買盒裝伴手禮即可。</p><span class="address">〒040-0065 函館市豊川町11-5</span><div class="actions"><a class="btn map" href="#" data-map-query="プティ・メルヴィーユ 赤レンガ倉庫BAYはこだて店 函館市豊川町11-5" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/more-about-hakodate/cafe-sweets/" target="_blank" rel="noopener">函館甜點指南</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type food">晚餐</span><b>函館港灣餐廳區</b><span class="reco-kicker">海鮮或函館鹽味拉麵・現場擇一</span></summary><div class="reco-body"><p>在金森與函館灣美食俱樂部周邊選一間，優先看候位與關門時間；不必為名店排太久。想吃函館鹽味拉麵，可查看官方列出的味彩分店。</p><span class="address">函館市末廣町・豊川町周邊</span><div class="actions"><a class="btn map" href="#" data-map-query="函館ベイ美食倶楽部" target="_blank" rel="noopener">餐廳區</a><a class="btn official" href="https://www.hakodate.travel/cht/experience/gourmet/" target="_blank" rel="noopener">函館美食指南</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>函館明治館</b><span class="reco-kicker">玻璃、音樂盒與地方商品</span></summary><div class="reco-body"><p>小樽已買過玻璃或音樂盒時，這裡改看函館限定小物與食品，避免重複。商店多在 19:00 前結束，先買再吃晚餐。</p><span class="address">〒040-0065 函館市豊川町11-17</span><div class="actions"><a class="btn map" href="#" data-map-query="函館明治館 函館市豊川町11-17" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/experience/shopping/" target="_blank" rel="noopener">函館購物指南</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>金森洋物館／BAY HAKODATE</b><span class="reco-kicker">伴手禮總整理・關門前完成</span></summary><div class="reco-body"><p>最後一次整理函館食品、雜貨與服飾；先列收禮名單再買，冷藏品確認飯店冰箱與隔日車程保冷。</p><span class="address">〒040-0053 函館市末廣町13-9</span><div class="actions"><a class="btn map" href="#" data-map-query="金森洋物館 函館市末広町13-9" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/kanemori-red-brick-warehouse-stores/" target="_blank" rel="noopener">官方資訊</a></div></div></details>
+          </div></div>
+        </div><div class="note red"><b>飯店施工仍在：</b>8/17 9:00–18:00 是公告最後一天。把白天安排在外正好，但若需要回房休息，先問櫃檯是否能安排安靜區域。</div><label class="check"><input type="checkbox" data-day-check="5"> DAY 5 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-6" data-day="6"><summary class="day-head"><span class="day-no"><small>DAY 6</small>8/18</span><span><h3>函館 → 洞爺：午餐、熊與湖景飯店</h3><p>Harvester / 道之驛二選一 → 昭和新山熊牧場 → 太陽皇宮</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>原表 11:15 休息、13:00 熊牧場過緊。建議 10:00 準時出發、午餐 45–60 分鐘，熊牧場改抓 13:30–14:00 到達，15:30 前後入住。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="プレミアホテル-CABIN PRESIDENT-函館" data-map-destination="洞爺サンパレス リゾート＆スパ 北海道有珠郡壮瞥町字洞爺湖温泉7-1" data-waypoints="ハーベスター八雲 北海道二海郡八雲町浜松365|昭和新山熊牧場 北海道有珠郡壮瞥町字昭和新山183" data-mode="driving" target="_blank" rel="noopener">Harvester 方案 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">10:00</span><h4>函館退房出發</h4><p>飯店官網估函館到洞爺太陽皇宮約 2 小時 50 分（不含停留）。請在出發前加滿油、確認高速道路與天氣。</p></article>
+          <article class="stop"><span class="time">11:15–12:15</span><h4>午餐 A：Harvester 八雲</h4><p>適合坐下吃披薩與雞肉，景觀好；8 月平日 10:30–19:00。若排隊過長，啟用 B 方案。</p><span class="address">北海道二海郡八雲町浜松365</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="ハーベスター八雲 北海道二海郡八雲町浜松365" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://harvester-yakumo.com/menu/" target="_blank" rel="noopener">官網</a></div></article>
+          <article class="stop"><span class="time">備案</span><h4>午餐 B：道の駅 YOU・遊・もり</h4><p>森町官方確認物產館販售發祥地名物「いかめし」，夏季 9:00–17:30。它位於 Harvester 之後、較靠近函館方向南側，不要兩站都停。</p><span class="address">北海道茅部郡森町字上台町326-18</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="道の駅 YOU・遊・もり 北海道茅部郡森町字上台町326-18" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://mori.hokkaido.jp/sightseeing/you_1/" target="_blank" rel="noopener">官方資訊</a></div></article>
+          <article class="stop"><span class="time">13:30–15:00 建議</span><h4>昭和新山熊牧場 <span class="tag confirmed">8:30–17:00</span></h4><p>地址與「登別熊牧場」不同，導航務必選昭和新山。可餵食的動物展示設施，依個人動物福利觀點決定是否入場。</p><span class="address">〒052-0102 北海道有珠郡壮瞥町字昭和新山183</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="昭和新山熊牧場 北海道有珠郡壮瞥町字昭和新山183" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://kumakuma.co.jp/会社概要/" target="_blank" rel="noopener">官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>昭和新山熊牧場｜園內小買與周邊補給</b><span>停留時間短，以不繞路為主</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type break">體驗</span><b>入口餵食用蘋果／餅乾</b><span class="reco-kicker">入場後依規定使用</span></summary><div class="reco-body"><p>官方資訊指出入口販售熊隻餵食用蘋果與餅乾；只使用園方指定飼料，不自行餵食其他食物。是否參與依同行者與動物福利觀點決定。</p><span class="address">昭和新山熊牧場入口</span><div class="actions"><a class="btn map" href="#" data-map-query="昭和新山熊牧場 北海道有珠郡壮瞥町字昭和新山183" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.visit-hokkaido.jp/spot/detail_10538.html" target="_blank" rel="noopener">北海道官方資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>熊牧場売店</b><span class="reco-kicker">原創熊商品・離場前 10 分鐘</span></summary><div class="reco-body"><p>可看熊牧場原創商品與當地伴手禮；網站也列有原創馬油配合乳霜。園區 8 月通常 8:30–17:00，臨時時段以官網為準。</p><span class="address">〒052-0102 有珠郡壮瞥町字昭和新山183</span><div class="actions"><a class="btn map" href="#" data-map-query="昭和新山熊牧場 売店" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://kumakuma.co.jp/" target="_blank" rel="noopener">熊牧場官網</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">15:30</span><h4>洞爺太陽皇宮 · Check-in</h4><p>全室湖景、溫泉與 Water Land。官方排定泳池 2026/7/18 14:00 恢復，但維修資訊可能更新；出發前再看官網首頁。</p><span class="address">〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="洞爺サンパレス リゾート＆スパ 北海道有珠郡壮瞥町字洞爺湖温泉7-1" target="_blank" rel="noopener">地圖</a><button class="btn copy" data-copy="〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1">複製地址</button><a class="btn official" href="https://www.toyasunpalace.co.jp/" target="_blank" rel="noopener">官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>洞爺太陽皇宮｜晚餐與飯店伴手禮</b><span>入住後不再開車</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>Palacio Grande 晚餐 Buffet</b><span class="reco-kicker">通常 18:00–20:00・最晚入場 19:30</span></summary><div class="reco-body"><p>這天移動時間長，建議入住後直接使用住宿方案晚餐，不再外出找店。實際時段可能依預約變更，報到時確認入場梯次與過敏原標示。</p><span class="address">洞爺サンパレス リゾート＆スパ館內</span><div class="actions"><a class="btn map" href="#" data-map-query="洞爺サンパレス リゾート＆スパ" target="_blank" rel="noopener">飯店地圖</a><a class="btn official" href="https://www.toyasunpalace.co.jp/meal/restaurant/" target="_blank" rel="noopener">官方餐飲資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>1F 売店</b><span class="reco-kicker">平日 8:00–11:00、14:00–21:00</span></summary><div class="reco-body"><p>適合補洞爺湖與北海道伴手禮；週末、假日與旺季時段不同，先看現場公告。冷藏品等退房日再買。</p><span class="address">洞爺サンパレス 1F</span><div class="actions"><a class="btn map" href="#" data-map-query="洞爺サンパレス リゾート＆スパ 売店" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://www.toyasunpalace.co.jp/dayuse/" target="_blank" rel="noopener">館內設施時段</a></div></div></details>
+          </div></div>
+        </div><label class="check"><input type="checkbox" data-day-check="6"> DAY 6 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-7" data-day="7"><summary class="day-head"><span class="day-no"><small>DAY 7</small>8/19</span><span><h3>登別：城堡水族館與地熱溫泉街</h3><p>尼克斯海洋公園 → 登別溫泉街 / 地獄谷 → 洞爺湖</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p>原表的 45 分鐘車程偏樂觀，建議抓 50–70 分鐘並在 9:45 前出發；若 10:00 才離開飯店，預計約 11:00 左右到水族館。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="洞爺サンパレス リゾート＆スパ" data-map-destination="登別温泉駐車場 北海道登別市登別温泉町1番地26" data-waypoints="登別マリンパークニクス 北海道登別市登別東町1丁目22" data-mode="driving" target="_blank" rel="noopener">今日駕車路線 ↗</a></div>
+        <div class="timeline">
+          <article class="stop"><span class="time">10:00–12:30 原案</span><h4>登別マリンパークニクス <span class="tag confirmed">9:00–17:00</span></h4><p>最後入園 16:30；2026 年休館期在 4 月，8/19 可依官網正常日規劃。表演時刻會影響動線，前一晚再看當日節目表。</p><span class="address">〒059-0492 北海道登別市登別東町1丁目22</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="登別マリンパークニクス 北海道登別市登別東町1丁目22" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://nixe-aqua.com/guide/" target="_blank" rel="noopener">官網</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>尼克斯｜園內午餐與水族館商品</b><span>需購票入園後使用</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>セルフレストラン リーベ</b><span class="reco-kicker">拉麵、咖哩、兒童餐・表演空檔</span></summary><div class="reco-body"><p>若表演時間緊，可在園內快速吃午餐；先看當日節目表，再抓 30–45 分鐘。戶外食堂レカレカ冬季休業，8 月是否開放依現場。</p><span class="address">登別マリンパークニクス園內</span><div class="actions"><a class="btn map" href="#" data-map-query="レストラン リーベ 登別マリンパークニクス" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://nixe-aqua.com/food-shop/" target="_blank" rel="noopener">官方餐飲資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>ショップ アトランティス</b><span class="reco-kicker">海洋生物商品・出口前 15 分鐘</span></summary><div class="reco-body"><p>主打水族館原創商品、玩偶與零食；商店在城內動線末端，逛完再結帳最順。只使用商店與餐廳也需要入園票。</p><span class="address">登別マリンパークニクス・ニクス城內</span><div class="actions"><a class="btn map" href="#" data-map-query="ショップ アトランティス 登別マリンパークニクス" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://nixe-aqua.com/food-shop/" target="_blank" rel="noopener">官方商店資訊</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">13:00–15:00</span><h4>登別溫泉街午餐＋地獄谷短走</h4><p>新設登別溫泉停車場 24 小時、141 格；一般期 500 日圓/日、繁忙期 800 日圓/日，步行約 5 分鐘到極樂通商店街。若天雨或同行者走路不便，只逛溫泉街即可。</p><span class="address">登別溫泉停車場：北海道登別市登別温泉町1番地26、32、33、34</span><div class="actions"><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="登別温泉駐車場 北海道登別市登別温泉町1番地26" target="_blank" rel="noopener">停車場</a><a class="btn map" href="https://www.google.com/maps/search/?api=1" data-map-query="登別地獄谷 北海道登別市登別温泉町" target="_blank" rel="noopener">地獄谷</a><a class="btn official" href="https://www.city.noboribetsu.lg.jp/docs/2025103000052/" target="_blank" rel="noopener">停車官方資訊</a></div></article>
+          <div class="reco-block"><div class="reco-title"><b>登別溫泉街｜海鮮午餐與在地伴手禮</b><span>停車後全程步行</span></div><div class="reco-grid">
+            <details class="reco-card"><summary><span class="reco-type food">美食</span><b>温泉市場</b><span class="reco-kicker">海鮮午餐・10:30–20:00</span></summary><div class="reco-body"><p>可安排海鮮料理或登別特色食品；若已在尼克斯吃過午餐，這裡改成小吃或直接略過。營業時段可能變動，當日先看現場。</p><span class="address">北海道登別市登別温泉町50</span><div class="actions"><a class="btn map" href="#" data-map-query="温泉市場 北海道登別市登別温泉町50" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://noboribetsu-spa.jp/faq/shopping/" target="_blank" rel="noopener">觀光協會資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>藤崎わさび園</b><span class="reco-kicker">わさび漬・9:00–22:00（冬季變動）</span></summary><div class="reco-body"><p>適合買登別溫泉街代表性的山葵漬；屬需留意保存的食品，購買時確認冷藏方式與回程攜帶規定。</p><span class="address">北海道登別市登別温泉町49</span><div class="actions"><a class="btn map" href="#" data-map-query="藤崎わさび園 北海道登別市登別温泉町49" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://noboribetsu-spa.jp/faq/shopping/" target="_blank" rel="noopener">觀光協會資訊</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type shop">購物</span><b>極樂通鬼怪小物</b><span class="reco-kicker">地獄谷主題紀念品・步行順路</span></summary><div class="reco-body"><p>沿極樂通挑登別鬼怪、溫泉與地獄谷主題小物；設定 15–20 分鐘即可，預留地獄谷步行與回洞爺車程。</p><span class="address">登別市登別温泉町・極樂通商店街</span><div class="actions"><a class="btn map" href="#" data-map-query="登別温泉 極楽通り商店街" target="_blank" rel="noopener">商店街地圖</a><a class="btn official" href="https://noboribetsu-spa.jp/" target="_blank" rel="noopener">登別觀光官網</a></div></div></details>
+            <details class="reco-card"><summary><span class="reco-type break">加購</span><b>わかさいも本舗 登別東店</b><span class="reco-kicker">返洞爺途中・9:00–18:00</span></summary><div class="reco-body"><p>若還想補北海道銘菓，可在離開登別時順道停；但它不在溫泉街核心，時間不足就略過。店內另有食事處。</p><span class="address">北海道登別市中登別町96-6</span><div class="actions"><a class="btn map" href="#" data-map-query="わかさいも本舗 登別東店 登別市中登別町96-6" target="_blank" rel="noopener">地圖</a><a class="btn official" href="https://noboribetsu-spa.jp/spot/spot0223/" target="_blank" rel="noopener">觀光協會介紹</a></div></div></details>
+          </div></div>
+          <article class="stop"><span class="time">15:30</span><h4>返回太陽皇宮</h4><p>回程保留休息、泳池與晚餐時間。若水族館停留較久，刪掉地獄谷長步道，不要為趕 15:30 而超速。</p><div class="actions"><a class="btn route" href="https://www.google.com/maps/dir/?api=1" data-map-origin="登別温泉駐車場" data-map-destination="洞爺サンパレス リゾート＆スパ" data-mode="driving" target="_blank" rel="noopener">回飯店</a></div></article>
+        </div><label class="check"><input type="checkbox" data-day-check="7"> DAY 7 已確認 / 完成</label></div>
+    </details>
+
+    <details class="day" id="day-8" data-day="8"><summary class="day-head"><span class="day-no"><small>DAY 8</small>8/20</span><span><h3>退房與返程：依航班倒推</h3><p>原表未提供班機時間 · 需要你補上</p></span><span class="chev">⌄</span></summary>
+      <div class="day-body"><div class="day-intro"><p><span class="tag user">待你決定</span> 若由新千歲機場返台，太陽皇宮官網估自駕約 1 小時 30 分。請再加租車加油/還車接駁、國際線報到與可能車流，建議以航班起飛前至少 4–4.5 小時離開飯店作為保守起點。</p><a class="btn route route-btn" href="https://www.google.com/maps/dir/?api=1" data-map-origin="洞爺サンパレス リゾート＆スパ" data-map-destination="新千歲空港 国際線" data-mode="driving" target="_blank" rel="noopener">飯店 → 新千歲機場 ↗</a></div>
+        <div class="note"><b>請補到你的行程：</b>航班號碼、起飛時間、租車公司還車地址、是否需加滿油、國際線櫃檯關閉時間。若不是新千歲機場返程，請勿使用上述時間。</div>
+        <label class="check"><input type="checkbox" data-day-check="8"> DAY 8 航班與還車時間已補妥</label></div>
+    </details>
+
+    <div class="section-title"><h2>出發前要訂與要查</h2><p>把會影響「能不能進去」的事情優先處理。</p></div>
+    <section class="book-list" aria-label="預訂清單">
+      <article class="book-item"><b>先訂：白色戀人體驗</b><span class="mini">若要手作課程，查看指定日期與名額；純逛園區可保留彈性。</span></article>
+      <article class="book-item"><b>先看：札幌啤酒 Premium Tour</b><span class="mini">需要導覽才預約；駕駛不飲酒。</span></article>
+      <article class="book-item"><b>確認：GAjA 8/15 18:30</b><span class="mini">保留訂位姓名、電話與取消規則截圖。</span></article>
+      <article class="book-item"><b>確認：三間飯店停車</b><span class="mini">尤其 FAV LUX 只有 15 格且不可預約；函館飯店合作停車費率另問。</span></article>
+      <article class="book-item"><b>當天看：函館山運行與能見度</b><span class="mini">雲霧濃時可將夜景與 8/17 行程互換。</span></article>
+      <article class="book-item"><b>前一晚看：尼克斯表演時刻</b><span class="mini">用企鵝、海豚等節目時間反推到園時間。</span></article>
+    </section>
+
+    <div class="section-title"><h2>離家前 10 分鐘核對</h2><p>即時資訊最適合在出發前再看一次。</p></div>
+    <section class="panel"><ul class="verify-list">
+      <li>航班、租車接駁與還車分店地址</li><li>ETC 卡、兒童座椅、駕照與日文譯本</li><li>三間飯店停車與入住人數</li><li>函館飯店施工房間安排</li><li>函館山纜車運行、雲量與候車時間</li><li>道路封閉、事故與高速路況</li><li>各景點臨時休館、最後入場</li><li>洞爺 Water Land 當日狀態</li><li>北海道與市町村住宿稅是否已含房價</li><li>全程駕駛不飲酒；疲勞就加休息站</li>
+    </ul></section>
+
+    <div class="section-title"><h2>資料來源與核對狀態</h2><p>營業時間與活動資訊於 2026/8/10（Asia/Taipei）核對；即時狀態仍需出發前確認。</p></div>
+    <section class="panel references"><ol>
+      <li><a href="https://fav-hotels.com/hotels/lux/sapporosusukino/" target="_blank" rel="noopener">FAV LUX 札幌すすきの官方資訊</a> — 地址、入住退房、停車。</li>
+      <li><a href="https://cabin.kenhotels.com/hakodate/" target="_blank" rel="noopener">PREMIER HOTEL–CABIN PRESIDENT–函館</a>與<a href="https://cabin.kenhotels.com/hakodate/uploads/2026/07/db9ecca7881a740bf45b310dd69841c7.pdf" target="_blank" rel="noopener">施工公告</a>。</li>
+      <li><a href="https://www.toyasunpalace.co.jp/" target="_blank" rel="noopener">洞爺太陽皇宮</a> — 地址、泳池維修/恢復排程；<a href="https://www.toyasunpalace.co.jp/access/" target="_blank" rel="noopener">交通時間</a>。</li>
+      <li><a href="https://www.visit-hokkaido.jp/tw/spot/detail_10028.html" target="_blank" rel="noopener">白色戀人公園</a>、<a href="https://www.visit-hokkaido.jp/spot/detail_10025.html" target="_blank" rel="noopener">札幌啤酒博物館</a>、<a href="https://www.hokkaidojingu.or.jp/" target="_blank" rel="noopener">北海道神宮</a>。</li>
+      <li><a href="https://www.sapporo.travel/spot/feature/summer/" target="_blank" rel="noopener">2026 札幌夏季活動</a>與<a href="https://www.tv-tower.co.jp/ch/pricetime.html" target="_blank" rel="noopener">札幌電視塔</a>。</li>
+      <li><a href="https://otaru.gr.jp/shop/parking" target="_blank" rel="noopener">小樽官方觀光停車場</a>與<a href="https://otaru.gr.jp/project/otaru-tourist-brochure" target="_blank" rel="noopener">2026 小樽官方導覽</a>。</li>
+      <li><a href="https://334.co.jp/ropeway/price/" target="_blank" rel="noopener">函館山纜車</a>、<a href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/hakodate-morning-market/" target="_blank" rel="noopener">函館朝市</a>、<a href="https://www.hakodate.travel/cht/sightseeing-spots/view/goryokaku-tower/" target="_blank" rel="noopener">五稜郭塔</a>、<a href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/kanemori-red-brick-warehouse-stores/" target="_blank" rel="noopener">金森紅磚倉庫</a>。</li>
+      <li><a href="https://harvester-yakumo.com/menu/" target="_blank" rel="noopener">Harvester 八雲</a>與<a href="https://mori.hokkaido.jp/sightseeing/you_1/" target="_blank" rel="noopener">道の駅 YOU・遊・もり</a>。</li>
+      <li><a href="https://kumakuma.co.jp/会社概要/" target="_blank" rel="noopener">昭和新山熊牧場</a>、<a href="https://nixe-aqua.com/guide/" target="_blank" rel="noopener">登別海洋公園尼克斯</a>、<a href="https://www.city.noboribetsu.lg.jp/docs/2025103000052/" target="_blank" rel="noopener">登別溫泉停車場</a>。</li>
+      <li><a href="https://www.pref.hokkaido.lg.jp/kz/kkd/230824.html" target="_blank" rel="noopener">北海道住宿稅官方說明</a> — 2026/4/1 起實施，金額依房價與市町村而異。</li>
+      <li>札幌推薦：<a href="https://tanukikoji.or.jp/shop-search/" target="_blank" rel="noopener">狸小路店鋪目錄</a>、<a href="https://www.shiroikoibitopark.jp/daily-report/" target="_blank" rel="noopener">白色戀人公園營業資訊</a>、<a href="https://sapporo-bier-garten.jp/shop/" target="_blank" rel="noopener">札幌啤酒園餐廳</a>。</li>
+      <li>小樽推薦：<a href="https://otaru.gr.jp/shop/kamaei-chokubaiten" target="_blank" rel="noopener">かま栄工場直売店</a>、<a href="https://otaru.gr.jp/shop/letao_honten" target="_blank" rel="noopener">LeTAO 本店</a>、<a href="https://otaru.gr.jp/shop/kitaichiglass-building3" target="_blank" rel="noopener">北一硝子三号館</a>、<a href="https://otaru.gr.jp/shop/orgel-doh-mainbuilding" target="_blank" rel="noopener">小樽音樂盒堂本館</a>。</li>
+      <li>函館推薦：<a href="https://www.hakodate.travel/cht/sightseeing-spots/food-drink-sushi-seafood-rice-bowl/hakodate-morning-market-ikura-tei/" target="_blank" rel="noopener">朝市いくら亭</a>、<a href="https://www.hakodate.travel/cht/sightseeing-spots/shopping-spot/rokkatei-goryokaku-store/" target="_blank" rel="noopener">六花亭五稜郭店</a>、<a href="https://www.hakodate.travel/cht/sightseeing-spots/food-drink-cafe/victorian-rose-former-british-consulate-of-hakodate/" target="_blank" rel="noopener">Victorian Rose</a>、<a href="https://334.co.jp/shop/" target="_blank" rel="noopener">函館山山頂商店</a>。</li>
+      <li>洞爺・登別推薦：<a href="https://www.toyasunpalace.co.jp/dayuse/" target="_blank" rel="noopener">太陽皇宮館內設施</a>、<a href="https://nixe-aqua.com/food-shop/" target="_blank" rel="noopener">尼克斯餐飲商店</a>、<a href="https://noboribetsu-spa.jp/faq/shopping/" target="_blank" rel="noopener">登別觀光協會購物資訊</a>。</li>
+    </ol></section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-grid"><div><b>使用限制</b><br><span class="mini">本頁核心內容可離線閱讀；Google Maps、即時導航、外部官網與交通狀態需連網。路線時間是估算，不保證交通、入場或停車。</span></div><div><b>素材說明</b><br><span class="mini">未嵌入第三方照片或地圖圖磚。頁首動線為本頁原創示意，非比例地圖。原始行程來源：使用者提供的「北海道.xlsx」。</span></div></div></footer>
+  <button class="backtop" id="backTop" aria-label="回到頁首">↑</button>
+  <script>
+    const days=[...document.querySelectorAll('details.day')];
+    const recommendations=[...document.querySelectorAll('details.reco-card')];
+    document.getElementById('expandAll').addEventListener('click',()=>[...days,...recommendations].forEach(d=>d.open=true));
+    document.getElementById('collapseAll').addEventListener('click',()=>[...recommendations,...days].forEach(d=>d.open=false));
+    document.getElementById('printGuide').addEventListener('click',()=>window.print());
+    const originalOpen=new Map();
+    addEventListener('beforeprint',()=>{[...days,...recommendations].forEach(d=>{originalOpen.set(d,d.open);d.open=true})});
+    addEventListener('afterprint',()=>[...days,...recommendations].forEach(d=>d.open=originalOpen.get(d)));
+    document.querySelectorAll('[data-map-query]').forEach(a=>{a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(a.dataset.mapQuery)});
+    document.querySelectorAll('[data-map-destination]').forEach(a=>{const p=new URLSearchParams({api:'1',destination:a.dataset.mapDestination,travelmode:a.dataset.mode||'driving'});if(a.dataset.mapOrigin)p.set('origin',a.dataset.mapOrigin);if(a.dataset.waypoints)p.set('waypoints',a.dataset.waypoints);a.href='https://www.google.com/maps/dir/?'+p.toString()});
+    document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const text=b.dataset.copy;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}const old=b.textContent;b.textContent='已複製';setTimeout(()=>b.textContent=old,1300)}));
+    const checks=[...document.querySelectorAll('[data-day-check]')];
+    const readSaved=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+    const saveState=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){/* file-mode privacy settings may disable storage */}};
+    checks.forEach(c=>{c.checked=readSaved('hokkaido-day-'+c.dataset.dayCheck)==='1';c.addEventListener('change',()=>{saveState('hokkaido-day-'+c.dataset.dayCheck,c.checked?'1':'0');updateProgress()})});
+    function updateProgress(){const done=checks.filter(c=>c.checked).length;document.getElementById('progressText').textContent=done+' / '+checks.length;document.getElementById('progressBar').style.width=(done/checks.length*100)+'%'}updateProgress();
+    const search=document.getElementById('guideSearch');
+    search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();days.forEach(d=>{const match=!q||d.textContent.toLowerCase().includes(q);d.classList.toggle('hidden-by-search',!match);if(q&&match)d.open=true})});
+    function connection(){document.body.classList.toggle('is-offline',!navigator.onLine)}addEventListener('online',connection);addEventListener('offline',connection);connection();
+    const navs=[...document.querySelectorAll('.nav-day')];
+    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navs.forEach(n=>n.classList.toggle('active',n.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-25% 0px -65% 0px'});days.forEach(d=>observer.observe(d));
+    const back=document.getElementById('backTop');addEventListener('scroll',()=>back.classList.toggle('show',scrollY>650),{passive:true});back.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+  </script>
+</body>
+</html>
