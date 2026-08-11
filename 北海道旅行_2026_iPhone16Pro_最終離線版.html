@@ -1,0 +1,2366 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#174a5b">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="北海道 2026">
+  <meta name="format-detection" content="telephone=no">
+  <title>2026 北海道家庭旅行｜公開去識別離線版</title>
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root {
+      --ink: #17343c;
+      --muted: #60747a;
+      --paper: #f7f4ec;
+      --card: rgba(255,255,255,.86);
+      --line: rgba(23,52,60,.13);
+      --teal: #0d7d79;
+      --deep: #174a5b;
+      --coral: #e86f51;
+      --gold: #d9a441;
+      --shadow: 0 16px 48px rgba(27,58,65,.10);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      padding-top: calc(62px + env(safe-area-inset-top));
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(58,166,154,.16), transparent 30rem),
+        radial-gradient(circle at 90% 15%, rgba(232,111,81,.12), transparent 26rem),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
+        "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      padding: max(28px, env(safe-area-inset-top)) 0 38px;
+      color: #fff;
+      background:
+        linear-gradient(125deg, rgba(12,67,80,.97), rgba(15,124,119,.91)),
+        #174a5b;
+    }
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 360px; height: 360px; right: -120px; top: -150px;
+      background: rgba(255,255,255,.08);
+      box-shadow: -250px 280px 0 70px rgba(255,255,255,.035);
+    }
+    .hero::after {
+      width: 180px; height: 180px; left: -90px; bottom: -90px;
+      border: 34px solid rgba(232,179,91,.20);
+    }
+    .topbar, .hero-copy, .quick-stats { position: relative; z-index: 1; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .brand { font-weight: 800; letter-spacing: .08em; }
+    .actions { display: flex; gap: 8px; }
+    .icon-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      min-height: 42px; padding: 0 14px; border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px; color: #fff; background: rgba(255,255,255,.10);
+      backdrop-filter: blur(8px);
+    }
+    .icon-btn:hover { background: rgba(255,255,255,.18); }
+    .hero-copy { padding: 60px 0 36px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin: 0 0 14px; color: #d8f3ef; font-size: .88rem;
+      font-weight: 750; letter-spacing: .12em; text-transform: uppercase;
+    }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.4rem, 8vw, 5.8rem); line-height: .98; letter-spacing: -.045em; }
+    .lead { max-width: 680px; margin: 22px 0 0; color: rgba(255,255,255,.78); font-size: clamp(1rem, 2vw, 1.18rem); }
+    .quick-stats {
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px;
+    }
+    .stat {
+      padding: 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 18px;
+      background: rgba(255,255,255,.09); backdrop-filter: blur(10px);
+    }
+    .stat strong { display: block; font-size: 1.25rem; }
+    .stat span { color: rgba(255,255,255,.68); font-size: .82rem; }
+    .nav-wrap {
+      position: fixed !important; top: 0; right: 0; left: 0; z-index: 1000;
+      padding-top: env(safe-area-inset-top); border-bottom: 1px solid var(--line);
+      background: rgba(247,244,236,.88); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); transform: translateZ(0);
+    }
+    .nav {
+      display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 10px 0;
+      scroll-snap-type: x proximity; overscroll-behavior-inline: contain;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      flex: 0 0 auto; padding: 9px 14px; border-radius: 999px;
+      color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 700;
+      scroll-snap-align: start;
+    }
+    .nav a:hover { color: var(--teal); background: rgba(13,125,121,.09); }
+    .nav a.page-link {
+      color: #fff; background: var(--teal); box-shadow: 0 5px 16px rgba(13,125,121,.22);
+    }
+    .nav a.page-link:hover { color: #fff; background: #096d69; }
+    .pikmin-hero {
+      position: relative; overflow: hidden; padding: 26px;
+      color: #17343c; background: linear-gradient(135deg, #f7f1a8, #d9f2bc 52%, #b9e8df);
+    }
+    .pikmin-hero::after {
+      content: "✿"; position: absolute; right: 20px; top: -24px;
+      color: rgba(255,255,255,.58); font-size: 9rem; line-height: 1;
+    }
+    .pikmin-hero > * { position: relative; z-index: 1; }
+    .pikmin-hero h3 { margin: 0 0 6px; font-size: 1.35rem; }
+    .pikmin-hero p { max-width: 760px; margin: 0; }
+    .pikmin-key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .pikmin-key span, .pikmin-badge {
+      display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px;
+      font-size: .76rem; font-weight: 850; background: rgba(255,255,255,.72);
+    }
+    .pikmin-badge.official { color: #fff; background: #0d7d79; }
+    .pikmin-badge.chance { color: #7a5a12; background: #fff2b8; }
+    .pikmin-badge.event { color: #fff; background: #e86f51; }
+    .pikmin-alerts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 14px 0; }
+    .pikmin-alert { padding: 18px; }
+    .pikmin-alert strong { display: block; margin: 8px 0 3px; font-size: 1.05rem; }
+    .pikmin-alert p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .spot-route { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .spot-group { padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(23,74,91,.04); }
+    .spot-group h4 { margin: 0 0 8px; color: var(--teal); }
+    .spot-group ol { margin: 0; padding-left: 20px; }
+    .spot-group li { margin: 5px 0; }
+    .spot-group small { display: block; color: var(--muted); }
+    .hunt-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .hunt-day { padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+    .hunt-day time { color: var(--coral); font-size: .78rem; font-weight: 850; }
+    .hunt-day h4 { margin: 3px 0 7px; }
+    .hunt-day p { margin: 0; color: var(--muted); font-size: .87rem; }
+    .pikmin-check { margin: 14px 0 0; padding-left: 20px; }
+    .pikmin-check li { margin: 7px 0; }
+    .gift-legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+    .gift-legend span, .gift-origin {
+      display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px;
+      font-size: .76rem; font-weight: 850; background: rgba(13,125,121,.09); color: var(--teal);
+    }
+    .gift-origin.local { color: #fff; background: var(--coral); }
+    .gift-origin.hokkaido { color: #684c08; background: #f5dda2; }
+    .gift-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .gift-card { padding: 20px; }
+    .gift-card-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .gift-card h3 { margin: 0; font-size: 1.08rem; }
+    .gift-card .jp-name { margin: 2px 0 0; color: var(--muted); font-size: .8rem; }
+    .gift-price { color: var(--coral); font-weight: 900; white-space: nowrap; }
+    .gift-card > p { margin: 11px 0; color: var(--muted); font-size: .87rem; }
+    .gift-ratings { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .gift-rating { padding: 9px 8px; border-radius: 11px; background: rgba(23,74,91,.05); }
+    .gift-rating small { display: block; color: var(--muted); }
+    .stars { color: #d89920; font-size: .78rem; letter-spacing: -.08em; white-space: nowrap; }
+    .gift-buy { margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .82rem; }
+    .gift-buy b { color: var(--teal); }
+    .cold-note { color: #a8503b; font-weight: 800; }
+    .gift-plan { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .gift-stop { padding: 15px; border-radius: 14px; background: rgba(23,74,91,.05); }
+    .gift-stop time { color: var(--coral); font-size: .76rem; font-weight: 850; }
+    .gift-stop b { display: block; margin: 4px 0; }
+    .gift-stop small { color: var(--muted); }
+    #group-plan .group-intro { margin-bottom: 18px; }
+    #group-plan .lodging { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+    #group-plan .stay, #group-plan .day { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    #group-plan .stay { padding: 20px; }
+    #group-plan .stay small { color: var(--muted); }
+    #group-plan .stay h3 { margin: 8px 0 4px; font-size: 1.08rem; }
+    #group-plan .days { display: grid; gap: 16px; }
+    #group-plan .day { overflow: hidden; }
+    #group-plan .day-head { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 14px; padding: 20px 22px; color: #fff; background: var(--deep); }
+    #group-plan .day-head time { font-size: 1.38rem; font-weight: 850; }
+    #group-plan .day-head h3 { margin: 0; font-size: 1.18rem; }
+    #group-plan .day-head p { margin: 2px 0 0; color: rgba(255,255,255,.7); font-size: .86rem; }
+    #group-plan details.day-dialog { margin: 0; padding: 0; }
+    #group-plan details.day-dialog + details.day-dialog { margin-top: 0; }
+    #group-plan .day-dialog > .day-head {
+      grid-template-columns: 130px minmax(0,1fr) auto;
+      cursor: pointer; list-style: none;
+    }
+    #group-plan .day-dialog > .day-head::after {
+      content: "＋"; color: #fff; font-size: 1.45rem; font-weight: 500;
+    }
+    #group-plan .day-dialog[open] > .day-head::after { content: "－"; }
+    #group-plan .day-dialog > .day-head::-webkit-details-marker { display: none; }
+    #group-plan .timeline { list-style: none; margin: 0; padding: 9px 22px 16px; }
+    #group-plan .timeline li { display: grid; grid-template-columns: 88px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    #group-plan .timeline li:last-child { border-bottom: 0; }
+    #group-plan .time { color: var(--teal); font-weight: 850; }
+    #group-plan .event strong, #group-plan .event small { display: block; }
+    #group-plan .event small { margin-top: 3px; color: var(--muted); }
+    #group-plan .travel .time { color: var(--coral); }
+    #group-plan .travel .event { color: var(--muted); }
+    #group-plan .trip-tip { margin-top: 10px; border: 1px solid rgba(13,125,121,.24); border-radius: 13px; background: rgba(13,125,121,.055); box-shadow: none; }
+    #group-plan .trip-tip summary { min-height: 44px; padding: 10px 12px; color: var(--teal); font-size: .84rem; }
+    #group-plan .tip-body { padding: 0 12px 12px; font-size: .86rem; }
+    #group-plan .tip-body p { margin: 7px 0; }
+    #group-plan .tip-body b { color: var(--coral); }
+    #group-plan .tip-body a, #group-plan .blog-links a { color: var(--teal); font-weight: 750; text-underline-offset: 2px; }
+    #group-plan .tip-choice { margin-top: 8px; padding: 9px 10px; border-radius: 10px; background: rgba(217,164,65,.12); }
+    #group-plan .route-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+    #group-plan .route-card { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: var(--shadow); }
+    #group-plan .route-card h3 { margin: 0 0 4px; font-size: 1.15rem; }
+    #group-plan .route-card > p { margin: 0 0 14px; color: var(--muted); font-size: .86rem; }
+    #group-plan .route-steps { margin: 0; padding: 0; list-style: none; }
+    #group-plan .route-steps li { position: relative; margin-left: 8px; padding: 0 0 14px 24px; border-left: 2px solid rgba(13,125,121,.22); }
+    #group-plan .route-steps li:last-child { padding-bottom: 2px; border-left-color: transparent; }
+    #group-plan .route-steps li::before { content: ""; position: absolute; left: -6px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); }
+    #group-plan .route-steps b, #group-plan .route-steps small { display: block; }
+    #group-plan .route-steps small { margin-top: 2px; color: var(--muted); }
+    #group-plan .map-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    #group-plan .map-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 9px 12px; border-radius: 999px; color: #fff; background: var(--teal); font-size: .82rem; font-weight: 800; text-decoration: none; }
+    #group-plan .map-btn.secondary { color: var(--teal); border: 1px solid rgba(13,125,121,.3); background: rgba(13,125,121,.07); }
+    #group-plan .blog-titlebar {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      margin-bottom: 16px; padding: 14px 16px; border: 1px solid var(--line);
+      border-radius: 16px; background: var(--deep); box-shadow: var(--shadow);
+    }
+    #group-plan .blog-titlebar h2 { margin: 0; color: #fff; font-size: clamp(1.35rem,4vw,2rem); }
+    #group-plan .blog-titlebar a {
+      flex: 0 0 auto; min-height: 42px; display: inline-flex; align-items: center;
+      padding: 8px 12px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px;
+      color: #fff; background: rgba(255,255,255,.1); text-decoration: none; font-size: .84rem; font-weight: 800;
+    }
+    #group-plan .blog-feature { overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--card); box-shadow: var(--shadow); }
+    #group-plan .blog-cover { padding: 38px; color: #fff; background: linear-gradient(125deg,rgba(23,74,91,.98),rgba(13,125,121,.9)); }
+    #group-plan .blog-cover.nijo-cover { background: linear-gradient(125deg,#6f3f21,#bd6a38 55%,#d99b48); }
+    #group-plan .blog-cover.tanuki-cover { background: linear-gradient(125deg,#342756,#7b3f77 52%,#c86b5c); }
+    #group-plan .blog-cover.jingu-cover { background: linear-gradient(125deg,#244937,#39745a 55%,#8b7b45); }
+    #group-plan .blog-cover .label { color: #bfece7; font-size: .78rem; font-weight: 850; letter-spacing: .16em; }
+    #group-plan .blog-cover h3 { max-width: 760px; margin: 9px 0 12px; font-size: clamp(1.8rem,5vw,3.4rem); line-height: 1.08; letter-spacing: -.035em; }
+    #group-plan .blog-cover p { max-width: 740px; margin: 0; color: rgba(255,255,255,.78); }
+    #group-plan .blog-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    #group-plan .blog-meta span { padding: 6px 10px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; font-size: .78rem; background: rgba(255,255,255,.09); }
+    #group-plan .blog-body { padding: 34px 38px; }
+    #group-plan .blog-intro { max-width: 800px; font-size: 1.05rem; line-height: 1.85; }
+    #group-plan .pullquote { margin: 24px 0; padding: 20px 22px; border-left: 5px solid var(--coral); background: rgba(232,111,81,.07); font-size: 1.12rem; font-weight: 750; }
+    #group-plan .blog-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-top: 26px; }
+    #group-plan .blog-chapter { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: rgba(23,74,91,.035); }
+    #group-plan .blog-chapter.wide { grid-column: 1 / -1; }
+    #group-plan .blog-chapter h4 { margin: 0 0 12px; font-size: 1.14rem; }
+    #group-plan .blog-chapter p { margin: 8px 0; }
+    #group-plan .blog-schedule { margin: 0; padding: 0; list-style: none; }
+    #group-plan .blog-schedule li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    #group-plan .blog-schedule li:last-child { border-bottom: 0; }
+    #group-plan .blog-schedule time { color: var(--teal); font-weight: 850; }
+    #group-plan .food-pick { margin-top: 9px; padding: 10px 12px; border-radius: 12px; background: rgba(217,164,65,.12); }
+    #group-plan .blog-links { margin-top: 20px; color: var(--muted); font-size: .84rem; }
+    #group-plan .empty { padding: 24px 22px; color: var(--muted); }
+    #group-plan .source { padding: 20px; border: 1px dashed var(--line); border-radius: 18px; color: var(--muted); background: rgba(255,255,255,.04); }
+    main { padding: 48px 0 80px; }
+    section { scroll-margin-top: 84px; margin: 0 0 54px; }
+    .section-head {
+      display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 20px;
+    }
+    .section-top-link {
+      flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px;
+      padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--teal); background: rgba(13,125,121,.07); text-decoration: none;
+      font-size: .84rem; font-weight: 850;
+    }
+    h2 { margin: 0; font-size: clamp(1.65rem, 4vw, 2.45rem); letter-spacing: -.035em; }
+    .section-kicker { margin: 0 0 4px; color: var(--coral); font-size: .8rem; font-weight: 800; letter-spacing: .15em; }
+    .muted { color: var(--muted); }
+    .card {
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--card); box-shadow: var(--shadow);
+    }
+    .route {
+      display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden;
+    }
+    .route-stop { position: relative; padding: 24px 22px; border-right: 1px solid var(--line); }
+    .route-stop:last-child { border-right: 0; }
+    .route-stop::before {
+      content: ""; position: absolute; top: 34px; right: -5px;
+      width: 9px; height: 9px; border-radius: 50%; background: var(--coral); z-index: 1;
+    }
+    .route-stop:last-child::before { display: none; }
+    .route-stop time { color: var(--teal); font-size: .8rem; font-weight: 800; }
+    .route-stop strong { display: block; margin-top: 7px; font-size: 1.1rem; }
+    .route-stop small { display: block; margin-top: 4px; color: var(--muted); }
+    .flight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .flight { overflow: hidden; }
+    .flight-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px 22px; color: #fff; background: var(--deep);
+    }
+    .flight-top .tag { color: #bce9e3; font-size: .78rem; font-weight: 800; letter-spacing: .1em; }
+    .flight-no { font-size: 1.35rem; font-weight: 850; }
+    .flight-body { padding: 24px 22px; }
+    .airports { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+    .airport:last-child { text-align: right; }
+    .airport b { display: block; font-size: 1.7rem; }
+    .airport span { display: block; color: var(--muted); font-size: .86rem; }
+    .plane { color: var(--coral); font-size: 1.35rem; }
+    .meta {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px;
+      margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line);
+    }
+    .meta div { padding: 11px 12px; border-radius: 12px; background: rgba(23,74,91,.05); }
+    .meta small { display: block; color: var(--muted); }
+    .booking-strip {
+      display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 16px; padding: 16px 20px;
+      border: 1px dashed rgba(13,125,121,.3); border-radius: 16px; background: rgba(13,125,121,.055);
+    }
+    .booking-strip span { color: var(--muted); font-size: .82rem; }
+    .booking-strip b { display: block; color: var(--ink); font-size: .96rem; }
+    .passenger-panel { margin-top: 16px; padding: 22px; }
+    .passenger-panel h3 { margin: 0 0 4px; font-size: 1.12rem; }
+    .passenger-panel > p { margin: 0 0 14px; color: var(--muted); font-size: .84rem; }
+    .passenger-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .passenger {
+      display: grid; grid-template-columns: 1fr auto; gap: 7px 14px;
+      padding: 14px; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(23,74,91,.04);
+    }
+    .passenger strong { letter-spacing: .02em; }
+    .passenger .type { color: var(--coral); font-size: .78rem; font-weight: 850; }
+    .passenger small { color: var(--muted); }
+    .transfer-panel { margin-top: 16px; padding: 22px; }
+    .transfer-panel > h3 { margin: 0; font-size: 1.12rem; }
+    .transfer-panel > p { margin: 4px 0 16px; color: var(--muted); font-size: .86rem; }
+    .transfer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .transfer-card {
+      overflow: hidden; border: 1px solid var(--line); border-radius: 16px;
+      background: rgba(23,74,91,.04);
+    }
+    .transfer-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 16px; color: #fff; background: linear-gradient(125deg, var(--deep), var(--teal));
+    }
+    .transfer-head span { color: #c9efea; font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
+    .transfer-head strong { font-size: 1.16rem; }
+    .transfer-body { padding: 16px; }
+    .transfer-time { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+    .transfer-time b { color: var(--coral); font-size: 1.55rem; }
+    .transfer-time span { color: var(--muted); }
+    .transfer-route { display: grid; grid-template-columns: 22px 1fr; gap: 8px 10px; }
+    .transfer-route .dot { color: var(--teal); font-weight: 900; text-align: center; }
+    .transfer-route small { display: block; color: var(--muted); }
+    .transfer-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .passenger .ticket { color: var(--teal); font-weight: 750; }
+    .rental-layout { display: grid; grid-template-columns: 1.08fr .92fr; gap: 16px; }
+    .rental-main, .coverage-card { padding: 24px; }
+    .rental-title { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .rental-title h3 { margin: 0; font-size: 1.35rem; }
+    .rental-title p { margin: 3px 0 0; color: var(--muted); }
+    .paid-tag { padding: 7px 11px; border-radius: 999px; color: var(--teal); background: rgba(13,125,121,.1); font-size: .78rem; font-weight: 850; }
+    .rental-times { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; margin: 22px 0; padding: 18px; border-radius: 16px; background: rgba(23,74,91,.05); }
+    .rental-time:last-child { text-align: right; }
+    .rental-time small { display: block; color: var(--muted); }
+    .rental-time b { display: block; font-size: 1.12rem; }
+    .rental-arrow { color: var(--coral); font-size: 1.5rem; }
+    .feature-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 0; }
+    .chip { padding: 7px 10px; border-radius: 999px; color: var(--muted); background: rgba(23,74,91,.07); font-size: .8rem; font-weight: 750; }
+    .pickup-note { margin-top: 18px; padding: 16px; border-left: 4px solid var(--gold); border-radius: 0 14px 14px 0; background: rgba(217,164,65,.1); }
+    .pickup-note h4 { margin: 0 0 6px; }
+    .pickup-note p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .coverage-card h3 { margin: 0 0 4px; }
+    .coverage-card > p { margin: 0; color: var(--muted); }
+    .coverage-list { display: grid; gap: 10px; margin-top: 18px; }
+    .coverage-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .coverage-row:last-child { border-bottom: 0; }
+    .coverage-row span { color: var(--muted); font-size: .84rem; }
+    .coverage-row b { text-align: right; }
+    .tax-banner {
+      display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px;
+      margin-bottom: 16px; padding: 22px; color: #fff; background: linear-gradient(125deg, var(--deep), var(--teal));
+    }
+    .tax-banner .tax-rate { font-size: 2.6rem; font-weight: 900; letter-spacing: -.05em; }
+    .tax-banner h3 { margin: 0; font-size: 1.2rem; }
+    .tax-banner p { margin: 3px 0 0; color: rgba(255,255,255,.72); font-size: .88rem; }
+    .tax-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+    .tax-card { padding: 20px; }
+    .tax-card .num { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-bottom: 12px; border-radius: 10px; color: #fff; background: var(--coral); font-weight: 900; }
+    .tax-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .tax-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .tax-card b { color: var(--ink); }
+    .phrase-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; margin-top: 14px; }
+    .phrase { padding: 13px 15px; border-radius: 14px; background: rgba(13,125,121,.07); }
+    .phrase b { display: block; color: var(--teal); font-size: 1rem; }
+    .phrase small { color: var(--muted); }
+    .plan-card { display: grid; grid-template-columns: 132px 1fr; overflow: hidden; }
+    .plan-date {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 22px; color: #fff; text-align: center; background: var(--coral);
+    }
+    .plan-date small { opacity: .78; }
+    .plan-date strong { margin: 4px 0 14px; font-size: 1.8rem; line-height: 1; }
+    .plan-date b { font-size: 2.15rem; }
+    .plan-content { padding: 25px; }
+    .plan-content h3 { margin: 0; font-size: 1.4rem; }
+    .plan-content .jp-name { margin: 3px 0 17px; color: var(--teal); font-weight: 800; }
+    .plan-facts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 18px; }
+    .plan-facts div { padding-top: 10px; border-top: 1px solid var(--line); }
+    .plan-facts small { display: block; color: var(--muted); }
+    .link-btn { display: inline-flex; margin-top: 16px; padding: 9px 13px; border-radius: 12px; color: var(--teal); background: rgba(13,125,121,.08); font-size: .85rem; font-weight: 800; text-decoration: none; }
+    .meal-summary { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 14px; }
+    .meal-stat { padding: 18px; }
+    .meal-stat strong { display: block; color: var(--teal); font-size: 1.45rem; }
+    .meal-stat span { color: var(--muted); font-size: .82rem; }
+    .meal-table-wrap { overflow-x: auto; padding: 8px 18px; }
+    .meal-table { min-width: 700px; }
+    .meal-type { display: inline-block; padding: 5px 9px; border-radius: 999px; color: var(--deep); background: rgba(217,164,65,.18); font-size: .75rem; font-weight: 850; }
+    .meal-confirmed { color: var(--teal); font-weight: 850; }
+    .meal-slot { min-width: 175px; }
+    .meal-slot strong { display: block; color: var(--teal); }
+    .meal-slot small { display: block; margin-top: 3px; color: var(--muted); line-height: 1.4; }
+    .meal-empty { color: var(--muted); opacity: .72; font-size: .84rem; }
+    .esim-hero { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; padding: 24px; margin-bottom: 14px; }
+    .esim-hero h3 { margin: 0; font-size: 1.35rem; }
+    .esim-hero p { margin: 4px 0 0; color: var(--muted); }
+    .esim-plan { padding: 12px 15px; border-radius: 15px; color: #fff; background: var(--teal); text-align: right; }
+    .esim-plan strong { display: block; font-size: 1.15rem; }
+    .esim-plan span { font-size: .78rem; opacity: .8; }
+    .step-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+    .step-card { padding: 19px; }
+    .step-card .step-no { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-bottom: 10px; border-radius: 10px; color: #fff; background: var(--coral); font-weight: 900; }
+    .step-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .step-card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .setting-table td:first-child { width: 34%; color: var(--muted); }
+    .safe-setting { color: var(--teal); font-weight: 850; }
+    .hotel-list { display: grid; gap: 18px; }
+    .hotel { display: grid; grid-template-columns: 118px 1fr; overflow: hidden; }
+    .hotel-date {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 220px; padding: 18px; color: #fff; text-align: center; background: var(--teal);
+    }
+    .hotel:nth-child(2) .hotel-date { background: var(--deep); }
+    .hotel:nth-child(3) .hotel-date { background: var(--coral); }
+    .hotel-date b { font-size: 2rem; line-height: 1; }
+    .hotel-date span { margin-top: 6px; font-size: .78rem; opacity: .8; }
+    .hotel-content { padding: 24px; }
+    .hotel-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .hotel h3 { margin: 0; font-size: 1.3rem; }
+    .hotel-en { margin: 2px 0 0; color: var(--muted); font-size: .88rem; }
+    .price { white-space: nowrap; color: var(--coral); font-weight: 850; }
+    .hotel-info {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px 18px;
+      margin-top: 18px;
+    }
+    .hotel-info div { padding-top: 10px; border-top: 1px solid var(--line); }
+    .hotel-info small { display: block; color: var(--muted); }
+    .jp-line {
+      display: block; margin-top: 4px; color: var(--teal); font-weight: 750;
+      line-height: 1.5; word-break: keep-all;
+    }
+    .place-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .place-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px; }
+    .place-card h3 { margin: 0; font-size: 1.05rem; }
+    .place-card p { margin: 5px 0 0; color: var(--muted); font-size: .88rem; }
+    .place-jp { display: block; margin-top: 3px; color: var(--teal); font-weight: 800; }
+    .show-btn {
+      flex: 0 0 auto; padding: 10px 13px; border: 0; border-radius: 12px;
+      color: #fff; background: var(--teal); font-weight: 800;
+    }
+    .place-overlay {
+      position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center;
+      padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+      color: var(--ink); background: rgba(5,21,26,.92);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .place-overlay.open { display: flex; }
+    .place-overlay-panel {
+      width: min(680px, 100%); max-height: 100%; overflow-y: auto; border-radius: 26px;
+      background: var(--paper); box-shadow: 0 28px 80px rgba(0,0,0,.42);
+    }
+    .place-dialog { padding: clamp(26px, 7vw, 54px); text-align: center; }
+    .place-dialog small { color: var(--coral); font-weight: 850; letter-spacing: .14em; }
+    .place-dialog h3 { margin: 14px 0 16px; font-size: clamp(1.7rem, 7vw, 3.2rem); line-height: 1.25; }
+    .place-dialog p { margin: 0; color: var(--teal); font-size: clamp(1.15rem, 4.5vw, 1.75rem); font-weight: 800; line-height: 1.6; white-space: pre-line; }
+    .dialog-actions { display: flex; justify-content: center; gap: 9px; margin-top: 30px; }
+    .notice {
+      margin-top: 16px; padding: 13px 15px; border-radius: 14px;
+      color: #805426; background: #fff2d9; font-size: .88rem;
+    }
+    details {
+      border: 1px solid var(--line); border-radius: 18px; background: var(--card);
+      box-shadow: 0 8px 30px rgba(27,58,65,.06);
+    }
+    details + details { margin-top: 10px; }
+    summary {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px; font-weight: 800; cursor: pointer; list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "＋"; color: var(--teal); font-size: 1.2rem; }
+    details[open] summary::after { content: "－"; }
+    .detail-body { padding: 0 20px 20px; }
+    .fuel-visual { display: block; width: 100%; height: auto; margin: 14px 0 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.52); }
+    .fuel-visual .svg-ink { fill: var(--ink); }
+    .fuel-visual .svg-muted { fill: var(--muted); }
+    .fuel-visual .svg-line { stroke: var(--line); }
+    .fuel-visual text { font-family: Inter, "Noto Sans TC", "Noto Sans JP", system-ui, sans-serif; }
+    .visual-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+    .visual-scroll .fuel-visual { min-width: 760px; }
+    .table { width: 100%; border-collapse: collapse; }
+    .detail-body > .table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table th, .table td { padding: 11px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+    .table th { color: var(--muted); font-size: .78rem; }
+    .table tr:last-child td { border-bottom: 0; }
+    .check-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .check-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 16px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--card);
+    }
+    .check-item input {
+      appearance: none; flex: 0 0 auto; width: 23px; height: 23px; margin: 1px 0 0;
+      border: 2px solid rgba(23,74,91,.35); border-radius: 7px; background: #fff;
+    }
+    .check-item input:checked { border-color: var(--teal); background: var(--teal); }
+    .check-item input:checked::after {
+      content: "✓"; display: grid; place-items: center; color: #fff; font-size: .9rem; font-weight: 900;
+    }
+    .check-item:has(input:checked) span { color: var(--muted); text-decoration: line-through; }
+    .check-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .soft-btn {
+      padding: 9px 13px; border: 1px solid var(--line); border-radius: 12px;
+      color: var(--muted); background: rgba(255,255,255,.7);
+    }
+    .soft-btn:hover { color: var(--teal); border-color: rgba(13,125,121,.35); }
+    .total-card {
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px;
+      padding: 26px; color: #fff; background: var(--deep);
+    }
+    .total-card h3 { margin: 0 0 4px; }
+    .total { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -.04em; }
+    .privacy { margin-top: 16px; color: var(--muted); font-size: .82rem; }
+    footer { padding: 28px 0 calc(34px + env(safe-area-inset-bottom)); color: var(--muted); text-align: center; font-size: .82rem; }
+    .back-to-top {
+      position: fixed; right: max(14px, env(safe-area-inset-right));
+      bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 900;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      min-width: 52px; min-height: 52px; padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.28); border-radius: 999px;
+      color: #fff; background: rgba(13,125,121,.94); box-shadow: 0 10px 30px rgba(8,52,61,.28);
+      text-decoration: none; font-weight: 850; backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .back-to-top:active { transform: translateY(1px); }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
+      z-index: 50; transform: translate(-50%, 20px); padding: 10px 16px;
+      border-radius: 999px; color: #fff; background: rgba(23,52,60,.94);
+      opacity: 0; pointer-events: none; transition: .22s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 22px, 1120px); }
+      .hero { min-height: auto; }
+      .hero-copy { padding: 48px 0 32px; }
+      .quick-stats { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 14px; }
+      main { padding-top: 34px; }
+      .route { grid-template-columns: 1fr 1fr; }
+      .route-stop:nth-child(2) { border-right: 0; }
+      .route-stop:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .route-stop:nth-child(2)::before { display: none; }
+      .flight-grid, .transfer-grid, .check-grid { grid-template-columns: 1fr; }
+      .rental-layout { grid-template-columns: 1fr; }
+      .tax-grid { grid-template-columns: 1fr; }
+      .passenger-list { grid-template-columns: 1fr; }
+      .rental-times { grid-template-columns: 1fr; }
+      .rental-time:last-child { text-align: left; }
+      .rental-arrow { transform: rotate(90deg); justify-self: start; }
+      .tax-banner { grid-template-columns: 1fr; gap: 4px; }
+      .phrase-list { grid-template-columns: 1fr; }
+      .plan-card { grid-template-columns: 92px 1fr; }
+      .plan-date { padding: 12px; }
+      .plan-date strong { font-size: 1.35rem; }
+      .plan-date b { font-size: 1.7rem; }
+      .plan-content { padding: 20px 16px; }
+      .plan-facts { grid-template-columns: 1fr; }
+      .meal-summary { grid-template-columns: 1fr; }
+      .esim-hero { grid-template-columns: 1fr; }
+      .esim-plan { text-align: left; }
+      .step-list { grid-template-columns: 1fr; }
+      .pikmin-alerts, .spot-route, .hunt-list { grid-template-columns: 1fr; }
+      .gift-grid, .gift-plan { grid-template-columns: 1fr; }
+      #group-plan .lodging, #group-plan .route-grid, #group-plan .blog-grid { grid-template-columns: 1fr; }
+      #group-plan .day-head { grid-template-columns: 88px minmax(0,1fr) auto; gap: 8px; }
+      #group-plan .timeline li { grid-template-columns: 76px 1fr; gap: 10px; }
+      #group-plan .blog-cover, #group-plan .blog-body { padding: 24px 20px; }
+      #group-plan .blog-chapter.wide { grid-column: auto; }
+      .gift-ratings { grid-template-columns: 1fr 1fr 1fr; }
+      .pikmin-hero { padding: 20px 17px; }
+      .pikmin-hero::after { font-size: 6rem; right: 5px; }
+      .place-grid { grid-template-columns: 1fr; }
+      .hotel { grid-template-columns: 82px 1fr; }
+      .hotel-date { min-height: 260px; padding: 10px; }
+      .hotel-date b { font-size: 1.55rem; }
+      .hotel-content { padding: 19px 16px; }
+      .hotel-heading { display: block; }
+      .price { display: inline-block; margin-top: 8px; }
+      .hotel-info { grid-template-columns: 1fr; }
+      .place-card { align-items: flex-start; }
+      .total-card { grid-template-columns: 1fr; }
+      .actions .label { display: none; }
+      .icon-btn { width: 42px; padding: 0; }
+    }
+    @media (max-width: 430px) {
+      .shell { width: calc(100% - 20px); }
+      .hero { padding-top: max(22px, env(safe-area-inset-top)); }
+      .hero-copy { padding: 40px 0 28px; }
+      h1 { font-size: clamp(2.55rem, 15vw, 4rem); line-height: 1.02; }
+      .lead { margin-top: 17px; font-size: .98rem; }
+      .quick-stats { gap: 8px; }
+      .stat { min-height: 92px; padding: 13px; }
+      .stat strong { font-size: 1.05rem; }
+      body { padding-top: calc(59px + env(safe-area-inset-top)); }
+      .nav-wrap { box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+      .nav { padding: 7px 0; }
+      .nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 10px 13px; }
+      .back-to-top { right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); min-width: 48px; min-height: 48px; padding: 0 12px; font-size: .86rem; }
+      main { padding-top: 28px; padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+      section { margin-bottom: 42px; scroll-margin-top: 72px; }
+      .section-head { display: block; }
+      .section-head > span { display: block; margin-top: 5px; font-size: .82rem; }
+      .section-head > .section-top-link { margin-top: 10px; }
+      h2 { font-size: 1.75rem; }
+      .route-stop { padding: 18px 14px; }
+      .route-stop strong { font-size: .98rem; }
+      .flight-top, .flight-body, .passenger-panel, .transfer-panel { padding-left: 16px; padding-right: 16px; }
+      .airport b { font-size: 1.4rem; }
+      .meta { grid-template-columns: 1fr; }
+      .plan-card { grid-template-columns: 78px 1fr; }
+      .plan-content { padding: 18px 14px; }
+      .plan-content h3 { font-size: 1.18rem; }
+      .meal-table-wrap { padding-left: 10px; padding-right: 10px; -webkit-overflow-scrolling: touch; }
+      details { border-radius: 16px; }
+      summary { min-height: 54px; padding: 15px 15px; gap: 10px; line-height: 1.35; }
+      summary::after { flex: 0 0 auto; }
+      .detail-body { padding: 0 15px 17px; }
+      .detail-body > .table th, .detail-body > .table td { min-width: 118px; }
+      .setting-table td:last-child { min-width: 300px; }
+      .hotel { grid-template-columns: 72px 1fr; }
+      .hotel-date { min-height: 245px; }
+      .hotel-content { padding: 17px 13px; }
+      .hotel h3 { font-size: 1.12rem; line-height: 1.35; }
+      .place-card { padding: 16px; }
+      .show-btn, .soft-btn, .link-btn { min-height: 44px; }
+      .gift-card { padding: 17px 15px; }
+      .gift-card-head { display: block; }
+      .gift-price { display: block; margin-top: 6px; }
+      .gift-ratings { gap: 4px; }
+      .gift-rating { padding: 8px 5px; }
+      .stars { font-size: .72rem; }
+      .pikmin-alert, .spot-group, .hunt-day { padding: 15px; }
+      .check-item { min-height: 58px; padding: 14px; }
+      .check-item input { width: 25px; height: 25px; }
+      .dialog-actions { flex-direction: column; }
+      .dialog-actions button { width: 100%; min-height: 48px; }
+      footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #e8f0ef; --muted: #9eb1b5; --paper: #102329;
+        --card: rgba(22,49,57,.88); --line: rgba(220,239,237,.12);
+        --shadow: 0 16px 48px rgba(0,0,0,.18);
+      }
+      body { background: radial-gradient(circle at 10% 0%, rgba(58,166,154,.15), transparent 30rem), #102329; }
+      .nav-wrap { background: rgba(16,35,41,.9); }
+      .meta div { background: rgba(255,255,255,.045); }
+      .booking-strip { background: rgba(13,125,121,.12); }
+      .fuel-visual { background: rgba(255,255,255,.035); }
+      .notice { color: #ffdda2; background: rgba(217,164,65,.13); }
+      .check-item input { background: rgba(255,255,255,.07); }
+      .soft-btn { background: rgba(255,255,255,.04); }
+    }
+    @media print {
+      :root { --paper: #fff; --ink: #17343c; --muted: #60747a; --card: #fff; }
+      body { padding-top: 0; background: #fff; font-size: 10pt; }
+      .hero { min-height: 0; padding: 24px 0; background: #174a5b !important; print-color-adjust: exact; }
+      .hero-copy { padding: 24px 0 18px; }
+      h1 { font-size: 34pt; }
+      .nav-wrap, .actions, .check-actions, .toast { display: none !important; }
+      main { padding: 24px 0; }
+      section { margin-bottom: 28px; break-inside: avoid; }
+      .card, details { box-shadow: none; }
+      details > .detail-body { display: block !important; }
+      .flight-top, .hotel-date, .total-card { print-color-adjust: exact; }
+      footer { padding: 12px 0; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="hero">
+    <div class="shell">
+      <div class="topbar">
+        <div class="brand">HOKKAIDO · 2026</div>
+        <div class="actions">
+          <button class="icon-btn" type="button" onclick="window.print()" aria-label="列印或另存 PDF">⎙ <span class="label">列印</span></button>
+          <button class="icon-btn" type="button" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" aria-label="前往出發清單">✓ <span class="label">清單</span></button>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">一家四口 · 夏日北海道</p>
+        <h1>札幌・函館・洞爺</h1>
+        <p class="lead">2026 年 8 月 13 日至 20 日｜8 天 7 夜家庭旅行離線手冊</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-wrap">
+    <nav class="nav shell" aria-label="頁面導覽">
+      <a href="#overview">總覽</a>
+      <a href="#confirmed-plans">已訂行程</a>
+      <a class="page-link" href="#group-plan" aria-label="前往本頁的大部隊行程">大部隊行程</a>
+      <a href="#routes">地圖動線</a>
+      <a href="#tanuki-blog">狸小路夜誌</a>
+      <a href="#jingu-blog">神宮散策誌</a>
+      <a href="#otaru-blog">小樽散步誌</a>
+      <a href="#nijo-blog">二條早餐誌</a>
+      <a href="#meals">餐食</a>
+      <a href="#flights">航班</a>
+      <a href="#rental">租車</a>
+      <a href="#hotels">住宿</a>
+      <a href="#show-japanese">出示日文</a>
+      <a href="#tax-free">免稅</a>
+      <a href="#esim">網路</a>
+      <a href="#pikmin">Pikmin</a>
+      <a href="#souvenirs">伴手禮</a>
+      <a href="#bookings">預訂資料</a>
+      <a href="#budget">費用</a>
+      <a href="#checklist">出發清單</a>
+    </nav>
+  </div>
+
+  <main class="shell">
+    <section id="overview">
+      <div class="section-head">
+        <div><p class="section-kicker">TRIP FLOW</p><h2>旅程路線</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="route card">
+        <div class="route-stop"><time>8/13 · 週四</time><strong>新千歲 → 札幌</strong><small>抵達北海道・入住 3 晚</small></div>
+        <div class="route-stop"><time>8/16 · 週日</time><strong>札幌 → 函館</strong><small>換宿・入住 2 晚</small></div>
+        <div class="route-stop"><time>8/18 · 週二</time><strong>函館 → 洞爺</strong><small>換宿・入住 2 晚</small></div>
+        <div class="route-stop"><time>8/20 · 週四</time><strong>洞爺 → 新千歲</strong><small>10:00 前退房・搭機返台</small></div>
+      </div>
+    </section>
+
+    <div id="group-plan">
+      <div class="section-head group-intro">
+        <div><p class="section-kicker">GROUP PLAN</p><h2>大部隊行程</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      
+          <section id="stays">
+            <h2>住宿順序</h2>
+            <div class="lodging">
+              <article class="stay"><small>8/13 入住 · 8/16 退房</small><h3>FAV LUX 札幌薄野</h3><div lang="ja">FAV LUX 札幌すすきの</div></article>
+              <article class="stay"><small>8/16 入住 · 8/18 退房</small><h3>函館普樂美雅凱賓總統飯店</h3><div lang="ja">プレミアホテル-CABIN PRESIDENT-函館</div></article>
+              <article class="stay"><small>8/18 入住 · 8/20 退房</small><h3>洞爺太陽皇宮度假村</h3><div lang="ja">洞爺サンパレス リゾート＆スパ</div></article>
+            </div>
+          </section>
+      
+          <section id="routes">
+            <h2>Google 地圖移動動線</h2>
+            <div class="notice"><strong>使用方式：</strong>每張卡依大部隊行程順序排列。文字與地點可離線閱讀；Google Maps 按鈕需有網路才能計算導航。下列時間是一般估算，出發前請以當日路況、停車、排隊及 Google Maps 即時結果為準。</div>
+            <div class="route-grid" style="margin-top:16px">
+              <article class="route-card">
+                <h3>8/13｜新千歲機場 → 札幌</h3>
+                <p>取車、入住後改步行，避免第一晚在市區重新找停車位。</p>
+                <ol class="route-steps">
+                  <li><b>15:00 新千歲機場</b><small lang="ja">新千歳空港</small></li>
+                  <li><b>機場接駁 → BBJ 租車門市</b><small>集合、等車與取車手續要另留時間。</small></li>
+                  <li><b>BBJ → FAV LUX 札幌薄野</b><small>開車約 60～80 分鐘；週四傍晚可能更久。</small></li>
+                  <li><b>FAV LUX → 狸小路 3 丁目</b><small>建議步行約 12～18 分鐘，不再開車。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=BBJ+Airport+Rent+A+Car&amp;destination=FAV+LUX+札幌すすきの&amp;travelmode=driving">開啟租車門市 → 飯店</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=FAV+LUX+札幌すすきの&amp;destination=狸小路商店街3丁目&amp;travelmode=walking">開啟飯店 → 狸小路步行</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/14｜札幌市區一日遊</h3>
+                <p>上午開車；下午車停回飯店後，改計程車與步行。若駕駛人試飲酒類，當天絕對不再開車。</p>
+                <ol class="route-steps">
+                  <li><b>FAV LUX → 白色戀人公園</b><small>開車約 25～35 分鐘，另留停車時間。</small></li>
+                  <li><b>白色戀人公園 → 北海道神宮</b><small>開車約 15～25 分鐘。</small></li>
+                  <li><b>北海道神宮 → FAV LUX</b><small>開車約 15～25 分鐘；先停車回飯店。</small></li>
+                  <li><b>FAV LUX → 札幌啤酒博物館</b><small>計程車約 15～25 分鐘。</small></li>
+                  <li><b>啤酒博物館 → 大通公園</b><small>計程車或大眾運輸約 15～30 分鐘。</small></li>
+                  <li><b>大通西 7／8 丁目 → 西 2 丁目</b><small>用餐後步行約 15～20 分鐘前往盆踊。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=FAV+LUX+札幌すすきの&amp;destination=FAV+LUX+札幌すすきの&amp;waypoints=白い恋人パーク%7C北海道神宮&amp;travelmode=driving">開啟上午開車環線</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=サッポロビール博物館&amp;destination=大通公園西7丁目&amp;travelmode=transit">開啟啤酒博物館 → 大通公園</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/15｜小樽一日遊 → GAJA</h3>
+                <p>週六回札幌可能塞車。GAJA 已訂 18:30，最晚 16:45 離開小樽。</p>
+                <ol class="route-steps">
+                  <li><b>10:00 FAV LUX → 小樽運河周邊停車場</b><small>開車約 50～70 分鐘；市中心入庫另留 15 分鐘。</small></li>
+                  <li><b>淺草橋 → 運河倉庫群</b><small>先拍全家照，再往堺町通方向走。</small></li>
+                  <li><b>堺町通 → 北一硝子 → 音樂盒堂</b><small>步行、用餐與甜點約 3～4 小時。</small></li>
+                  <li><b>16:45 小樽 → FAV LUX／GAJA 薄野店</b><small>開車約 60～90 分鐘，加上停車與步行緩衝。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=FAV+LUX+札幌すすきの&amp;destination=小樽運河+淺草橋&amp;travelmode=driving">開啟札幌 → 小樽開車</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=小樽運河+淺草橋&amp;destination=小樽オルゴール堂+本館&amp;waypoints=小樽堺町通り商店街%7C北一硝子三號館&amp;travelmode=walking">開啟小樽步行路線</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=小樽運河&amp;destination=GAJA+すすきの店&amp;travelmode=driving">開啟小樽 → GAJA</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/16｜札幌 → 八雲 → 函館</h3>
+                <p>長途移動日。Google Maps 建議途中休息不會自動計入，實際時間要再加用餐、廁所與加油。</p>
+                <ol class="route-steps">
+                  <li><b>08:00 FAV LUX 退房 → 二條市場</b><small>開車約 5～15 分鐘；須另找付費停車場。</small></li>
+                  <li><b>09:45 二條市場 → 八雲</b><small>估算約 2.5～3.5 小時，依路況與休息而異。</small></li>
+                  <li><b>八雲 → 函館飯店</b><small>開車約 1.5～2 小時。</small></li>
+                  <li><b>飯店 → 函館山纜車山麓站</b><small>建議計程車約 10～15 分鐘，避免山麓停車。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=二条市場&amp;destination=プレミアホテル-CABIN+PRESIDENT-函館&amp;waypoints=噴火湾パノラマパーク&amp;travelmode=driving">開啟札幌 → 八雲 → 函館</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=プレミアホテル-CABIN+PRESIDENT-函館&amp;destination=函館山ロープウェイ山麓駅&amp;travelmode=driving">開啟飯店 → 纜車站</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/17｜函館一日遊</h3>
+                <p>依飯店位置安排朝市、五稜郭、金森紅磚倉庫與元町。</p>
+                <ol class="route-steps">
+                  <li><b>08:30 飯店 → 函館朝市</b><small>步行約 1～3 分鐘，可用早餐。</small></li>
+                  <li><b>10:00 函館朝市 → 五稜郭公園</b><small>市電與步行約 30～40 分鐘，計程車約 15～20 分鐘。</small></li>
+                  <li><b>13:30 五稜郭 → 金森紅磚倉庫</b><small>計程車約 20～30 分鐘。</small></li>
+                  <li><b>金森倉庫 → 元町散步 → 函館駅</b><small>下午以步行與市電為主；看孩子體力隨時縮短。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=プレミアホテル-CABIN+PRESIDENT-函館&amp;destination=金森赤レンガ倉庫&amp;waypoints=函館朝市%7C五稜郭公園&amp;travelmode=driving">開啟函館景點順序</a>
+                  <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=金森赤レンガ倉庫&amp;destination=プレミアホテル-CABIN+PRESIDENT-函館&amp;waypoints=函館元町&amp;travelmode=walking">開啟金森 → 元町步行</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/18｜函館 → 昭和新山 → 洞爺湖</h3>
+                <p>途中於八雲休息，再前往昭和新山熊牧場與洞爺湖飯店。</p>
+                <ol class="route-steps">
+                  <li><b>10:00 函館飯店 → 八雲</b><small>開車約 1.5 小時，可選 Harvester 八雲或道之驛。</small></li>
+                  <li><b>11:45 八雲 → 昭和新山熊牧場</b><small>開車約 1.5～2 小時。</small></li>
+                  <li><b>14:00 熊牧場 → 洞爺太陽皇宮</b><small>開車約 15～25 分鐘，預留 15:00 入住。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=プレミアホテル-CABIN+PRESIDENT-函館&amp;destination=洞爺サンパレス+リゾート%26スパ&amp;waypoints=ハーベスター八雲%7C昭和新山熊牧場&amp;travelmode=driving">開啟函館 → 八雲 → 熊牧場 → 飯店</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/19｜洞爺湖 ⇄ 登別</h3>
+                <p>同日往返；建議 09:00 左右出發，保留充足的水族館參觀時間。</p>
+                <ol class="route-steps">
+                  <li><b>09:00 洞爺太陽皇宮 → 尼克斯海洋公園</b><small>開車約 45～65 分鐘，加上停車與入園時間。</small></li>
+                  <li><b>12:30 尼克斯 → 登別溫泉街</b><small>開車約 20～30 分鐘。</small></li>
+                  <li><b>溫泉街 → 極樂通／地獄谷入口</b><small>停車後步行；若時間不足，只逛溫泉街不走完整步道。</small></li>
+                  <li><b>15:30 登別溫泉街 → 洞爺太陽皇宮</b><small>開車約 50～70 分鐘。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=洞爺サンパレス+リゾート%26スパ&amp;destination=洞爺サンパレス+リゾート%26スパ&amp;waypoints=登別マリンパークニクス%7C登別温泉極楽通り&amp;travelmode=driving">開啟洞爺 → 尼克斯 → 溫泉街 → 洞爺</a>
+                </div>
+              </article>
+      
+              <article class="route-card">
+                <h3>8/20｜洞爺湖 → 新千歲機場</h3>
+                <p>配合 13:30 還車與 JX851 回程航班安排。</p>
+                <ol class="route-steps">
+                  <li><b>09:30～10:00 飯店退房</b><small>先確認全部行李、兒童座椅與車內失物。</small></li>
+                  <li><b>洞爺太陽皇宮 → 千歲方向</b><small>開車約 1.5～2 小時，保留午前路況緩衝。</small></li>
+                  <li><b>還車前加滿油</b><small>依 BBJ 指定加油站；保留收據、油表與里程照片。</small></li>
+                  <li><b>13:30 BBJ 還車 → 新千歲機場</b><small>完成驗車後搭接駁；接駁等待時間另計。</small></li>
+                </ol>
+                <div class="map-actions">
+                  <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=洞爺サンパレス+リゾート%26スパ&amp;destination=BBJ+Airport+Rent+A+Car&amp;travelmode=driving">開啟洞爺飯店 → BBJ 還車</a>
+                </div>
+              </article>
+            </div>
+          </section>
+      
+          <section id="daily">
+            <h2>每日安排</h2>
+            <div class="days">
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-13">8/13 週四</time><div><h3>抵達北海道・前往札幌</h3><p>新千歲機場 → 札幌</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">15:00</div><div class="event"><strong>落地，預計出關與取車</strong><small>同事估計 16:30～17:00 完成取車</small></div></li>
+                  <li class="travel"><div class="time">車程</div><div class="event">前往札幌市區，估計約 1 小時</div></li>
+                  <li><div class="time">18:30</div><div class="event"><strong>入住 FAV LUX</strong><small lang="ja">FAV LUX 札幌すすきの</small></div></li>
+                  <li><div class="time">19:30</div><div class="event"><strong>狸小路商店街</strong><small lang="ja">狸小路商店街｜同事註記：步行約 12 分鐘、計程車約 4 分鐘</small><details class="trip-tip" open><summary>商店街介紹與晚餐推薦</summary><div class="tip-body"><p>狸小路始於 1873 年，是北海道歷史悠久的商店街之一；從 1 丁目延伸到 7 丁目，約 900 公尺、近 200 間店。大部分路段有全罩式拱廊，遇到下雨或烈日也適合帶孩子散步。</p><p><b>分區逛法：</b>1～4 丁目較熱鬧，有藥妝、伴手禮、遊戲中心與連鎖餐飲；6 丁目有狸小路市場及小型餐飲店；7 丁目較有老街與個性小店氣氛。</p><p><b>一家四口晚餐建議：</b></p><p>① <b>札幌味噌拉麵</b>：上餐快、孩子容易接受，適合剛抵達的第一晚。<br>② <b>湯咖哩</b>：可調辣度，選雞腿與蔬菜較適合家庭。<br>③ <b>壽司／海鮮</b>：可考慮 6 丁目的西鶴狸小路店，不吃生食可點熟食或烤物。<br>④ <b>成吉思汗</b>：想第一晚就吃北海道特色可選，但熱門店可能排隊且衣服容易沾味。</p><p><b>散步小吃：</b>北海道牛奶霜淇淋、烤玉米、起司甜點；吃完晚餐還可體驗札幌的「收尾聖代」。</p><div class="tip-choice">抵達日最穩妥方案：先選味噌拉麵或湯咖哩正餐 → 逛 3～6 丁目 → 買藥妝與伴手禮 → 甜點外帶。建議總停留 1.5～2 小時。</div><p><a href="https://tanukikoji.or.jp/">狸小路商店街官網</a> · <a href="https://visit.sapporo.travel/tw/discover/city/tanuki-koji-shopping-street/">札幌官方觀光介紹</a> · <a href="https://www.sapporo.travel/sp/sapporo-ramen/">札幌拉麵介紹</a></p></div></details></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-14">8/14 週五</time><div><h3>札幌市區一日遊</h3><p>札幌</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">10:00</div><div class="event"><strong>白色戀人公園</strong><small lang="ja">白い恋人パーク</small></div></li>
+                  <li class="travel"><div class="time">車程</div><div class="event">前往北海道神宮，估計約 13 分鐘</div></li>
+                  <li><div class="time">11:30</div><div class="event"><strong>北海道神宮＋用餐</strong><small lang="ja">北海道神宮</small><details class="trip-tip"><summary>景點介紹與午餐建議</summary><div class="tip-body"><p>北海道具代表性的神社，參道位於圓山原始林旁，氣氛安靜。建議從鳥居沿參道前往本殿參拜，家庭停留約 40～60 分鐘。</p><p><b>午餐首選：</b>圓山公園站周邊的日式定食、蕎麥麵或湯咖哩，座位通常比神宮內茶屋適合一家四口。參拜後可到六花亭神宮茶屋店吃限定點心。</p><div class="tip-choice">建議流程：參拜 → 神宮茶屋點心 → 圓山一帶午餐；若孩子累了，可直接搭車回飯店。</div><p><a href="https://www.hokkaidojingu.or.jp/">北海道神宮官網</a> · <a href="https://www.sapporo.travel/gourmet/feature/maruyama-cafe/">圓山餐飲官方特輯</a></p></div></details></div></li>
+                  <li class="travel"><div class="time">轉乘</div><div class="event">同事建議車停回飯店，搭計程車前往啤酒博物館，估計約 12 分鐘</div></li>
+                  <li><div class="time">14:00</div><div class="event"><strong>札幌啤酒博物館</strong><small lang="ja">サッポロビール博物館</small></div></li>
+                  <li><div class="time">15:30</div><div class="event"><strong>大通公園、札幌電視塔</strong><small lang="ja">大通公園・さっぽろテレビ塔</small></div></li>
+                  <li><div class="time">18:00</div><div class="event"><strong>大通公園夏季啤酒花園＋盆踊</strong><small>2026 官方已確認舉辦・不是一般小夜市</small><details class="trip-tip" open><summary>8/14 晚餐與活動資訊</summary><div class="tip-body"><p>大通公園長約 1.5 公里。2026 大通啤酒花園於 <b>7/23～8/18、12:00～21:00</b>舉辦，因此 8/14 可以前往。</p><p><b>適合家庭的晚餐：</b>西 7 丁目有生羊肉成吉思汗、窯烤披薩與室蘭烤雞肉串；西 8 丁目有小樽勾芡炒麵與炸雞；西 11 丁目有德國料理。各會場均可選無酒精飲料。</p><p><b>盆踊是什麼？</b>這是日本夏季祭典常見的民俗舞蹈。參加者圍繞中央高台，跟著太鼓和固定曲目重複簡單動作；重點是大家一起同樂，不是舞台競賽。北海盆踊自第一屆札幌夏祭延續至今，現在也有許多外國旅客加入。</p><p><b>2026 日期與地點：</b>8/13～8/16，大通公園西 2 丁目。兒童盆踊為 18:00～19:00；一般北海盆踊為 19:00～21:00。</p><p><b>孩子怎麼玩：</b>可以先站在外圍看幾輪，再跟著隊伍加入。官方安排兒童太鼓體驗及吉祥物參與；太鼓體驗的名額與登記方式請到現場本部確認。一般盆踊官方頁面未要求預約。</p><p><b>需要穿浴衣嗎？</b>不需要，日常服裝即可。若想體驗，會場提供成人浴衣租借：¥4,400，含簡易髮型；13:00～20:00 受理、21:30 前歸還，不接受預約且數量有限。現場另售成人及兒童浴衣／甚平，價格依商品而異並含著裝。</p><p><b>帶孩子提醒：</b>穿方便活動的鞋、準備飲水並約定走散集合點。西 2 丁目盆踊區和西 7～11 丁目用餐區有一段距離，人多時移動要預留時間。</p><div class="tip-choice">較順路安排：17:00 在西 7 或 8 丁目先吃晚餐 → 17:45 步行至西 2 丁目 → 18:00 兒童盆踊 → 19:00 視體力參加北海盆踊或前往電視塔看夜景。</div><p><a href="https://www.sapporo.travel/summerfes/event/odori02/">札幌夏祭・北海盆踊官方說明</a> · <a href="https://odori-park.jp/news/2026%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E5%A4%8F%E3%81%BE%E3%81%A4%E3%82%8A%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/">大通公園官方公告</a></p></div></details></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-15">8/15 週六</time><div><h3>小樽一日遊</h3><p>札幌 ⇄ 小樽</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">10:00</div><div class="event"><strong>出發前往小樽</strong><small>同事估計車程約 50 分鐘</small></div></li>
+                  <li><div class="time">白天</div><div class="event"><strong>小樽運河、商店街</strong><small lang="ja">小樽運河・小樽堺町通り商店街</small><details class="trip-tip"><summary>散步路線與美食建議</summary><div class="tip-body"><p>建議從淺草橋拍運河與石造倉庫，再步行到堺町通；沿途可逛北一硝子、音樂盒堂及甜點店。全程含用餐約 3～4 小時。</p><p><b>正餐：</b>壽司、海鮮丼，或孩子較容易接受的小樽勾芡炒麵。<b>邊走邊吃：</b>かま栄炸魚板、LeTAO 起司蛋糕、北菓樓甜點。</p><div class="tip-choice">一家四口建議先吃正餐，再逛堺町；熱門甜點可外帶，避免每家都排隊。</div><p><a href="#otaru-blog">↓ 閱讀完整「小樽散步誌」部落格特輯</a></p><p><a href="https://otaru.gr.jp/shop/otarucanal">小樽運河官方介紹</a> · <a href="https://otaru.gr.jp/eat/">小樽觀光協會餐飲名錄</a></p></div></details></div></li>
+                  <li><div class="time">18:30</div><div class="event"><strong>札幌晚餐：GAJA 薄野店</strong><small lang="ja">GAJA すすきの店｜已訂 18:30～20:30</small></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-16">8/16 週日</time><div><h3>札幌前往函館</h3><p>長途移動日 · 全程約 4.5 小時</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">退房</div><div class="event"><strong>FAV LUX 退房</strong></div></li>
+                  <li><div class="time">08:30</div><div class="event"><strong>二條市場用早餐後出發</strong><small lang="ja">二条市場</small><details class="trip-tip"><summary>市場介紹與早餐建議</summary><div class="tip-body"><p>二條市場已有 125 年以上歷史，是札幌市民的廚房；商店約早上 7 點至傍晚營業，但各店不同。市場距大通公園約步行 5 分鐘。</p><p><b>早餐候選：</b>大磯或どんぶり茶屋的海鮮丼；魚や がんねん可選烤魚定食。孩子不吃生食時，優先選烤魚、味噌湯或其他熟食。</p><div class="tip-choice">原定 09:30 才到可能遇到排隊，且當天要長途開車；已建議調整為 08:30 抵達，最晚 09:45 離開。</div><p><a href="#nijo-blog">↓ 閱讀完整「二條市場早餐誌」部落格特輯</a></p><p><a href="https://nijomarket.com/about/">二條市場官網</a> · <a href="https://ohiso.jp/">大磯</a> · <a href="https://donburi.jp/shop/nijo">どんぶり茶屋</a></p></div></details></div></li>
+                  <li class="travel"><div class="time">車程</div><div class="event">前往八雲，Excel 估計約 3 小時</div></li>
+                  <li><div class="time">13:30</div><div class="event"><strong>八雲休息、用餐</strong><small lang="ja">八雲町</small><details class="trip-tip"><summary>八雲吃什麼</summary><div class="tip-body"><p>八雲同時面向太平洋與日本海。噴火灣全景公園位於高地，可遠眺噴火灣，也適合孩子下車活動。</p><p><b>推薦：</b>Harvester 八雲的石窯披薩、香草雞及當地山海食材；時間較趕可在「丘の駅」買簡餐、乳製品或伴手禮。</p><div class="tip-choice">13:30 抵達已偏晚，建議出發前確認最後點餐時間；若排隊就改吃丘之驛，避免影響函館入住。</div><p><a href="https://www.town.yakumo.lg.jp/soshiki/syoukou/content1110.html">八雲町官方景點與美食</a> · <a href="https://panorama.town.yakumo.hokkaido.jp/">噴火灣全景公園</a></p></div></details></div></li>
+                  <li class="travel"><div class="time">車程</div><div class="event">前往函館，Excel 估計約 1.5 小時</div></li>
+                  <li><div class="time">15:00</div><div class="event"><strong>入住函館普樂美雅</strong><small lang="ja">プレミアホテル-CABIN PRESIDENT-函館</small></div></li>
+                  <li><div class="time">20:00</div><div class="event"><strong>函館山看夜景</strong><small lang="ja">函館山｜Excel 註記由飯店前往約 15 分鐘</small><details class="trip-tip"><summary>美景重點與函館晚餐</summary><div class="tip-body"><p>函館山可俯瞰函館灣與津輕海峽夾出的「城市腰線」，夏季還可能看到海上捕魷魚船燈。日落後約 30 分鐘是暮色與城市燈光並存的時段。</p><p><b>重要：</b>官方提醒日落至夜景後 1～2 小時最擁擠。8/16 為週日，建議提早到山麓站並預留排隊時間。</p><p><b>晚餐：</b>看夜景前後可選函館鹽味拉麵；若回到函館站附近，可到大門橫丁選拉麵、成吉思汗或海鮮。帶孩子最省時間的是鹽味拉麵。</p><div class="tip-choice">推薦：先簡單晚餐 → 19:00 前往纜車 → 20:00 看夜景；不要把完整晚餐排在山頂後才開始。</div><p><a href="https://www.japan.travel/tw/spot/1896/">日本觀光局函館夜景</a> · <a href="https://334.co.jp/">函館山纜車</a> · <a href="https://www.hakobura.jp/features/1">夜景後美食官方特輯</a></p></div></details></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-17">8/17 週一</time><div><h3>函館一日遊</h3><p>市電＋步行；家庭經典路線</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">08:00</div><div class="event"><strong>函館朝市早餐</strong><small lang="ja">函館朝市｜飯店步行約 1～3 分鐘</small><details class="trip-tip"><summary>早餐與親子體驗</summary><div class="tip-body"><p>5～12 月市場多由清晨營業至約 14:00，但各店不同。可選海鮮丼、烤魚定食、蟹湯；孩子不吃生食可改熟食。</p><p>若當日開放，可體驗活魷魚釣池；完成後由店家處理食用，孩子務必由成人陪同。</p><div class="tip-choice">建議 08:00 抵達、09:15 前離開，避開較晚的人潮。</div><p><a href="https://www.hakodate-asaichi.com/">函館朝市官方網站</a></p></div></details></div></li>
+                  <li><div class="time">09:30</div><div class="event"><strong>五稜郭公園與五稜郭塔</strong><small lang="ja">五稜郭公園・五稜郭タワー</small><details class="trip-tip"><summary>星形城郭看點</summary><div class="tip-body"><p>五稜郭是日本早期西式星形城郭。登上五稜郭塔可清楚俯瞰完整星形，公園平地也適合孩子散步。</p><div class="tip-choice">家庭停留約 90～120 分鐘；若孩子累，只登塔＋走一小段公園即可。</div><p><a href="https://www.hakobura.jp/spots/1">函館官方觀光介紹</a></p></div></details></div></li>
+                  <li><div class="time">12:00</div><div class="event"><strong>五稜郭周邊午餐</strong><small>函館鹽味拉麵、咖哩或日式定食</small></div></li>
+                  <li><div class="time">13:30</div><div class="event"><strong>金森紅磚倉庫</strong><small lang="ja">金森赤レンガ倉庫</small><details class="trip-tip"><summary>港灣散步與購物</summary><div class="tip-body"><p>1909 年建成的倉庫群現為港灣購物與餐飲區，室內外都容易安排，適合家庭慢慢散步、吃甜點及買伴手禮。</p><div class="tip-choice">停留約 60～90 分鐘；下雨時可把主要時間留在倉庫商場內。</div><p><a href="https://www.hakobura.jp/spots/39">函館官方觀光介紹</a></p></div></details></div></li>
+                  <li><div class="time">15:15</div><div class="event"><strong>元町、八幡坂散步</strong><small lang="ja">元町・八幡坂</small><details class="trip-tip"><summary>經典街景路線</summary><div class="tip-body"><p>從八幡坂可望向港灣，周邊有教會群與歷史建築。坡道較多，推車與孩子步行宜縮短路線。</p><div class="tip-choice">推薦金森倉庫 → 八幡坂 → 元町教會群，約 60～90 分鐘；累了就搭市電回函館站。</div><p><a href="https://www.hakobura.jp/courses/1">函館官方元町路線</a></p></div></details></div></li>
+                  <li><div class="time">17:30</div><div class="event"><strong>函館站／大門周邊晚餐</strong><small>鹽味拉麵、海鮮、成吉思汗或熟食定食</small></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-18">8/18 週二</time><div><h3>函館前往洞爺湖</h3><p>全程約 2.5 小時</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">退房</div><div class="event"><strong>函館普樂美雅退房</strong></div></li>
+                  <li><div class="time">10:00</div><div class="event"><strong>出發前往洞爺湖</strong></div></li>
+                  <li><div class="time">11:15</div><div class="event"><strong>八雲途中休息，二選一</strong><small lang="ja">ハーベスター八雲，或道の駅（Excel 註記：烏賊飯有名）</small></div></li>
+                  <li><div class="time">13:00</div><div class="event"><strong>昭和新山熊牧場</strong><small lang="ja">昭和新山熊牧場｜可以餵熊</small><details class="trip-tip"><summary>熊牧場介紹與停留建議</summary><div class="tip-body"><p>可近距離觀察北海道棕熊並購買指定飼料餵食；「人之籠」能從接近熊視線高度觀察，2026 年也有當年出生的小熊。</p><p><b>8 月營業：</b>官方公告 08:30～17:00。家庭建議停留 45～60 分鐘；餵食只使用場內指定飼料，孩子需由成人陪同。</p><div class="tip-choice">13:00 抵達時間充裕，14:00 左右離開即可銜接 15:00 飯店入住。</div><p><a href="https://kumakuma.co.jp/">昭和新山熊牧場官網</a></p></div></details></div></li>
+                  <li><div class="time">15:00</div><div class="event"><strong>入住洞爺太陽皇宮</strong><small lang="ja">洞爺サンパレス リゾート＆スパ</small></div></li>
+                  <li><div class="time">晚上</div><div class="event"><strong>飯店休息、玩水、晚餐</strong></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-19">8/19 週三</time><div><h3>登別一日遊</h3><p>洞爺湖 ⇄ 登別</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">10:00</div><div class="event"><strong>出發前往尼克斯海洋公園</strong><small lang="ja">登別マリンパークニクス｜同事估計車程約 45 分鐘</small><details class="trip-tip"><summary>海洋公園介紹與時間提醒</summary><div class="tip-body"><p>以北歐城堡造型水族館為主體，官方介紹約有 400 種、20,000 隻海洋生物，適合 6、8 歲孩子；另有海豚、企鵝等表演與體驗。</p><p><b>營業：</b>09:00～17:00，最後入園 16:30；成人票官方現價 ¥3,200。8/19 是週三，夏季限定「海豚 Splash Time」只在週末、假日及盂蘭盆期間舉辦，請勿預設當天一定有。</p><div class="tip-choice">若 10:45 才抵達、12:30 又要到溫泉街，實際參觀不足 2 小時；建議 09:00 出發或把午餐延到 13:30。</div><p><a href="https://nixe-aqua.com/">尼克斯海洋公園官網</a></p></div></details></div></li>
+                  <li><div class="time">12:30</div><div class="event"><strong>登別溫泉街用午餐、散步</strong><small lang="ja">登別温泉街｜Excel 註記由海洋公園車程約 10 分鐘</small><details class="trip-tip"><summary>溫泉街介紹與午餐建議</summary><div class="tip-body"><p>溫泉街主街「極樂通」有鬼像、閻魔堂、伴手禮店與餐廳，適合邊散步邊找午餐；若時間允許，可再前往地獄谷入口。</p><p><b>首選在地料理：</b>登別閻魔炒麵，以北海道小麥平麵、微辣芝麻醬及當地食材製作。孩子怕辣可改點拉麵、蕎麥麵、咖哩或定食。</p><div class="tip-choice">只有約 3 小時含午餐與往返，建議「海洋公園＋溫泉街」為主；不要再塞完整地獄谷健行。</div><p><a href="https://www.noboribetsubrand.jp/enmayakisobainfo/">登別閻魔炒麵官方介紹</a> · <a href="https://noboribetsu-spa.jp/">登別國際觀光協會</a></p></div></details></div></li>
+                  <li><div class="time">15:30</div><div class="event"><strong>返回洞爺太陽皇宮</strong></div></li>
+                  <li><div class="time">晚上</div><div class="event"><strong>飯店晚餐、休息、玩水</strong></div></li>
+                </ol>
+              </details>
+      
+              <details class="day day-dialog">
+                <summary class="day-head"><time datetime="2026-08-20">8/20 週四</time><div><h3>返程日</h3><p>洞爺湖 → 新千歲機場 → 桃園</p></div></summary>
+                <ol class="timeline">
+                  <li><div class="time">10:00前</div><div class="event"><strong>洞爺太陽皇宮退房</strong><small lang="ja">洞爺サンパレス リゾート＆スパ</small></div></li>
+                  <li class="travel"><div class="time">車程</div><div class="event">前往千歲方向，途中依租車規定加滿指定油種並保留收據</div></li>
+                  <li><div class="time">13:30</div><div class="event"><strong>BBJ 還車、搭接駁前往機場</strong><small lang="ja">BBJ Airport Rent A Car</small></div></li>
+                  <li><div class="time">16:00</div><div class="event"><strong>JX851 新千歲起飛</strong><small>建議完成還車後直接辦理報到與行李託運</small></div></li>
+                </ol>
+              </details>
+            </div>
+          </section>
+      
+          <section id="tanuki-blog">
+            <div class="blog-titlebar"><h2>狸小路夜行誌</h2><a href="#top" aria-label="從狸小路夜行誌回到表頭">↑ 回到表頭</a></div>
+            <article class="blog-feature">
+              <header class="blog-cover tanuki-cover">
+                <div class="label">SAPPORO FIRST NIGHT · 8/13</div>
+                <h3>抵達北海道的第一晚，走進狸小路的燈光、食物香與城市節奏</h3>
+                <p>飛行、入境、取車後，第一晚不適合追景點。狸小路有屋頂，餐飲與採買也集中，剛好用一頓熱食和一段散步，慢慢打開旅行模式。</p>
+                <div class="blog-meta"><span>2 大 2 小</span><span>抵達日行程</span><span>1.5～2 小時</span><span>雨天也可行</span></div>
+              </header>
+              <div class="blog-body">
+                <p class="blog-intro">狸小路不是一座購物中心，而是從西 1 丁目一路延伸至西 7 丁目的老商店街。自 1873 年起，藥妝、食堂、伴手禮店、娛樂店與老字號便在約 900 公尺的街廓裡並排。大部分路段有蓋，對剛下飛機、還在調整節奏的一家四口很友善。</p>
+                <div class="pullquote">第一晚的關鍵不是吃到最有名的店，而是全家先吃到熱食，再依孩子的體力決定逛多遠。</div>
+      
+                <div class="blog-grid">
+                  <section class="blog-chapter">
+                    <h4>不趕行程的夜間時間表</h4>
+                    <ol class="blog-schedule">
+                      <li><time>19:30</time><div><b>抵達 3 丁目一帶</b><br><small class="muted">以中段當起點，餐廳與藥妝選擇較集中。</small></div></li>
+                      <li><time>19:35</time><div><b>先選晚餐，不先購物</b><br><small class="muted">候位超過 30 分鐘就換備案。</small></div></li>
+                      <li><time>20:25</time><div><b>3 → 4 → 5 → 6 丁目</b><br><small class="muted">有需要再買藥妝與伴手禮，不為採買強行停留。</small></div></li>
+                      <li><time>21:10</time><div><b>甜點或直接回飯店</b><br><small class="muted">孩子還有精神再吃收尾聖代；累了就外帶。</small></div></li>
+                      <li><time>21:30</time><div><b>開始返回 FAV LUX</b><br><small class="muted">不為逛完 7 個丁目牽牲第二天體力。</small></div></li>
+                    </ol>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>晚餐選擇器</h4>
+                    <div class="food-pick"><b>A｜大家都累了：味噌拉麵</b><br>上餐快、選擇直觀；孩子可考慮鹽味或醬油口味。這是第一晚最穩妥的方案。</div>
+                    <div class="food-pick"><b>B｜想吃蔬菜：湯咖哩</b><br>選雞腿與蔬菜，大人、孩子分開選辣度；點餐時主動說「不辣」。</div>
+                    <div class="food-pick"><b>C｜仍想吃海鮮：壽司與烤物</b><br>不吃生食者可詢問玉子、熟蝦、烤魚或其他熱食。</div>
+                    <div class="food-pick"><b>D｜最想吃北海道特色：成吉思汗</b><br>香氣與儀式感最強，但候位、烤肉時間與衣服沾味都較多，只在全家還有體力時選。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>丁目的性格：從熱鬧到老街</h4>
+                    <p><b>1～4 丁目</b><br>連鎖餐飲、藥妝、伴手禮與遊戲店密度高，燈光亮、選擇多，第一次最容易逛。</p>
+                    <p><b>5～6 丁目</b><br>往西後步調慢下來，可看到較小型的飲食店與狸小路市場。</p>
+                    <p><b>7 丁目</b><br>老街與個性小店氣氛較明顯。抵達日不必勉強走到底，體力比打卡重要。</p>
+                    <div class="food-pick"><b>這次建議</b><br>從 3 丁目往 6 丁目散步，已能同時看到熱鬧路段與小店氣氛。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>收尾聖代：札幌的夜間句點</h4>
+                    <p>「シメパフェ」是在晚餐後以聖代為今晚收尾的札幌飲食文化。它不只是霜淇淋，常會把水果、果醬、蛋糕、巧克力與北海道乳製品排成層次。</p>
+                    <p>一家四口不必一人一杯；可先確認能否分食，再選 2 份不同口味。若孩子已累，改買霜淇淋或甜點回飯店，一樣有儀式感。</p>
+                    <div class="food-pick"><b>排隊原則</b><br>候位超過 20 分鐘就改外帶甜點，不影響孩子休息。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>給店員看的日文</h4>
+                    <p lang="ja"><b>子どもがいます。辛くしないでください。</b><br><span class="muted">有小孩，請不要做辣。</span></p>
+                    <p lang="ja"><b>子どもは生ものを食べません。火を通した料理はありますか？</b><br><span class="muted">孩子不吃生食，有完全煮熟的料理嗎？</span></p>
+                    <p lang="ja"><b>四人で座れますか？</b><br><span class="muted">四個人可以一起坐嗎？</span></p>
+                    <p lang="ja"><b>あとどのくらい待ちますか？</b><br><span class="muted">大約還要等多久？</span></p>
+                    <div class="food-pick"><b>給當地人看</b><br><span lang="ja">狸小路商店街：北海道札幌市中央区南2・3条西1丁目～7丁目</span></div>
+                  </section>
+                </div>
+      
+                <div class="blog-links">查核來源：<a href="https://tanukikoji.or.jp/">狸小路商店街官方</a> · <a href="https://visit.sapporo.travel/tw/discover/city/tanuki-koji-shopping-street/">札幌官方觀光</a> · <a href="https://www.sapporo.travel/sp/sapporo-ramen/">札幌拉麵特輯</a>｜資料查核：2026/8/2</div>
+              </div>
+            </article>
+          </section>
+      
+          <section id="jingu-blog">
+            <div class="blog-titlebar"><h2>北海道神宮散策誌</h2><a href="#top" aria-label="從北海道神宮散策誌回到表頭">↑ 回到表頭</a></div>
+            <article class="blog-feature">
+              <header class="blog-cover jingu-cover">
+                <div class="label">HOKKAIDO JINGU &amp; MARUYAMA · 8/14</div>
+                <h3>穿過圓山的綠意，在北海道神宮放慢腳步</h3>
+                <p>從白色戀人公園的甜蜜世界，轉進圓山的參道與樹林。這一站不需要趕著打卡，只要用正確的順序參拜、吃一份熱點心，再在圓山找一頓快速午餐。</p>
+                <div class="blog-meta"><span>8/14 週五</span><span>家庭參拜</span><span>停留約 60～90 分鐘</span><span>13:05 最晚離開圓山</span></div>
+              </header>
+              <div class="blog-body">
+                <p class="blog-intro">北海道神宮的源頭可追溯至 1869 年。在札幌城市開拓的初期，這裡不只是信仰中心，也是人們面對北方環境時的精神依靠。神宮與約 70 公頃的圓山公園相接，參道旁的大樹、鳥鳴與林間涼意，讓這一站和札幌市中心形成很大對比。</p>
+                <div class="pullquote">今天 14:00 已排札幌啤酒博物館。神宮與午餐不能同時慢慢來：參拜完快速用餐，13:05 前開車離開圓山，才能預留回飯店停車與轉搭計程車的時間。</div>
+      
+                <div class="blog-grid">
+                  <section class="blog-chapter">
+                    <h4>放進當日行程的正確順序</h4>
+                    <ol class="blog-schedule">
+                      <li><time>11:10</time><div><b>白色戀人公園出發</b><br><small class="muted">開車約 15～25 分鐘，另留入場與停車時間。</small></div></li>
+                      <li><time>11:35</time><div><b>從鳥居、參道走向神門</b><br><small class="muted">不趕路，讓孩子感受林間氣氛。</small></div></li>
+                      <li><time>11:50</time><div><b>手水、本殿參拜</b><br><small class="muted">總共預留 25～35 分鐘。</small></div></li>
+                      <li><time>12:20</time><div><b>六花亭神宮茶屋店</b><br><small class="muted">當天有販售再嘗神宮茶屋特色點心「判官さま」。</small></div></li>
+                      <li><time>12:35</time><div><b>圓山一帶快速午餐</b><br><small class="muted">定食、蕎麥麵或不需長時間候位的餐廳優先。</small></div></li>
+                      <li><time>13:05</time><div><b>最晚離開圓山</b><br><small class="muted">回 FAV LUX 停車，再依原安排轉計程車前往啤酒博物館。若午餐排隊，應改快速餐或延後用餐。</small></div></li>
+                    </ol>
+                  </section>
+      
+                  <section class="blog-chapter wide">
+                    <h4>分離大部隊：2 大 4 小的圓山親子分隊方案</h4>
+                    <p><b>最推薦結論：不去啤酒博物館，留在圓山動物園。</b>它緊鄰圓山公園與神宮區域，少一次回薄野停車、再跨城搭車的折返。兩位大人帶四位孩子時，「少轉乘、有廁所、可隨時休息」比多一個室內景點更重要。</p>
+                    <div class="blog-grid" style="margin-top:16px">
+                      <div>
+                        <div class="food-pick"><b>A｜首選：札幌市圓山動物園</b><br>官方 2026 年夏季開園 09:30～16:30，最後入園 16:00。8/14 是週五，不是 8 月第 1、第 4 週三休園日。大人¥800；國中生以下免費，高中生出示學生證可用減免價¥400。</div>
+                        <div class="food-pick"><b>B｜體力不足：圓山公園輕鬆版</b><br>參拜後在公園散步、找午餐，不再進動物園。15:00 前後離開，提早前往大通公園用餐與盆踊。這是旅行第 2 天孩子已累時的最佳止損。</div>
+                        <div class="food-pick"><b>C｜大雨或炎熱：北海道立近代美術館</b><br>開車往市中心方向移動約 10～20 分鐘。2026/8/14 為開館日，09:30～17:00（最後入場 16:30）；當期有可觀看、觸摸與參與的「魔法の美術館」體驗型展覽。特展票價應另查當期官方公告。</div>
+                      </div>
+                      <div>
+                        <h4 style="margin-top:0">建議時間表：動物園版</h4>
+                        <ol class="blog-schedule">
+                          <li><time>12:20</time><div><b>六花亭神宮茶屋</b><br><small class="muted">吃點心、上廁所，確認六人體力。</small></div></li>
+                          <li><time>12:35</time><div><b>圓山午餐</b><br><small class="muted">快速定食或麵食；候位超過 15 分鐘就換店。</small></div></li>
+                          <li><time>13:20</time><div><b>移車至圓山公園停車場</b><br><small class="muted">神宮與動物園距離近，但原停車規定不一定允許繼續停放，應移至動物園鄰接停車場。</small></div></li>
+                          <li><time>13:30</time><div><b>圓山動物園</b><br><small class="muted">約 2.5～3 小時；不追每個館舍，每 60～75 分鐘休息一次。</small></div></li>
+                          <li><time>16:20</time><div><b>離園、集合、上廁所</b><br><small class="muted">動物園 16:30 關門，不壓到最後一分鐘。</small></div></li>
+                          <li><time>16:40</time><div><b>前往大通公園西 7／8 丁目</b><br><small class="muted">和大部隊在晚餐或 18:00 兒童盆踊重新會合。</small></div></li>
+                        </ol>
+                      </div>
+                    </div>
+                    <div class="notice" style="margin-top:16px"><b>2 大 4 小交通提醒：</b>一般計程車通常無法合法搭載 6 名乘客，不要現場勉強擠一輛車。若不自駕，應叫 2 輛計程車，或預約可載 6 名乘客的大型計程車（<span lang="ja">ジャンボタクシー</span>）並確認兒童座椅與乘車規定。</div>
+                    <p class="muted">停車資訊：圓山公園第一、第二停車場與動物園共用，不是動物園專用。官方列示普通車 1 次¥700；第一停車場 612 台、第二停車場 276 台，8 月開放至 17:30。人潮多時仍可能滿車。</p>
+                    <div class="map-actions">
+                      <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=北海道神宮&amp;destination=札幌市圓山動物園&amp;travelmode=driving">開啟神宮 → 圓山動物園</a>
+                      <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=札幌市圓山動物園&amp;destination=大通公園西7丁目&amp;travelmode=driving">開啟動物園 → 大通公園</a>
+                      <a class="map-btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=北海道神宮&amp;destination=北海道立近代美術館&amp;travelmode=driving">開啟神宮 → 近代美術館</a>
+                    </div>
+                    <div class="blog-links">親子分隊資料：<a href="https://www.city.sapporo.jp/zoo/info/kaienzikan-kyuenbi/20210311.html">圓山動物園開園日與時間</a> · <a href="https://www.city.sapporo.jp/zoo/info/riyo/kaienjikan.html">入園票價</a> · <a href="https://www.city.sapporo.jp/zoo/info/riyo/access.html">交通與停車</a> · <a href="https://artmuseum.pref.hokkaido.lg.jp/knb/chinese_t">北海道立近代美術館</a></div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>第一次參拜，照這個順序就好</h4>
+                    <p><b>1｜鳥居前輕輕一禮</b><br>參道中央傳統上視為神明通行的位置，步行時可稍靠左或右。</p>
+                    <p><b>2｜在手水舍淨手</b><br>依現場指示洗手；不要讓勺子直接碰到嘴。若現場有特別措施，就以神宮指示為準。</p>
+                    <p><b>3｜參拜「二拜二拍手一拜」</b><br>輕投賽錢，鞠躬兩次、拍手兩次，安靜祈願後再鞠躬一次。這是參拜慣例，重點是保持尊重。</p>
+                    <p><b>4｜離開鳥居後再回身一禮</b><br>孩子不必把每個動作做得完美，安靜、不奔跑即可。</p>
+                    <div class="food-pick"><b>8 月參拜時間</b><br>神宮官方列示 4/1～10/15 神門 06:00～17:00；御守與御朱印的一般授與時間為 09:00 至閉門。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>六花亭神宮茶屋：參拜後的一口熱點心</h4>
+                    <p lang="ja"><b>六花亭 神宮茶屋店</b><br>神宮內的六花亭直營店，官方目前列示營業時間為 09:00～17:00，沒有專用停車場。</p>
+                    <p>許多人是為了現場烤熱的「判官さま」而來：外層是加入蕎麥的餅皮，內裡包著粒餡。它是小點心，不能當作四人午餐。</p>
+                    <div class="food-pick"><b>現場原則</b><br>烤物可能因當日供應、排隊或售完而變動。沒有就改買其他六花亭點心，不影響午餐與後續行程。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>午餐怎麼選才不遅到</h4>
+                    <div class="food-pick"><b>A｜最穩定：日式定食</b><br>飯、湯、烤魚或炸物組合明確，大人、孩子都容易選。</div>
+                    <div class="food-pick"><b>B｜最快：蕎麥麵或烏龍麵</b><br>適合只剩 30～40 分鐘時。有天婦羅時份量較完整。</div>
+                    <div class="food-pick"><b>C｜想吃札幌特色：湯咖哩</b><br>可選雞腿與蔬菜，但候位與上餐可能較慢；門口已排隊就不適合今天。</div>
+                    <p class="muted">圓山一帶有許多咖啡店與餐廳，但這天不宜追特定名店。現場候位超過 15 分鐘，直接選下一家。</p>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>停車、孩子與實用日文</h4>
+                    <p>官方列示西停車場約 170 台、東停車場約 70 台；但假日、祭典或參拜人潮仍可能滿車。不要把「駛進園區」當成「立刻有車位」。</p>
+                    <p lang="ja"><b>北海道神宮の参拝者駐車場はどこですか？</b><br><span class="muted">北海道神宮的參拜者停車場在哪裡？</span></p>
+                    <p lang="ja"><b>六花亭の神宮茶屋店はどこですか？</b><br><span class="muted">六花亭神宮茶屋店在哪裡？</span></p>
+                    <p lang="ja"><b>四人で座れますか？</b><br><span class="muted">四個人可以一起坐嗎？</span></p>
+                    <div class="food-pick"><b>給當地人看</b><br><span lang="ja">北海道神宮：〒064-8505 北海道札幌市中央区宮ケ丘1番地</span></div>
+                  </section>
+                </div>
+      
+                <div class="blog-links">查核來源：<a href="https://www.hokkaidojingu.or.jp/china/access/index.html">北海道神宮官方交通與開門時間</a> · <a href="https://www.sapporo.travel/zh-tw/spot/facility/hokkaido_shrine/">札幌官方觀光介紹</a> · <a href="https://www.rokkatei.co.jp/shop/sapporo/">六花亭官方店鋪資料</a> · <a href="https://www.sapporo.travel/gourmet/feature/maruyama-cafe/">圓山餐飲特輯</a>｜資料查核：2026/8/2</div>
+              </div>
+            </article>
+          </section>
+      
+          <section id="otaru-blog">
+            <div class="blog-titlebar"><h2>小樽散步誌</h2><a href="#top" aria-label="從小樽散步誌回到表頭">↑ 回到表頭</a></div>
+            <article class="blog-feature">
+              <header class="blog-cover">
+                <div class="label">OTARU FAMILY WALK · 8/15</div>
+                <h3>沿著運河，把港町的玻璃光、音樂盒與奶油香收進一天</h3>
+                <p>這不是把景點逐一打卡的行程，而是一條適合 2 位成人與 2 位孩子的慢走路線：先看運河，再吃一頓小樽味，最後沿堺町通一路散步到甜點時間。</p>
+                <div class="blog-meta"><span>家庭四人</span><span>步行約 3～4 小時</span><span>正餐＋三個小食候選</span><span>16:45 前離開小樽</span></div>
+              </header>
+              <div class="blog-body">
+                <p class="blog-intro">小樽的迷人，不只是一條運河。從淺草橋望出去，石造倉庫沿水面排開；轉進堺町通後，風景從港町慢慢變成玻璃器皿、音樂盒聲和甜點香。帶孩子旅行，最舒服的方式不是每一家都排，而是選一頓真正想吃的正餐，再把兩三樣小吃分著吃。</p>
+                <div class="pullquote">今天真正的限制不是小樽店家幾點關門，而是札幌 GAJA 已預約 18:30。最晚 16:45 必須開車離開小樽。</div>
+      
+                <div class="blog-grid">
+                  <section class="blog-chapter">
+                    <h4>一家四口的理想時間表</h4>
+                    <ol class="blog-schedule">
+                      <li><time>10:00</time><div><b>札幌出發</b><br><small class="muted">週六可能塞車，導航時間僅供參考。</small></div></li>
+                      <li><time>11:00</time><div><b>淺草橋、運河與石造倉庫</b><br><small class="muted">先完成全家合照，停留約 30 分鐘。</small></div></li>
+                      <li><time>11:45</time><div><b>提早吃午餐</b><br><small class="muted">避開 12:30 後的排隊高峰。</small></div></li>
+                      <li><time>13:00</time><div><b>かま栄 → 北一硝子</b><br><small class="muted">一路往堺町 7 丁目方向散步。</small></div></li>
+                      <li><time>14:15</time><div><b>音樂盒堂</b><br><small class="muted">讓孩子各選一個最喜歡的聲音，不必每層都逛。</small></div></li>
+                      <li><time>15:00</time><div><b>LeTAO 甜點時間</b><br><small class="muted">內用排隊太長就改外帶，保留回程時間。</small></div></li>
+                      <li><time>16:00</time><div><b>最後採買、取車</b><br><small class="muted">設定 16:30 鬧鐘提醒全家集合。</small></div></li>
+                      <li><time>16:45</time><div><b>最晚離開小樽</b><br><small class="muted">預留回札幌、停車及步行到 GAJA 的緩衝。</small></div></li>
+                    </ol>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>午餐怎麼選才不後悔</h4>
+                    <div class="food-pick"><b>A｜想吃小樽代表味</b><br>選壽司或海鮮丼。大人吃生食，孩子可點玉子、蝦、熟食卷或烤魚。</div>
+                    <div class="food-pick"><b>B｜孩子不愛生魚</b><br>選小樽勾芡炒麵；熱騰騰、份量足，也方便一家分食。</div>
+                    <div class="food-pick"><b>C｜不想花時間排隊</b><br>先吃かま栄炸魚板，再搭配麵食或簡餐，把時間留給堺町散步。</div>
+                    <p class="muted">原則：看到候位超過 30 分鐘就換店。晚餐已有吃到飽，午餐不必點得太重。</p>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>堺町通三個值得停下來的地方</h4>
+                    <p><b>かま栄工場直売店</b><br>1905 年創業的魚板店。8/15 官方標示 09:00～19:00；推薦現炸「ひら天」、限定パンドーム與ウインナーロール，店內有休息空間。</p>
+                    <p><b>北一硝子三號館</b><br>由歷史石造倉庫改造，玻璃器皿很有小樽氣氛。若孩子對易碎品沒耐性，可由一位成人快速挑選、另一位陪孩子休息。</p>
+                    <p><b>小樽音樂盒堂</b><br>建築與音樂盒展示本身就是景點。給孩子一個預算或挑選條件，會比漫無目的逛店更輕鬆。</p>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>甜點只選一站：LeTAO 本店</h4>
+                    <p>本店就在音樂盒堂對面，以雙層起司蛋糕聞名。8/15 適用夏季時間，商店 09:00～19:00、咖啡廳至 19:00，最後點餐 17:30；8/8～8/16 不接受座位預約。</p>
+                    <p>若現場排隊，買外帶甜點或到其他 LeTAO 分店即可，不值得為內用延誤 18:30 的札幌晚餐。</p>
+                    <div class="food-pick"><b>分享吃法</b><br>四人點 2～3 份不同甜點分食，再買冷藏伴手禮；甜度與份量都比較剛好。</div>
+                  </section>
+                </div>
+      
+                <div class="blog-links">查核來源：<a href="https://otaru.gr.jp/shop/otarucanal">小樽運河</a> · <a href="https://otaru.gr.jp/eat/">小樽官方餐飲名錄</a> · <a href="https://kamaei.co.jp/store_introduce/">かま栄</a> · <a href="https://kitaichiglass.co.jp/shoplist/">北一硝子</a> · <a href="https://www.letao-brand.jp/shop/letao/">LeTAO 本店</a>｜資料查核：2026/8/2</div>
+              </div>
+            </article>
+          </section>
+      
+          <section id="nijo-blog">
+            <div class="blog-titlebar"><h2>二條市場早餐誌</h2><a href="#top" aria-label="從二條市場早餐誌回到表頭">↑ 回到表頭</a></div>
+            <article class="blog-feature">
+              <header class="blog-cover nijo-cover">
+                <div class="label">NIJO MARKET BREAKFAST · 8/16</div>
+                <h3>札幌清晨的海味：吃飽早餐，再一路開往函館</h3>
+                <p>只有一小時，也能吃到像樣的北海道早餐。這份四人家庭攻略，把生食、熟食、孩子的選擇與長途開車的時間都一起算進去。</p>
+                <div class="blog-meta"><span>2 大 2 小</span><span>8/16 週日</span><span>生食／熟食都有選法</span><span>09:45 最晚出發</span></div>
+              </header>
+              <div class="blog-body">
+                <p class="blog-intro">二條市場的清晨很有札幌的生活感：蟹、鮮魚與海膽在店門前排開，小小的食堂已端出熱湯與海鮮丼。這裡源自明治初期石狩漁師販賣鮮魚的歷史，如今仍被稱為「札幌市民的廚房」。各店營業時間不同，早餐目標要先選好，才不會把行車時間都花在排隊。</p>
+                <div class="pullquote">這頓的目標不是吃最貴的海鮮丼，而是四個人都吃得舒服，並在 09:45 前出發。</div>
+      
+                <div class="blog-grid">
+                  <section class="blog-chapter">
+                    <h4>長途移動日的時間表</h4>
+                    <ol class="blog-schedule">
+                      <li><time>08:00</time><div><b>FAV LUX 退房</b><br><small class="muted">行李上車，先設好停車場導航。</small></div></li>
+                      <li><time>08:20</time><div><b>二條市場附近停車</b><br><small class="muted">市場周邊以付費停車場為主，預留找車位時間。</small></div></li>
+                      <li><time>08:30</time><div><b>看候位狀況選店</b><br><small class="muted">超過 20～30 分鐘就換備案，不死守名店。</small></div></li>
+                      <li><time>08:40</time><div><b>四人早餐</b><br><small class="muted">生食與熟食分開點，讓孩子也有正餐。</small></div></li>
+                      <li><time>09:20</time><div><b>短逛、廁所、補水</b><br><small class="muted">冷藏海產不適合在車上放數小時，沒有保冷設備就不買。</small></div></li>
+                      <li><time>09:45</time><div><b>最晚出發</b><br><small class="muted">往八雲、函館方向，留下休息站與塞車緩衝。</small></div></li>
+                    </ol>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>三家早餐怎麼選</h4>
+                    <div class="food-pick"><b>A｜大磯 本店（大磯）</b><br>海鮮丼種類很多，官方稱有 30 種以上，也有烤海鮮、刺身與自家製焗烤。週日一般營業 07:30～15:30；適合「大人吃生食、孩子找熟食」的家庭。</div>
+                    <div class="food-pick"><b>B｜どんぶり茶屋 二條市場店</b><br>由魚店起家的海鮮丼專門店，價格與食材組合從基礎到豪華都有。夏季 07:30～16:30（最後點餐 16:00），不接受預約，適合想快速從圖片選一碗的人。</div>
+                    <div class="food-pick"><b>C｜魚や がんねん</b><br>把它當「熟食備案」：優先詢問當日烤魚定食與熱湯。網站標示約 08:00 開始、售完即止，當天仍以現場為準。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>一家四口的點餐策略</h4>
+                    <p><b>大人想吃海鮮：</b>一碗豐盛綜合丼配一碗較單純的魚料丼，不用兩碗都升級海膽與蟹。</p>
+                    <p><b>孩子不吃生食：</b>詢問烤魚、熟蝦、玉子燒、白飯與味噌湯；菜單因店家與當日進貨不同，先問再點。</p>
+                    <p><b>開車的人：</b>烤魚、飯與湯通常比大份油脂豐富的丼飯輕鬆；吃完再帶水上車。</p>
+                    <div class="food-pick"><b>現場判斷</b><br>生食愛好者選大磯或どんぶり茶屋；孩子要熟食先看烤魚定食。任一家候位超過 30 分鐘，立即換店。</div>
+                  </section>
+      
+                  <section class="blog-chapter">
+                    <h4>給店員看的日文</h4>
+                    <p lang="ja"><b>四人で座れますか？</b><br><span class="muted">四個人可以一起坐嗎？</span></p>
+                    <p lang="ja"><b>子どもは生ものを食べません。焼き魚か、火を通した料理はありますか？</b><br><span class="muted">孩子不吃生食，有烤魚或完全煮熟的料理嗎？</span></p>
+                    <p lang="ja"><b>この丼に入っている魚を教えてください。</b><br><span class="muted">請告訴我這碗裡有哪些魚。</span></p>
+                    <p lang="ja"><b>わさび抜きでお願いします。</b><br><span class="muted">請不要芥末。</span></p>
+                    <p lang="ja"><b>お会計をお願いします。</b><br><span class="muted">請幫我結帳。</span></p>
+                    <div class="food-pick"><b>給當地人看</b><br><span lang="ja">二条市場：北海道札幌市中央区南3条東1～2丁目</span></div>
+                  </section>
+                </div>
+      
+                <div class="blog-links">查核來源：<a href="https://nijomarket.com/about/">二條市場官方</a> · <a href="https://www.sapporo.travel/spot/facility/nijo_fish_market/">札幌官方觀光</a> · <a href="https://ohiso.jp/">大磯</a> · <a href="https://donburi.jp/shop/nijo">どんぶり茶屋</a> · <a href="https://www.gannen.net/">魚や がんねん</a>｜資料查核：2026/8/2</div>
+              </div>
+            </article>
+          </section>
+      
+      
+    </div>
+
+    <section id="confirmed-plans">
+      <div class="section-head">
+        <div><p class="section-kicker">CONFIRMED PLAN</p><h2>已預訂行程</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <article class="plan-card card">
+        <div class="plan-date"><small>8 月</small><strong>15 日</strong><small>週六</small><b>18:30</b></div>
+        <div class="plan-content">
+          <h3>Birra Ristorante GAJA 薄野店</h3>
+          <p class="jp-name" lang="ja">ガヤ すすきの店</p>
+          <div class="plan-facts">
+            <div><small>地址（日本語）</small><b lang="ja">北海道札幌市中央区南5条西2丁目 サイバーシティビル3F</b></div>
+            <div><small>交通（日本語）</small><b lang="ja">地下鉄東豊線「豊水すすきの駅」4番出口から徒歩1分</b></div>
+            <div><small>預約時間</small><b>18:30 入店・20:30 離店</b></div>
+            <div><small>預約人數</small><b>4 位（成人 2、兒童 2）</b></div>
+            <div><small>預約狀態</small><b>已確認・私人編號已移除</b></div>
+            <div><small>預約姓名</small><b>已從公開版移除</b></div>
+            <div><small>桌位</small><b>一般座位</b></div>
+            <div><small>餐點</small><b>吃到飽 4 人份・當日決定方案</b></div>
+            <div><small>店家電話</small><b>011-520-2911</b></div>
+            <div><small>營業時間</small><b>17:00～翌 5:00</b></div>
+            <div><small>吃到飽最晚入場</small><b>翌 2:30（26:30）</b></div>
+            <div><small>座位</small><b>約 200 席</b></div>
+            <div><small>空間</small><b>包廂・沙發區・適合家庭聚餐</b></div>
+          </div>
+          <a class="link-btn" href="https://gajafan.com/" target="_blank" rel="noopener">官網（需要網路）↗</a>
+          <p class="privacy">個人聯絡資料、私人訂位編號及可管理／取消預約的連結已從公開版移除。</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="meals">
+      <div class="section-head">
+        <div><p class="section-kicker">MEAL SCHEDULE</p><h2>每日餐食安排</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="meal-summary">
+        <div class="meal-stat card"><strong>24 個餐次</strong><span>8 天的早・午・晚餐皆已填入</span></div>
+        <div class="meal-stat card"><strong>4 位用餐</strong><span>2 位成人＋2 位兒童</span></div>
+        <div class="meal-stat card"><strong>7 餐已確認</strong><span>機上餐 2＋GAJA 1＋飯店餐 4</span></div>
+      </div>
+      <div class="meal-table-wrap card">
+        <table class="table meal-table">
+          <thead><tr><th>日期</th><th>早餐</th><th>午餐</th><th>晚餐</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>8/13 週四</b><br><small>札幌</small></td>
+              <td class="meal-slot"><strong>自己準備</strong><small>06:40 接送出發前備妥</small></td>
+              <td class="meal-slot"><strong>JX850 機上餐</strong><small>4 位・票面確認含餐<br>供餐時間未公布，暫列午餐</small></td>
+              <td class="meal-slot"><strong>狸小路商店街</strong><small>預計 19:30 前往・餐廳待定</small></td>
+            </tr>
+            <tr>
+              <td><b>8/14 週五</b><br><small>札幌</small></td>
+              <td class="meal-slot"><strong>白色戀人公園</strong><small>早餐／點心・內容待定</small></td>
+              <td class="meal-slot"><strong>北海道神宮</strong><small>預計 11:30 用餐・餐廳待定</small></td>
+              <td class="meal-slot"><strong>大通公園夏季啤酒花園</strong><small>18:00 用餐・2026 官方確認舉辦</small></td>
+            </tr>
+            <tr>
+              <td><b>8/15 週六</b><br><small>札幌</small></td>
+              <td class="meal-slot"><strong>札幌市區</strong><small>前往小樽前用餐・餐廳待定</small></td>
+              <td class="meal-slot"><strong>小樽運河／商店街</strong><small>小樽一日遊途中・餐廳待定</small></td>
+              <td class="meal-slot"><strong>GAJA 薄野店</strong><small>18:30～20:30・吃到飽 4 人份<br>已預約・私人編號已移除</small></td>
+            </tr>
+            <tr>
+              <td><b>8/16 週日</b><br><small>札幌 → 函館</small></td>
+              <td class="meal-slot"><strong>二條市場</strong><small>預計 09:30 早餐後出發</small></td>
+              <td class="meal-slot"><strong>八雲休息站</strong><small>預計 13:30 用餐・地點待定</small></td>
+              <td class="meal-slot"><strong>函館夜景</strong><small>觀景前後用餐・餐廳待定</small></td>
+            </tr>
+            <tr>
+              <td><b>8/17 週一</b><br><small>函館</small></td>
+              <td class="meal-slot"><strong>函館市區</strong><small>函館一日遊・餐廳待定</small></td>
+              <td class="meal-slot"><strong>函館市區</strong><small>函館一日遊・餐廳待定</small></td>
+              <td class="meal-slot"><strong>函館市區</strong><small>函館一日遊・餐廳待定</small></td>
+            </tr>
+            <tr>
+              <td><b>8/18 週二</b><br><small>函館 → 洞爺</small></td>
+              <td class="meal-slot"><strong>函館市區／飯店附近</strong><small>10:00 出發前用餐・餐廳待定</small></td>
+              <td class="meal-slot"><strong>Harvester 八雲／道之驛</strong><small>預計 11:15・兩處擇一</small></td>
+              <td class="meal-slot"><strong>洞爺飯店晚餐</strong><small>4 位・房價已含</small></td>
+            </tr>
+            <tr>
+              <td><b>8/19 週三</b><br><small>洞爺</small></td>
+              <td class="meal-slot"><strong>洞爺飯店早餐</strong><small>4 位・房價已含</small></td>
+              <td class="meal-slot"><strong>登別溫泉街</strong><small>午餐・餐廳待定</small></td>
+              <td class="meal-slot"><strong>洞爺飯店晚餐</strong><small>4 位・房價已含</small></td>
+            </tr>
+            <tr>
+              <td><b>8/20 週四</b><br><small>洞爺 → 新千歲</small></td>
+              <td class="meal-slot"><strong>洞爺飯店早餐</strong><small>4 位・房價已含</small></td>
+              <td class="meal-slot"><strong>新千歲機場</strong><small>還車後、登機前用餐・餐廳待定</small></td>
+              <td class="meal-slot"><strong>JX851 機上餐</strong><small>4 位・票面確認含餐<br>供餐時間未公布，暫列晚餐</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice"><b>標示說明：</b>未訂位的餐次依大部隊行程所到地點填入，標示「待定」代表用餐區域已有方向，但餐廳尚未預約。FAV LUX 札幌薄野與函館飯店是否含早餐仍未確認；兩段機上餐因航空公司尚未公布供餐時間，依航班時段暫列為午餐及晚餐。</div>
+    </section>
+
+    <section id="flights">
+      <div class="section-head">
+        <div><p class="section-kicker">FLIGHTS</p><h2>來回航班</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="flight-grid">
+        <article class="flight card">
+          <div class="flight-top"><div><span class="tag">去程 · 8/13 週四</span><div class="flight-no">JX850</div></div><b>4h 05m</b></div>
+          <div class="flight-body">
+            <div class="airports">
+              <div class="airport"><b>10:05</b><strong>TPE</strong><span>桃園機場 T1</span><span class="jp-line">台湾桃園国際空港 第1ターミナル</span></div>
+              <div class="plane" aria-hidden="true">✈</div>
+              <div class="airport"><b>15:10</b><strong>CTS</strong><span>新千歲國際航廈</span><span class="jp-line">新千歳空港 国際線ターミナル</span></div>
+            </div>
+            <div class="meta">
+              <div><small>艙等</small><b>經濟艙 S</b></div>
+              <div><small>餐點</small><b>有</b></div>
+              <div><small>每人託運</small><b>1 件 × 23 kg</b></div>
+              <div><small>全家合計</small><b>4 件</b></div>
+            </div>
+          </div>
+        </article>
+        <article class="flight card">
+          <div class="flight-top"><div><span class="tag">回程 · 8/20 週四</span><div class="flight-no">JX851</div></div><b>4h 10m</b></div>
+          <div class="flight-body">
+            <div class="airports">
+              <div class="airport"><b>16:25</b><strong>CTS</strong><span>新千歲國際航廈</span><span class="jp-line">新千歳空港 国際線ターミナル</span></div>
+              <div class="plane" aria-hidden="true">✈</div>
+              <div class="airport"><b>19:35</b><strong>TPE</strong><span>桃園機場 T1</span><span class="jp-line">台湾桃園国際空港 第1ターミナル</span></div>
+            </div>
+            <div class="meta">
+              <div><small>艙等</small><b>經濟艙 M</b></div>
+              <div><small>餐點</small><b>有</b></div>
+              <div><small>每人託運</small><b>2 件 × 23 kg</b></div>
+              <div><small>全家合計</small><b>8 件</b></div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="booking-strip">
+        <div><span>航空訂位</span><b>已完成・私人代號已移除</b></div>
+        <div><span>旅行社訂單</span><b>私人編號已移除</b></div>
+        <div><span>提醒</span><b>座位尚未指定・請依航段順序使用</b></div>
+      </div>
+      <div class="passenger-panel card">
+        <h3>同行旅客</h3>
+        <p>共 4 位旅客；姓名、電子機票號碼與私人訂位識別碼已從公開版移除。</p>
+        <div class="passenger-list">
+          <div class="passenger">
+            <strong>成人旅客 1</strong><span class="type">成人</span>
+            <small>電子機票</small><span class="ticket">已移除</span>
+          </div>
+          <div class="passenger">
+            <strong>成人旅客 2</strong><span class="type">成人</span>
+            <small>電子機票</small><span class="ticket">已移除</span>
+          </div>
+          <div class="passenger">
+            <strong>兒童旅客 1</strong><span class="type">兒童</span>
+            <small>電子機票</small><span class="ticket">已移除</span>
+          </div>
+          <div class="passenger">
+            <strong>兒童旅客 2</strong><span class="type">兒童</span>
+            <small>電子機票</small><span class="ticket">已移除</span>
+          </div>
+        </div>
+      </div>
+      <div class="transfer-panel card">
+        <h3>全鋒機場接送</h3>
+        <p>接送安排與航班放在同一區，司機姓名、車牌及電話尚待系統更新。</p>
+        <div class="transfer-grid">
+          <article class="transfer-card">
+            <div class="transfer-head"><div><span>去程送機</span><br><strong>私人預約單號已移除</strong></div><b>台北市區 → TPE</b></div>
+            <div class="transfer-body">
+              <div class="transfer-time"><b>8/13 06:40</b><span>航班起飛前 3 小時 25 分</span></div>
+              <div class="transfer-route">
+                <div class="dot">●</div><div><small>上車</small><strong>台北市區・私人地址已移除</strong></div>
+                <div class="dot">↓</div><div><small>下車</small><strong>桃園機場第一航廈</strong></div>
+              </div>
+              <div class="transfer-note">車輛資料將於服務前一日 18:00 後陸續更新，請留意預約追蹤頁。</div>
+            </div>
+          </article>
+          <article class="transfer-card">
+            <div class="transfer-head"><div><span>回程接機</span><br><strong>私人預約單號已移除</strong></div><b>TPE → 台北市區</b></div>
+            <div class="transfer-body">
+              <div class="transfer-time"><b>8/20 19:35</b><span>與 JX851 表定抵達時間相同</span></div>
+              <div class="transfer-route">
+                <div class="dot">●</div><div><small>上車</small><strong>桃園機場第一航廈</strong></div>
+                <div class="dot">↓</div><div><small>下車</small><strong>台北市區・私人地址已移除</strong></div>
+              </div>
+              <div class="transfer-note"><b>請確認：</b>預約時間與航班表定抵達時間皆為 19:35，應確認全鋒是否依航班落地時間追蹤接機。車輛資料預計於預約時間前 1 小時陸續更新。</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rental">
+      <div class="section-head">
+        <div><p class="section-kicker">RENTAL CAR</p><h2>租車與保障</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="rental-layout">
+        <article class="rental-main card">
+          <div class="rental-title">
+            <div><h3>Honda Freed 或同級商務車</h3><p>BBJ Airport Rent A Car</p></div>
+            <span class="paid-tag">已付款 NT$10,095</span>
+          </div>
+          <div class="rental-times">
+            <div class="rental-time"><small>取車</small><b>8/13 週四・16:00</b><span>抵達航班後 50 分</span></div>
+            <div class="rental-arrow" aria-hidden="true">→</div>
+            <div class="rental-time"><small>還車</small><b>8/20 週四・13:30</b><span>回程起飛前 2 小時 55 分</span></div>
+          </div>
+          <div class="hotel-info">
+            <div><small>訂單／確認編號</small><b>已從公開版移除</b></div>
+            <div><small>登記駕駛</small><b>已從公開版移除</b></div>
+            <div><small>門市名稱</small><b>BBJ Airport Rent A Car</b></div>
+            <div><small>門市電話</small><b>+81-11-826-4388</b></div>
+            <div><small>地址（日本語）</small><b lang="ja">〒066-0012 北海道千歳市美々1292-18</b></div>
+            <div><small>營業時間</small><b>09:00–19:00</b></div>
+          </div>
+          <div class="feature-chips">
+            <span class="chip">5 人座</span><span class="chip">2 件行李</span><span class="chip">自排</span>
+            <span class="chip">空調</span><span class="chip">無限里程</span><span class="chip">滿油取還</span>
+            <span class="chip">增高座椅 × 2</span>
+          </div>
+          <div class="pickup-note">
+            <h4>新千歲機場接駁方式</h4>
+            <p>抵達後取齊行李，從國際線 3 樓依指示前往國內線，再至 1 樓「98 號巴士站」。免費接駁車每小時 15 分及 45 分發車，車牌號碼 1314；若未收到接駁資訊，請致電門市。</p>
+          </div>
+          <div class="notice"><b>取消提醒：</b>2026/8/11 16:00 前可免費取消；訂單不可更改。</div>
+        </article>
+
+        <article class="coverage-card card">
+          <h3>Klook 安心保障</h3>
+          <p>第三方保險提供者提供並負責賠償</p>
+          <div class="coverage-list">
+            <div class="coverage-row"><span>被保障人</span><b>已從公開版移除</b></div>
+            <div class="coverage-row"><span>保障單據號碼</span><b>已從公開版移除</b></div>
+            <div class="coverage-row"><span>保障期間（日本時間）</span><b>8/13 16:00<br>至 8/20 13:30</b></div>
+            <div class="coverage-row"><span>目的地</span><b>Japan</b></div>
+          </div>
+          <div class="notice" style="margin-top:18px"><b>租車憑證所列基本保障：</b>租車自負額 ¥0、第三人責任險、營業損失賠償、車窗／底盤／輪胎／後視鏡專案保障、緊急道路救援及租賃物品遺失等；實際理賠以保險條款為準。</div>
+          <div class="pickup-note">
+            <h4>取車必備文件</h4>
+            <p>駕駛人護照、台灣駕照正本、駕照日文譯本、駕駛人名下且效期至少 6 個月的實體信用卡，以及列印的租車憑證。中國大陸駕照不受理。</p>
+          </div>
+        </article>
+      </div>
+      <div style="margin-top:14px">
+        <details>
+          <summary>取車、還車與接駁完整規定</summary>
+          <div class="detail-body">
+            <ul>
+              <li><b>取車：</b>2026/8/13 16:00；抵達新千歲機場後先領取全部行李。</li>
+              <li><b>集合：</b>由國際線 3 樓依指示前往國內線，至國內線 1 樓「98 號巴士站」。</li>
+              <li><b>接駁：</b>免費巴士車牌 1314，每小時 15 分、45 分發車；約 3 天前門市會以 Email／通訊軟體寄送接駁細節。未收到請檢查垃圾郵件或致電 +81-11-826-4388。</li>
+              <li><b>還車：</b>2026/8/20 13:30，同一門市。依工作人員指示把車停入指定區域；完成手續後由免費接駁車送往機場。</li>
+              <li><b>營業時間：</b>09:00–19:00。若取車時間落在 07:00–08:59 或 19:01–21:00，需於門市另付約 ¥5,000 服務費；本訂單時間不在加價區間。</li>
+              <li><b>門市：</b>BBJ Airport Rent A Car，〒066-0012 北海道千歳市美々1292-18。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>駕駛資格與取車必備文件</summary>
+          <div class="detail-body">
+            <ul>
+              <li>主駕駛姓名已從公開版移除；憑證登記年齡區間為 30–65 歲。</li>
+              <li>租車公司規定駕駛年齡須為 20–69 歲，且持有有效駕照至少 1 年。</li>
+              <li>台灣駕照使用者須攜帶：<b>護照、台灣駕照正本、官方日文譯本</b>；僅有翻譯本不能取代駕照正本。</li>
+              <li>日文譯本須由日本台灣交流協會、JAF 或其他被認可機構核發；在日本可使用期限仍依日本法規與譯本規定。</li>
+              <li>中國大陸駕照不受理。其他適用國家可用《1949 年日內瓦公約》格式的 IDP 正本搭配原駕照與護照，但本次台灣駕照應走日文譯本方式。</li>
+              <li>必須攜帶<b>列印的租車憑證</b>；無法出示時，門市可能收取額外費用。</li>
+              <li>除上述文件外，須出示主駕駛本人名下的實體信用卡。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>信用卡、押金與付款規定</summary>
+          <div class="detail-body">
+            <ul>
+              <li>信用卡持卡人姓名須與主駕駛一致，卡片效期至少 6 個月。</li>
+              <li>不接受簽帳金融卡、虛擬卡、預付卡及副卡。</li>
+              <li>接受的卡別：China UnionPay、Visa、Mastercard、Diners Club、JCB、Discover、American Express。</li>
+              <li>憑證所列押金為約 ¥1，實際金額仍由門市現場決定；高級車型可能要求主駕駛信用卡具備更高可用額度。</li>
+              <li>押金由租車公司於取車時預授權或收取；車況、違規及其他待付款項確認無誤後退還。</li>
+              <li>本訂單已線上付款 NT$10,095，現場應付顯示為 ¥0；臨時加購、罰款、燃油或其他不含項目除外。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>車輛、燃油、里程與兒童座椅</summary>
+          <div class="detail-body">
+            <ul>
+              <li>Honda Freed 或同級商務車／迷你廂型車，5 人座、可放約 2 件行李、自排、有空調。</li>
+              <li><b>無限里程、滿油取還：</b>取車時油箱加滿，還車前須再次加滿；保留最後一次加油收據及油表照片。</li>
+              <li>已附加增高座椅 2 張；憑證標示適用 4–7 歲、體重 15–30 kg。</li>
+              <li><b>需再確認：</b>住宿資料顯示兒童為 6 歲與 8 歲，而增高座椅方案標示到 7 歲；請依 8 歲兒童實際身高、體重及門市規定確認是否適用。</li>
+              <li>門市可另行加購：增高座椅、追加駕駛、日文 GPS、ETC 卡與 ETC 設備、雪胎、幼童座椅、USB 接孔、行李掛鉤及車用手機架。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>外國旅客的日本加油指南（自助／人工站）</summary>
+          <div class="detail-body">
+            <div class="notice"><b>第一原則：不要只根據車型猜油種。</b>本次是 Honda Freed「或同級車」，實際車輛可能不同。取車時要請門市在租車單上圈出正確油種，加油前再檢查油箱蓋與租賃文件。</div>
+
+            <h4>先認得三種油</h4>
+            <div class="visual-scroll" aria-label="三種油示意圖，手機可左右滑動">
+            <svg class="fuel-visual" viewBox="0 0 960 350" role="img" aria-labelledby="fuel-types-title fuel-types-desc">
+              <title id="fuel-types-title">日本加油站三種油槍示意圖</title>
+              <desc id="fuel-types-desc">紅色為一般無鉛汽油レギュラー，黃色為高辛烷值汽油ハイオク，綠色為柴油軽油。</desc>
+              <rect x="18" y="18" width="924" height="314" rx="22" fill="none" class="svg-line" stroke-width="2"/>
+
+              <g transform="translate(38 42)">
+                <rect width="270" height="250" rx="20" fill="#b72f36"/>
+                <rect x="22" y="22" width="226" height="54" rx="12" fill="#fff" opacity=".96"/>
+                <text x="135" y="57" text-anchor="middle" font-size="26" font-weight="900" fill="#8f1f26">レギュラー</text>
+                <g transform="translate(30 94)" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="0" width="78" height="105" rx="9"/>
+                  <rect x="25" y="18" width="44" height="30" rx="4"/>
+                  <path d="M86 22h23l18 18v67c0 18 28 18 28 0V69"/>
+                  <path d="M145 50l18 13-8 20-18-13z"/>
+                  <path d="M6 111h88"/>
+                </g>
+                <text x="135" y="220" text-anchor="middle" font-size="24" font-weight="900" fill="#fff">一般無鉛汽油</text>
+                <text x="135" y="244" text-anchor="middle" font-size="15" fill="#fff" opacity=".84">REGULAR · 常見紅色油槍</text>
+              </g>
+
+              <g transform="translate(345 42)">
+                <rect width="270" height="250" rx="20" fill="#d7a51d"/>
+                <rect x="22" y="22" width="226" height="54" rx="12" fill="#fff" opacity=".96"/>
+                <text x="135" y="57" text-anchor="middle" font-size="27" font-weight="900" fill="#735b0a">ハイオク</text>
+                <g transform="translate(30 94)" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="0" width="78" height="105" rx="9"/>
+                  <rect x="25" y="18" width="44" height="30" rx="4"/>
+                  <path d="M86 22h23l18 18v67c0 18 28 18 28 0V69"/>
+                  <path d="M145 50l18 13-8 20-18-13z"/>
+                  <path d="M6 111h88"/>
+                </g>
+                <text x="135" y="220" text-anchor="middle" font-size="24" font-weight="900" fill="#fff">高辛烷值汽油</text>
+                <text x="135" y="244" text-anchor="middle" font-size="15" fill="#fff" opacity=".9">HIGH OCTANE · 常見黃色油槍</text>
+              </g>
+
+              <g transform="translate(652 42)">
+                <rect width="270" height="250" rx="20" fill="#188453"/>
+                <rect x="22" y="22" width="226" height="54" rx="12" fill="#fff" opacity=".96"/>
+                <text x="135" y="58" text-anchor="middle" font-size="30" font-weight="900" fill="#0d633c">軽油</text>
+                <g transform="translate(30 94)" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="0" width="78" height="105" rx="9"/>
+                  <rect x="25" y="18" width="44" height="30" rx="4"/>
+                  <path d="M86 22h23l18 18v67c0 18 28 18 28 0V69"/>
+                  <path d="M145 50l18 13-8 20-18-13z"/>
+                  <path d="M6 111h88"/>
+                </g>
+                <text x="135" y="220" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">柴油</text>
+                <text x="135" y="244" text-anchor="middle" font-size="15" fill="#fff" opacity=".86">DIESEL · 常見綠色油槍</text>
+              </g>
+
+              <rect x="602" y="303" width="320" height="31" rx="15" fill="#e86f51"/>
+              <text x="762" y="324" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">⚠ 「軽油」＝柴油，不是輕型車汽油</text>
+            </svg>
+            </div>
+            <table class="table">
+              <thead><tr><th>加油機日文</th><th>常見油槍顏色</th><th>中文</th><th>重要提醒</th></tr></thead>
+              <tbody>
+                <tr><td lang="ja"><b>レギュラー</b></td><td>紅色</td><td>一般無鉛汽油</td><td>日本多數一般汽油車使用，但仍須以本次實車指定為準。</td></tr>
+                <tr><td lang="ja"><b>ハイオク</b></td><td>黃色</td><td>高辛烷值汽油</td><td>只有車輛明確指定時才選。</td></tr>
+                <tr><td lang="ja"><b>軽油</b></td><td>綠色</td><td>柴油</td><td><b>「軽油」不是輕型車用汽油！</b>只能加在柴油車。</td></tr>
+              </tbody>
+            </table>
+            <p class="privacy">油槍顏色是日本常見標示，但不可取代油箱蓋、租車單或門市的油種指定。</p>
+
+            <h4>看到「セルフ」：自助加油步驟</h4>
+            <ol>
+              <li><b>駛入正確方向：</b>先看儀表板油槍圖示旁的小箭頭，判斷油箱蓋在左還是右。</li>
+              <li><b>停好並熄火：</b>排入 P 檔、啟用駐車制動、關閉引擎；加油區不吸菸、不使用明火。</li>
+              <li><b>開啟油箱蓋：</b>開關常在駕駛座腳邊或儀表板下方，車型不同；找不到就請店員幫忙，不要硬撕蓋板。</li>
+              <li><b>選付款方式：</b>畫面可能先選現金（<span lang="ja">現金</span>）或信用卡（<span lang="ja">クレジットカード</span>）。有些自助站會先預付，再到精算機退餘額；外國卡失敗時，改用現金或換有人服務站。</li>
+              <li><b>選油種與「滿油」：</b>只按租車單指定的油種；還車前選 <span lang="ja">満タン</span>（加滿），不是只選固定金額。</li>
+              <li><b>先除靜電：</b>觸摸機台上的 <span lang="ja">静電気除去シート</span>（除靜電墊），再打開油箱蓋、取下正確油槍。</li>
+              <li><b>油槍插到底：</b>持續扣住手把，滿油時油槍會自動跳停。跳停後不要反覆補油；等一下再抽出，避免油滴濺出。</li>
+              <li><b>收尾：</b>放回油槍，鎖緊油箱蓋並關好外蓋，拿取收據（<span lang="ja">レシート</span>）。若是預付機型，確認是否還要到精算機取回找零。</li>
+            </ol>
+
+            <h4>看到「フルサービス」：有人服務站</h4>
+            <p>停在油機旁、熄火後搖下車窗，把下列文字給店員看即可。若不確定油種，同時出示租車單或油箱蓋標籤。</p>
+            <div class="visual-scroll" aria-label="人工加油流程示意圖，手機可左右滑動">
+            <svg class="fuel-visual" viewBox="0 0 1040 390" role="img" aria-labelledby="full-service-title full-service-desc">
+              <title id="full-service-title">日本人工加油站使用流程示意圖</title>
+              <desc id="full-service-desc">依序為駛入人工服務站、停車熄火搖下車窗、告知油種與加滿、店員加油、付款並取收據。</desc>
+              <rect x="18" y="18" width="1004" height="350" rx="24" fill="none" class="svg-line" stroke-width="2"/>
+              <text x="50" y="58" font-size="22" font-weight="900" class="svg-ink">フルサービス｜窗口一句話即可完成加油</text>
+              <text x="50" y="84" font-size="15" class="svg-muted">請先以租車單或油箱蓋確認油種，不確定就一起給店員看。</text>
+
+              <g transform="translate(42 116)">
+                <rect width="172" height="190" rx="18" fill="#174a5b"/>
+                <circle cx="34" cy="34" r="20" fill="#0d7d79"/>
+                <text x="34" y="41" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">1</text>
+                <g transform="translate(28 63)" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 58h112l-12-27H35L20 58z"/>
+                  <path d="M34 31l17-20h42l15 20"/>
+                  <circle cx="36" cy="64" r="10"/><circle cx="98" cy="64" r="10"/>
+                  <path d="M118 0v24M108 9l10-10 10 10"/>
+                </g>
+                <text x="86" y="155" text-anchor="middle" font-size="19" font-weight="900" fill="#fff">駛入油機旁</text>
+                <text x="86" y="178" text-anchor="middle" font-size="14" fill="#fff" opacity=".72">依店員手勢停車</text>
+              </g>
+
+              <path d="M220 211h32" stroke="#e86f51" stroke-width="6" stroke-linecap="round"/><path d="M245 201l12 10-12 10" fill="none" stroke="#e86f51" stroke-width="6"/>
+
+              <g transform="translate(262 116)">
+                <rect width="172" height="190" rx="18" fill="#174a5b"/>
+                <circle cx="34" cy="34" r="20" fill="#0d7d79"/>
+                <text x="34" y="41" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">2</text>
+                <g transform="translate(38 64)" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="48" cy="33" r="28"/>
+                  <path d="M48 6v54M21 33h54M16 75h64"/>
+                  <path d="M86 4v64M86 12h28v48H86"/>
+                </g>
+                <text x="86" y="155" text-anchor="middle" font-size="19" font-weight="900" fill="#fff">熄火、搖窗</text>
+                <text x="86" y="178" text-anchor="middle" font-size="14" fill="#fff" opacity=".72">排 P 檔、駐車制動</text>
+              </g>
+
+              <path d="M440 211h32" stroke="#e86f51" stroke-width="6" stroke-linecap="round"/><path d="M465 201l12 10-12 10" fill="none" stroke="#e86f51" stroke-width="6"/>
+
+              <g transform="translate(482 116)">
+                <rect width="212" height="190" rx="18" fill="#6f3f21"/>
+                <circle cx="34" cy="34" r="20" fill="#d99b48"/>
+                <text x="34" y="41" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">3</text>
+                <path d="M28 65h156v62H73l-18 17 3-17H28z" fill="#fff" opacity=".96"/>
+                <text x="106" y="91" text-anchor="middle" font-size="17" font-weight="900" fill="#6f3f21">レギュラー、</text>
+                <text x="106" y="115" text-anchor="middle" font-size="17" font-weight="900" fill="#6f3f21">満タンでお願いします</text>
+                <text x="106" y="165" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">說油種＋加滿</text>
+              </g>
+
+              <path d="M700 211h32" stroke="#e86f51" stroke-width="6" stroke-linecap="round"/><path d="M725 201l12 10-12 10" fill="none" stroke="#e86f51" stroke-width="6"/>
+
+              <g transform="translate(742 116)">
+                <rect width="130" height="190" rx="18" fill="#174a5b"/>
+                <circle cx="32" cy="34" r="20" fill="#0d7d79"/>
+                <text x="32" y="41" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">4</text>
+                <g transform="translate(28 66)" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="0" width="52" height="78" rx="7"/>
+                  <path d="M54 14h17l12 14v53c0 11 17 11 17 0V53"/>
+                  <path d="M91 40l12 8-6 15-12-8z"/>
+                </g>
+                <text x="65" y="165" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">店員加油</text>
+              </g>
+
+              <path d="M878 211h30" stroke="#e86f51" stroke-width="6" stroke-linecap="round"/><path d="M901 201l12 10-12 10" fill="none" stroke="#e86f51" stroke-width="6"/>
+
+              <g transform="translate(918 116)">
+                <rect width="84" height="190" rx="18" fill="#0d7d79"/>
+                <circle cx="24" cy="34" r="18" fill="#fff" opacity=".2"/>
+                <text x="24" y="40" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">5</text>
+                <g transform="translate(20 68)" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="0" y="0" width="44" height="30" rx="4"/>
+                  <path d="M6 10h32M9 44h28v36H9zM15 54h16M15 64h16"/>
+                </g>
+                <text x="42" y="165" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">付款</text>
+                <text x="42" y="184" text-anchor="middle" font-size="13" fill="#fff">收據</text>
+              </g>
+
+              <rect x="42" y="324" width="960" height="27" rx="13" fill="#d9a441" opacity=".18"/>
+              <text x="522" y="343" text-anchor="middle" font-size="15" font-weight="800" class="svg-ink">不確定油種：先說「レンタカーです」，再把租車單或油箱蓋標示給店員看</text>
+            </svg>
+            </div>
+            <div class="booking-strip" style="margin-top:12px">
+              <div><span>一般汽油加滿</span><b lang="ja">レギュラー、満タンでお願いします。</b></div>
+              <div><span>這是租賃車</span><b lang="ja">レンタカーです。</b></div>
+              <div><span>請問這輛車應加什麼油？</span><b lang="ja">この車はどの燃料ですか？</b></div>
+              <div><span>用信用卡付款</span><b lang="ja">クレジットカードでお願いします。</b></div>
+              <div><span>請給我收據</span><b lang="ja">レシートをください。</b></div>
+            </div>
+
+            <h4>本次還車前怎麼做</h4>
+            <ul>
+              <li>取車時先問 BBJ：<b>還車前是否有指定加油站、可接受的距離或收據要求</b>。BBJ 的規定優先於一般租車經驗。</li>
+              <li>還車前在門市附近加滿；加完立即拍<b>油表、里程、收據</b>三張照片，紙本收據交還車櫃檯。</li>
+              <li>若來不及加滿，先聯絡 BBJ。租車公司以里程或油表代加的費用，通常可能高於自行加油。</li>
+              <li>北海道郊區加油站可能較早關門；長途移動不要等到警示燈亮才找站，油量約剩半箱就可配合休息點補油。</li>
+            </ul>
+
+            <div class="notice"><b>如果加錯油：絕對不要發動引擎。</b>停留在安全位置，立即聯絡 BBJ（+81-11-826-4388）並依指示處理。若已發動，安全停車熄火後聯絡門市，不要繼續行駛。誤加燃油可能造成引擎損壞，且不一定由租車保障支付。</div>
+            <p class="privacy">參考：<a href="https://www.nipponrentacar.co.jp/en/nrglobal/guide/insurance.html">NIPPON Rent-A-Car｜日本加油、油槍顏色與誤加處理</a> · <a href="https://www.nipponrentacar.co.jp/en/guide/beginner.html">NIPPON Rent-A-Car｜滿油還車與收據</a>｜查核日期：2026/8/2。實際以 BBJ 租車契約、取得車輛與現場加油機指示為準。</p>
+          </div>
+        </details>
+        <details>
+          <summary>取消、修改與逾時規定</summary>
+          <div class="detail-body">
+            <table class="table">
+              <thead><tr><th>日本當地時間</th><th>憑證所列費用</th></tr></thead>
+              <tbody>
+                <tr><td>2026/8/11 16:00 前</td><td>免費取消</td></tr>
+                <tr><td>8/11 16:00～8/12 16:00</td><td>收取 NT$3,330</td></tr>
+                <tr><td>8/12 16:00～8/13 16:00</td><td>收取 NT$11,100</td></tr>
+                <tr><td>8/13 16:00 後</td><td>不可退款</td></tr>
+              </tbody>
+            </table>
+            <p class="privacy">憑證原文列出的第二階段費用為 NT$11,100，高於已付款總額 NT$10,095；若需取消，應先在 Klook 預訂頁向客服確認實際扣款。訂單標示為不可更改。</p>
+          </div>
+        </details>
+        <details>
+          <summary>租車憑證所列保險與理賠上限</summary>
+          <div class="detail-body">
+            <table class="table">
+              <thead><tr><th>保障項目</th><th>憑證所列條件／上限</th></tr></thead>
+              <tbody>
+                <tr><td>租賃車輛損失或損壞</td><td>自負額 ¥0；涵蓋玻璃、車窗、後視鏡、車輪、輪胎、底盤、車頂、車燈等汽車零組件</td></tr>
+                <tr><td>第三人責任險</td><td>自負額 ¥50,000</td></tr>
+                <tr><td>營業損失賠償（NOC）</td><td>理賠上限 ¥127,586</td></tr>
+                <tr><td>車窗、底盤、輪胎及後視鏡專案保障</td><td>理賠上限 ¥956,893</td></tr>
+                <tr><td>緊急道路救援費用報銷</td><td>理賠上限 ¥956,893</td></tr>
+                <tr><td>違規用車／誤加燃油等</td><td>理賠上限 ¥23,922</td></tr>
+                <tr><td>不可抗力造成行程中斷</td><td>最長延長 24 小時</td></tr>
+                <tr><td>租賃物品遺失</td><td>理賠上限 ¥127,586（如 GPS、兒童座椅、雪鏈）</td></tr>
+              </tbody>
+            </table>
+            <p class="privacy">以上為租車憑證摘要；Klook 安心保障另由第三方保險提供者承保與理賠。實際承保範圍、除外責任、文件要求及是否先行墊付，均以正式保障條款與理賠審核為準。</p>
+          </div>
+        </details>
+        <details>
+          <summary>發生事故、故障或損壞時</summary>
+          <div class="detail-body">
+            <ol>
+              <li>立即確認人員安全，必要時聯絡日本警察及緊急服務。</li>
+              <li>第一時間通知 BBJ 租車公司，依租賃協議上的電話與指示處理。</li>
+              <li>拍攝現場、車輛、對方車輛、道路與所有損壞照片，保存警方或事故證明。</li>
+              <li>保留維修、拖吊、加油、道路救援及其他所有收據與文件。</li>
+              <li>再依租車公司與第三方保障提供者要求提出理賠；租車公司會提供後續說明。</li>
+            </ol>
+          </div>
+        </details>
+        <details>
+          <summary>訂單中的其他資料</summary>
+          <div class="detail-body">
+            <div class="booking-strip" style="margin-top:0">
+              <div><span>SIPP Code</span><b>CMAV</b></div>
+              <div><span>關聯抵達航班</span><b>JX850</b></div>
+              <div><span>承租人聯絡資料</span><b>電話與 Email 已從公開版移除</b></div>
+            </div>
+            <p class="privacy">私人訂位如需查詢，請由本人登入原預訂平台。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="hotels">
+      <div class="section-head">
+        <div><p class="section-kicker">STAYS</p><h2>住宿安排</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="hotel-list">
+        <article class="hotel card">
+          <div class="hotel-date"><b>8/13</b><span>週四入住</span><b style="margin-top:22px">8/16</b><span>週日退房</span></div>
+          <div class="hotel-content">
+            <div class="hotel-heading">
+              <div><h3>FAV LUX 札幌薄野</h3><p class="hotel-en">FAV LUX Sapporo Susukino</p></div>
+              <span class="price">NT$37,668</span>
+            </div>
+            <div class="hotel-info">
+              <div><small>住宿</small><b>3 晚・1 間客房</b></div>
+              <div><small>旅客</small><b>2 位成人・2 位小孩</b></div>
+              <div><small>地址（日本語）</small><b lang="ja">〒064-0806 北海道札幌市中央区南6条西7丁目2-2</b></div>
+              <div><small>預訂日期</small><b>2026/6/1</b></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hotel card">
+          <div class="hotel-date"><b>8/16</b><span>週日入住</span><b style="margin-top:22px">8/18</b><span>週二退房</span></div>
+          <div class="hotel-content">
+            <div class="hotel-heading">
+              <div><h3>函館普樂美雅凱賓總統飯店</h3><p class="hotel-en">Premier Hotel - Cabin President - Hakodate</p></div>
+              <span class="price">NT$6,727</span>
+            </div>
+            <div class="hotel-info">
+              <div><small>住宿</small><b>2 晚・1 間客房</b></div>
+              <div><small>旅客</small><b>2 位成人・2 位小孩</b></div>
+              <div><small>地址（日本語）</small><b lang="ja">〒040-0063 北海道函館市若松町14番10号</b></div>
+              <div><small>預訂日期</small><b>2026/6/1</b></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="hotel card">
+          <div class="hotel-date"><b>8/18</b><span>週二 14:00 後</span><b style="margin-top:22px">8/20</b><span>週四 10:00 前</span></div>
+          <div class="hotel-content">
+            <div class="hotel-heading">
+              <div><h3>洞爺太陽皇宮度假村及水療中心</h3><p class="hotel-en">Toya Sun Palace Resort & Spa</p></div>
+              <span class="price">NT$30,180</span>
+            </div>
+            <div class="hotel-info">
+              <div><small>房型</small><b>日式湖畔房・禁菸・有窗</b></div>
+              <div><small>空間／寢具</small><b>約 28 m²・5 張日式床墊</b></div>
+              <div><small>旅客</small><b>2 成人・2 兒童（年齡已從公開版移除）</b></div>
+              <div><small>地址（日本語）</small><b lang="ja">〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1</b></div>
+              <div><small>8/18</small><b>四人晚餐</b></div>
+              <div><small>8/19～8/20</small><b>19 日早晚餐・20 日早餐</b></div>
+            </div>
+            <div class="notice"><b>取消提醒：</b>2026/8/8 23:59 前（飯店當地時間）可免費取消。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="show-japanese">
+      <div class="section-head">
+        <div><p class="section-kicker">SHOW IN JAPAN</p><h2>給當地人看的日文</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="place-grid">
+        <article class="place-card card">
+          <div><h3>札幌住宿</h3><span class="place-jp" lang="ja">FAV LUX 札幌すすきの</span><p lang="ja">〒064-0806 北海道札幌市中央区南6条西7丁目2-2</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('FAV LUX 札幌すすきの','〒064-0806 北海道札幌市中央区南6条西7丁目2-2')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>8/15 晚餐</h3><span class="place-jp" lang="ja">ガヤ すすきの店</span><p lang="ja">北海道札幌市中央区南5条西2丁目 サイバーシティビル3F</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('ガヤ すすきの店','8月15日 18時30分、4名で予約しています。予約名と番号は公開版から削除しました。\n北海道札幌市中央区南5条西2丁目 サイバーシティビル3F')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>函館住宿</h3><span class="place-jp" lang="ja">プレミアホテル-CABIN PRESIDENT-函館</span><p lang="ja">〒040-0063 北海道函館市若松町14番10号</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('プレミアホテル-CABIN PRESIDENT-函館','〒040-0063 北海道函館市若松町14番10号')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>洞爺住宿</h3><span class="place-jp" lang="ja">洞爺サンパレス リゾート＆スパ</span><p lang="ja">〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('洞爺サンパレス リゾート＆スパ','〒049-5731 北海道有珠郡壮瞥町字洞爺湖温泉7-1')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>北海道機場</h3><span class="place-jp" lang="ja">新千歳空港 国際線ターミナル</span><p lang="ja">北海道千歳市美々</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('新千歳空港 国際線ターミナル','北海道千歳市美々')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>租車門市</h3><span class="place-jp" lang="ja">BBJ Airport Rent A Car</span><p lang="ja">〒066-0012 北海道千歳市美々1292-18</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('BBJ Airport Rent A Car','〒066-0012 北海道千歳市美々1292-18')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>機場接駁集合點</h3><span class="place-jp" lang="ja">新千歳空港 国内線ターミナル 1階</span><p lang="ja">98番バス乗り場</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('新千歳空港 国内線ターミナル 1階','98番バス乗り場')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>函館交通節點</h3><span class="place-jp" lang="ja">JR函館駅</span><p lang="ja">北海道函館市若松町12-13</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('JR函館駅','北海道函館市若松町12-13')">放大出示</button>
+        </article>
+        <article class="place-card card">
+          <div><h3>洞爺交通節點</h3><span class="place-jp" lang="ja">JR洞爺駅</span><p lang="ja">北海道虻田郡洞爺湖町旭町</p></div>
+          <button class="show-btn" type="button" onclick="showPlace('JR洞爺駅','北海道虻田郡洞爺湖町旭町')">放大出示</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="tax-free">
+      <div class="section-head">
+        <div><p class="section-kicker">TAX-FREE SHOPPING</p><h2>2026 年 8 月免稅規定</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="tax-banner card">
+        <div class="tax-rate">8月</div>
+        <div><h3>仍是店內直接免稅／免稅櫃台退稅</h3><p>2026/11/1 才改為「先付含稅價、出境查驗後退款」；本次 8 月旅行尚未適用新制。</p></div>
+      </div>
+      <div class="tax-grid">
+        <article class="tax-card card">
+          <span class="num">1</span><h3>誰可以辦</h3>
+          <p>以「短期滯在」等非居住者身分入境的外國旅客。結帳時由<b>購買本人出示護照正本</b>；部分店家可讀取 Visit Japan Web 免稅 QR，但仍建議隨身攜帶護照。</p>
+        </article>
+        <article class="tax-card card">
+          <span class="num">2</span><h3>一般物品</h3>
+          <p>家電、服飾、鞋包、飾品等，同一人在<b>同一店家、同一天，未稅合計滿 ¥5,000</b>。沒有現行制度的購買上限。</p>
+        </article>
+        <article class="tax-card card">
+          <span class="num">3</span><h3>消耗品</h3>
+          <p>食品、飲料、藥品及化妝品等，同一人在<b>同一店家、同一天，未稅 ¥5,000～¥500,000</b>。店家會依規定封裝。</p>
+        </article>
+        <article class="tax-card card">
+          <span class="num">4</span><h3>日本境內不要拆用</h3>
+          <p>免稅消耗品在離境前<b>不可拆封、食用或使用</b>。所有免稅品必須由本人攜帶出境，不得轉售或代購作商業用途。</p>
+        </article>
+        <article class="tax-card card">
+          <span class="num">5</span><h3>新千歲機場離境</h3>
+          <p>保留免稅品、護照與收據以備海關查驗。若免稅品要放入託運行李，應<b>先取得海關確認，再到航空公司託運</b>。</p>
+        </article>
+        <article class="tax-card card">
+          <span class="num">6</span><h3>不可郵寄替代攜帶</h3>
+          <p>自 2025/4/1 起，利用國際包裹另寄商品的方式原則上不再適用免稅；本次請將免稅品放在自己的行李中帶離日本。</p>
+        </article>
+      </div>
+      <div class="booking-strip">
+        <div><span>混合購買</span><b>一般物品與消耗品各自未滿 ¥5,000 時，合計滿 ¥5,000 仍可能辦理</b></div>
+        <div><span>此時注意</span><b>全部會比照消耗品封裝，合計上限為未稅 ¥500,000</b></div>
+      </div>
+      <details style="margin-top:12px">
+        <summary>購物現場可出示的日文</summary>
+        <div class="detail-body">
+          <div class="phrase-list">
+            <div class="phrase"><b lang="ja">免税できますか？</b><small>請問可以免稅嗎？</small></div>
+            <div class="phrase"><b lang="ja">パスポートはこちらです。</b><small>這是我的護照。</small></div>
+            <div class="phrase"><b lang="ja">この商品は免税対象ですか？</b><small>這項商品可以免稅嗎？</small></div>
+            <div class="phrase"><b lang="ja">免税カウンターはどこですか？</b><small>免稅櫃台在哪裡？</small></div>
+            <div class="phrase"><b lang="ja">免税品を預け荷物に入れます。</b><small>我要把免稅品放進託運行李。</small></div>
+            <div class="phrase"><b lang="ja">税関の確認場所はどこですか？</b><small>海關查驗地點在哪裡？</small></div>
+          </div>
+        </div>
+      </details>
+      <div class="notice"><b>查核版本：</b>依日本國稅廳、觀光廳及日本政府觀光局於 2026/7/27 可取得的官方資料整理。各店可另收手續費或設有不同櫃台流程，現場仍以店家說明為準。</div>
+    </section>
+
+    <section id="esim">
+      <div class="section-head">
+        <div><p class="section-kicker">MOBILE DATA</p><h2>Ubigi eSIM 安裝說明</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="esim-hero card">
+        <div><h3>建議：兩位成人各一張</h3><p>Ubigi 日本 10GB／30 天・KDDI＋NTT Docomo・資料專用・可分享熱點</p></div>
+        <div class="esim-plan"><strong>10GB／30天</strong><span>每支手機獨立使用</span></div>
+      </div>
+
+      <div class="step-list">
+        <article class="step-card card"><span class="step-no">1</span><h3>確認手機可用</h3><p>撥打 <b>*#06#</b>，畫面有 EID 通常代表支援 eSIM。iPhone 可到「設定 → 一般 → 關於本機」確認電信業者鎖為「沒有 SIM 卡限制」。</p></article>
+        <article class="step-card card"><span class="step-no">2</span><h3>購買方案</h3><p>從 Ubigi 官方網站或官方 App 購買日本方案。使用常用 Email 註冊，保存訂單、帳號密碼與收到的 QR code。</p></article>
+        <article class="step-card card"><span class="step-no">3</span><h3>連接 Wi‑Fi 安裝</h3><p>在台灣先安裝，不必等到日本。用相機掃描 Email 中的 QR code，或長按 QR code；依畫面選擇「繼續／加入行動方案」。</p></article>
+        <article class="step-card card"><span class="step-no">4</span><h3>命名為 Ubigi</h3><p>將新門號標籤改成「Ubigi」，避免與台灣原門號混淆。Ubigi 是資料專用，不提供日本電話號碼或一般簡訊。</p></article>
+        <article class="step-card card"><span class="step-no">5</span><h3>抵達日本後切換</h3><p>開啟 Ubigi eSIM，將「行動數據／行動資料」指定為 Ubigi，並開啟 <b>Ubigi 的數據漫遊</b>。抵達後連上支援網路才開始使用方案。</p></article>
+        <article class="step-card card"><span class="step-no">6</span><h3>避免台灣門號漫遊費</h3><p>台灣門號可保留開啟以接收簡訊，但關閉其「數據漫遊」；iPhone 同時關閉「允許行動數據切換」，避免自動改用台灣門號上網。</p></article>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary>iPhone／iPad 設定位置</summary>
+        <div class="detail-body">
+          <table class="table setting-table">
+            <tbody>
+              <tr><td>安裝 QR code</td><td>設定 → 行動服務／行動數據 → 加入 eSIM → 使用行動條碼</td></tr>
+              <tr><td>預設語音門號</td><td>選台灣原門號，保留接電話與簡訊</td></tr>
+              <tr><td>行動數據</td><td class="safe-setting">選 Ubigi</td></tr>
+              <tr><td>Ubigi 數據漫遊</td><td class="safe-setting">抵達日本後開啟</td></tr>
+              <tr><td>台灣門號數據漫遊</td><td><b>關閉</b></td></tr>
+              <tr><td>允許行動數據切換</td><td><b>關閉</b></td></tr>
+              <tr><td>FaceTime／iMessage</td><td>保留台灣原門號；Ubigi 沒有電話號碼，不需要綁定 Apple ID</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details>
+        <summary>Android 設定位置</summary>
+        <div class="detail-body">
+          <table class="table setting-table">
+            <tbody>
+              <tr><td>安裝 QR code</td><td>設定 → 連線／網路與網際網路 → SIM 管理員 → 新增 eSIM</td></tr>
+              <tr><td>行動數據</td><td class="safe-setting">選 Ubigi</td></tr>
+              <tr><td>Ubigi 數據漫遊</td><td class="safe-setting">抵達日本後開啟</td></tr>
+              <tr><td>台灣門號數據漫遊</td><td><b>關閉</b></td></tr>
+              <tr><td>APN</td><td>若未自動建立：名稱填 <b>Ubigi</b>、APN 填 <b>mbb</b>，儲存後選取</td></tr>
+            </tbody>
+          </table>
+          <p class="privacy">不同品牌的選單名稱會略有差異；Samsung 常見路徑為「設定 → 連接 → SIM 卡管理員／行動網路」。</p>
+        </div>
+      </details>
+      <details>
+        <summary>抵達日本後無法上網時</summary>
+        <div class="detail-body">
+          <ol>
+            <li>先關閉 Wi‑Fi，確認 Ubigi eSIM 已開啟且仍有有效方案。</li>
+            <li>確認行動數據指定為 Ubigi；雙 SIM 手機一次只能指定一張 SIM 使用行動數據。</li>
+            <li>確認 Ubigi 的數據漫遊已開啟，台灣門號的數據漫遊仍為關閉。</li>
+            <li>開啟飛航模式約 10 秒後關閉，或重新啟動手機。</li>
+            <li>Android 確認 APN 為 <b>mbb</b>；仍無網路時，將網路選擇改為自動，或重新搜尋 KDDI／NTT Docomo。</li>
+            <li>不要隨意刪除 eSIM；先用飯店或機場 Wi‑Fi 登入 Ubigi App 查看方案與聯絡客服。</li>
+          </ol>
+        </div>
+      </details>
+      <div class="notice"><b>重要：</b>QR code 通常應直接掃描安裝，不要把含 QR code 的 Email 公開轉傳。安裝完成後請保留 Ubigi App、購買收據及帳號資料；北海道山區與隧道仍可能短暫無訊號，出發前務必下載離線地圖。</div>
+    </section>
+
+    <section id="pikmin">
+      <div class="section-head">
+        <div><p class="section-kicker">PIKMIN BLOOM</p><h2>北海道明信片收藏作戰</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+
+      <div class="pikmin-hero card">
+        <h3>第一優先：札幌官方「Walk Anytime」</h3>
+        <p>這是官方常設的札幌在地活動。從遊戲內 Local Event Portal 以 <b>700 coins</b> 換票，人在札幌活動範圍內觸碰特殊地點即可開始；12 個特殊地點中滑取 7 個，可完成官方明信片任務。每曆年可參加一次，開始後可在當年 12/31 前完成。</p>
+        <div class="pikmin-key"><span>✓ 官方明信片任務</span><span>12 個 Special Spots</span><span>滑取任 7 個</span><span>需 App v143 以上</span></div>
+      </div>
+
+      <div class="pikmin-alerts">
+        <article class="pikmin-alert card"><span class="pikmin-badge official">必取候選</span><strong>札幌 Tour 明信片</strong><p>旅途中唯一能事先確認條件的官方明信片任務；建議 8/14 市區日集中完成。</p></article>
+        <article class="pikmin-alert card"><span class="pikmin-badge event">特殊活動</span><strong>巨大海沫色菇</strong><p><b>8/15、8/16</b> 兩天出現；與小樽日、札幌→函館移動日重疊，看到就優先保留每日菇次數。</p></article>
+        <article class="pikmin-alert card"><span class="pikmin-badge event">8 月限定</span><strong>暑假活動進行中</strong><p>8/1～8/31 收集 Tropical Coconuts，取得峇里島雕刻、刨冰及冰淇淋系列苗；本次全旅程都在活動期內。</p></article>
+      </div>
+
+      <details open>
+        <summary>札幌 12 個官方特殊地點｜依你行程拆成三組</summary>
+        <div class="detail-body">
+          <p><b>最省力策略：</b>8/14 配合市區行程先取中央區 7～9 點；若漏點，8/16 二條市場早餐可補 L。每到一點要在遊戲裡實際滑取，不是只走過。</p>
+          <div class="spot-route">
+            <div class="spot-group"><h4>札幌站周邊</h4><ol>
+              <li>札幌站 <small lang="ja">札幌駅</small></li>
+              <li>札幌 Stellar Place <small lang="ja">札幌ステラプレイス</small></li>
+              <li>六花亭札幌本店 <small lang="ja">六花亭 札幌本店</small></li>
+            </ol></div>
+            <div class="spot-group"><h4>時計台・電視塔</h4><ol start="4">
+              <li>北3條廣場 Akapla <small lang="ja">札幌市北3条広場 アカプラ</small></li>
+              <li>札幌市時計台 <small lang="ja">札幌市時計台</small></li>
+              <li>札幌市民交流廣場 <small lang="ja">札幌市民交流プラザ</small></li>
+              <li>北菓樓札幌本館 <small lang="ja">北菓楼 札幌本館</small></li>
+              <li>札幌電視塔 <small lang="ja">さっぽろテレビ塔</small></li>
+            </ol></div>
+            <div class="spot-group"><h4>大通・二條市場</h4><ol start="9">
+              <li>大通公園噴水 <small lang="ja">大通公園 噴水</small></li>
+              <li>大通公園森林區 <small lang="ja">大通公園</small></li>
+              <li>札幌市資料館 <small lang="ja">札幌市資料館</small></li>
+              <li>二條市場 <small lang="ja">二条市場</small></li>
+            </ol></div>
+          </div>
+          <div class="notice"><b>路線建議：</b>札幌站 A/B → 六花亭 C → Akapla D → 時計台 E → 市民交流廣場 F → 北菓樓 G → 電視塔 H → 大通公園 I/J → 資料館 K。二條市場 L 可留到 8/16 早餐。官方地點可能調整，出發前與現場仍以遊戲地圖為準。</div>
+          <p class="source-links"><a href="https://pikminbloom.com/news/apr26-sapporotour">官方活動說明（需網路）</a> · <a href="https://www.google.com/maps/d/viewer?mid=1VEV7APUvvr7d0cgPJxez-3h8XMaAaKY">官方 Google 地圖（需網路）</a></p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>依日期整理｜一般明信片與地標狩獵</summary>
+        <div class="detail-body">
+          <p><span class="pikmin-badge chance">機會取得</span> 下列是最值得在現場打開遊戲、查看探測器與遠征的地標；一般遠征只會「有時」帶回明信片，照片也取決於遊戲 Wayspot，並非走到就保證取得。</p>
+          <div class="hunt-list">
+            <article class="hunt-day"><time>8/13 週四・新千歲 → 札幌</time><h4>新千歲機場・狸小路</h4><p><b>優先：</b>新千歲機場、狸小路商店街。入住後在狸小路安全停留時檢查遠征；不要在接送車上操作。</p></article>
+            <article class="hunt-day"><time>8/14 週五・札幌市區</time><h4>官方任務主攻日</h4><p><b>必巡：</b>白色戀人公園、北海道神宮、時計台、札幌電視塔、大通公園、札幌啤酒博物館；其中時計台／電視塔／大通也屬官方特殊地點。</p></article>
+            <article class="hunt-day"><time>8/15 週六・小樽</time><h4>小樽代表景</h4><p><b>優先：</b>小樽運河淺草橋、堺町通、北一硝子、小樽音樂盒堂。另有巨大海沫色菇，午間或回札幌途中檢查一次。</p></article>
+            <article class="hunt-day"><time>8/16 週日・札幌 → 函館</time><h4>二條市場補點・函館山</h4><p><b>優先：</b>二條市場官方特殊點、八雲休息區、函館站、函館山／纜車。當天仍有巨大海沫色菇。</p></article>
+            <article class="hunt-day"><time>8/17 週一・函館</time><h4>函館自由日候選</h4><p><b>若前往：</b>函館朝市、五稜郭塔、金森紅磚倉庫。這三處很適合地標明信片，但尚非已確認預訂行程。</p></article>
+            <article class="hunt-day"><time>8/18 週二・函館 → 洞爺</time><h4>昭和新山・洞爺湖</h4><p><b>優先：</b>昭和新山熊牧場、昭和新山、洞爺湖畔。抵達飯店後再查看附近菇與遠征。</p></article>
+            <article class="hunt-day"><time>8/19 週三・洞爺／登別</time><h4>城堡與溫泉地標</h4><p><b>優先：</b>登別尼克斯海洋公園、登別溫泉街、地獄谷；城堡外觀與鬼像周邊值得檢查遊戲地圖。</p></article>
+            <article class="hunt-day"><time>8/20 週四・洞爺 → 新千歲</time><h4>回程收尾</h4><p><b>優先：</b>洞爺湖最後一次檢查、新千歲機場。登機前把仍在附近且想要的遠征派出去。</p></article>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>現場操作清單｜提高帶回機會</summary>
+        <div class="detail-body">
+          <ol class="pikmin-check">
+            <li><b>出發前先清明信片容量：</b>容量已滿就不會收到新明信片。</li>
+            <li><b>抵達地標後才開遊戲：</b>停在安全位置，查看遠征、附近菇與探測器分類；不要在駕駛中操作。</li>
+            <li><b>菇的明信片較確定：</b>完成菇會帶回記錄結果的特殊明信片；普通遠征則只「有時」帶回。</li>
+            <li><b>離開城市前巡一次遠征：</b>在飯店、休息站或機場等候時派出想要的地標遠征，遠征完成後再確認明信片。</li>
+            <li><b>札幌官方任務要逐點滑取：</b>買票後必須身在特殊地點範圍；以遊戲內顯示為準，集滿 7 點後確認任務獎勵已領。</li>
+            <li><b>8/15、8/16 留菇次數：</b>優先打巨大海沫色菇，並持續種花、完成活動挑戰收集 Tropical Coconuts。</li>
+          </ol>
+          <div class="notice"><b>保證程度：</b>只有官方札幌活動的「滑取 7 個 Special Spots → Postcard」是明載任務。其餘地標皆為高價值候選；Wayspot 圖片、是否出現遠征及是否附明信片都可能不同。</div>
+          <p class="source-links"><a href="https://pikminbloom.com/news/august26-resortevent">2026 暑假活動公告（需網路）</a> · <a href="https://niantic.helpshift.com/hc/en/23-pikmin-bloom/faq/2858-postcards/">官方明信片規則（需網路）</a></p>
+        </div>
+      </details>
+    </section>
+
+    <section id="souvenirs">
+      <div class="section-head">
+        <div><p class="section-kicker">SOUVENIR GUIDE</p><h2>北海道伴手禮清單</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="gift-legend">
+        <span>心意度：送人時的體面與特色</span><span>價格友善：星越多越省</span><span>限定度：星越多越難在北海道外買到</span>
+      </div>
+      <div class="notice"><b>價格說明：</b>以下為 2026/8/2 查得的官方價格或適合購買的約略區間，實際仍依包裝大小、店舖與現場標價。夏季旅程優先買常溫品；冷藏品留到新千歲機場或回程前再買。</div>
+
+      <div class="gift-grid" style="margin-top:14px">
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin hokkaido">北海道經典</span><h3>白色戀人</h3><p class="jp-name" lang="ja">白い恋人</p></div><div class="gift-price">12枚 ¥1,144</div></div>
+          <p>辨識度最高、獨立包裝又好分送。送同事或多人辦公室最穩妥；缺點是非常常見，驚喜感較低。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★☆</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★★☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★☆☆☆</b></div></div>
+          <div class="gift-buy"><b>何時買：</b>8/14 白色戀人公園先看限定包裝；一般盒裝可留到新千歲機場。常溫攜帶。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin hokkaido">北海道經典</span><h3>六花亭奶油葡萄夾心餅</h3><p class="jp-name" lang="ja">マルセイバターサンド</p></div><div class="gift-price">約 ¥800～2,000</div></div>
+          <p>奶油、白巧克力與葡萄乾風味濃郁，包裝有北海道老字號感，適合送長輩或重視口味的人。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★★☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★☆☆</b></div></div>
+          <div class="gift-buy"><b>何時買：</b>札幌官方 Pikmin 路線會經六花亭札幌本店，可在此挑選；夏天避免長時間放車內。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin hokkaido">北海道限定</span><h3>札幌農學校牛奶餅乾</h3><p class="jp-name" lang="ja">札幌農学校 北海道ミルククッキー</p></div><div class="gift-price">約 ¥700～1,800</div></div>
+          <p>味道溫和、重量輕、孩子與長輩都容易接受；比白色戀人低調，適合大量分送而不顯隨便。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★☆</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★☆☆</b></div></div>
+          <div class="gift-buy"><b>何時買：</b>札幌市區或新千歲機場。常溫、易攜帶，是行李空間不足時的首選。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin hokkaido">北海道限定</span><h3>薯條三兄弟</h3><p class="jp-name" lang="ja">じゃがポックル</p></div><div class="gift-price">約 ¥700～1,300</div></div>
+          <p>北海道馬鈴薯與鄂霍次克海鹽，分裝方便、鹹食接受度高。送不愛甜食的人特別實用。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★☆☆</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★★☆</b></div></div>
+          <div class="gift-buy"><b>何時買：</b>新千歲機場最方便；看到「北海道とうきび味」等新口味可優先選，體積較大但不怕壓。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin hokkaido">北海道經典</span><h3>ROYCE 生巧克力［牛奶］</h3><p class="jp-name" lang="ja">生チョコレート［オーレ］</p></div><div class="gift-price">20粒 ¥1,215</div></div>
+          <p>口感細緻、送禮體面，適合重要親友；含微量酒精。官方要求 10°C 以下冷藏，夏季不能整天放車內。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★☆☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★☆☆</b></div></div>
+          <div class="gift-buy"><b>何時買：</b><span class="cold-note">8/20 新千歲機場最後購買並加保冷袋</span>；返台後立即冷藏。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin local">小樽代表</span><h3>LeTAO 雙層起司蛋糕</h3><p class="jp-name" lang="ja">ドゥーブルフロマージュ</p></div><div class="gift-price">¥2,376</div></div>
+          <p>小樽代表性最強，心意與話題性都高；但屬冷凍蛋糕，跨城市旅行及帶回台灣的保存難度最高。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★☆☆☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★★☆</b></div></div>
+          <div class="gift-buy"><b>建議：</b><span class="cold-note">8/15 在小樽現場吃，不列為長途攜回首選</span>；送禮改買常溫 LeTAO 巧克力或餅乾。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin local">函館代表</span><h3>SNAFFLE'S 起司歐姆蛋糕</h3><p class="jp-name" lang="ja">チーズオムレット</p></div><div class="gift-price">8個 ¥1,944</div></div>
+          <p>函館辨識度高、柔軟如半熟舒芙蕾，適合家人共享。需 10°C 以下冷藏，官方標示製造日起 8 日。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★☆☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★★☆</b></div></div>
+          <div class="gift-buy"><b>建議：</b>8/16～18 函館期間買來自己吃；若要帶回台灣，應確認飯店冷藏與全程保冷，不建議放車廂。</div>
+        </article>
+
+        <article class="gift-card card">
+          <div class="gift-card-head"><div><span class="gift-origin local">洞爺代表</span><h3>洞爺名菓「わかさいも」</h3><p class="jp-name" lang="ja">わかさいも</p></div><div class="gift-price">18個 ¥2,700</div></div>
+          <p>其實沒有使用地瓜，而以北海道大福豆與昆布做出烤地瓜意象，故事性強，是本次路線最有「去過洞爺」感的禮物。</p>
+          <div class="gift-ratings"><div class="gift-rating"><small>心意</small><b class="stars">★★★★★</b></div><div class="gift-rating"><small>價格友善</small><b class="stars">★★★☆☆</b></div><div class="gift-rating"><small>限定度</small><b class="stars">★★★★★</b></div></div>
+          <div class="gift-buy"><b>何時買：</b>8/18～20 洞爺湖溫泉本店周邊；常溫、製造日起約 29 日，最適合作為地域限定禮。</div>
+        </article>
+      </div>
+
+      <details open style="margin-top:14px">
+        <summary>照行程購買｜不要一路提著走</summary>
+        <div class="detail-body">
+          <div class="gift-plan">
+            <div class="gift-stop"><time>8/14 札幌</time><b>先挑限定包裝</b><small>白色戀人公園、六花亭札幌本店；一般盒裝先不大量買。</small></div>
+            <div class="gift-stop"><time>8/15 小樽</time><b>現場吃 LeTAO</b><small>常溫餅乾可買；冷凍蛋糕不建議陪你移動 5 天。</small></div>
+            <div class="gift-stop"><time>8/16～20</time><b>函館與洞爺地域禮</b><small>函館買 SNAFFLE'S 現吃；洞爺買わかさいも帶回。</small></div>
+            <div class="gift-stop"><time>8/20 新千歲</time><b>最後統一補貨</b><small>白色戀人、札幌農學校、じゃがポックル、ROYCE 冷藏品。</small></div>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>快速選擇｜送誰最適合</summary>
+        <div class="detail-body">
+          <table class="table"><thead><tr><th>對象</th><th>首選</th><th>理由</th></tr></thead><tbody>
+            <tr><td>同事多人分送</td><td>白色戀人／札幌農學校</td><td>獨立包裝、辨識度高、預算好控制</td></tr>
+            <tr><td>重要親友</td><td>六花亭／ROYCE</td><td>包裝體面、口味有記憶點</td></tr>
+            <tr><td>不愛甜食</td><td>じゃがポックル</td><td>鹹香、分裝、接受度高</td></tr>
+            <tr><td>最有旅程故事</td><td>わかさいも</td><td>洞爺地域性最強，且名稱與原料有話題</td></tr>
+            <tr><td>自己現場享用</td><td>LeTAO／SNAFFLE'S</td><td>冷凍冷藏難帶，當地吃風味與風險最好</td></tr>
+          </tbody></table>
+        </div>
+      </details>
+      <p class="source-links"><a href="https://www.ishiya.co.jp/inquiry/">ISHIYA 官方價格</a> · <a href="https://www.royce.com/goods/detail/?o_no=2054">ROYCE 官方商品</a> · <a href="https://www.letao.jp/category/DOUBLE_FROMAGE/">LeTAO 官方商品</a> · <a href="https://www.snaffles.jp/online_sales/cheese_omelette/">SNAFFLE'S 官方商品</a> · <a href="https://shop.wakasaimo.com/view/item/000000000143">わかさいも官方商品</a></p>
+    </section>
+
+    <section id="bookings">
+      <div class="section-head">
+        <div><p class="section-kicker">DOCUMENTS</p><h2>公開版資料說明</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <details>
+        <summary>旅客與電子機票</summary>
+        <div class="detail-body">
+          <p>旅客姓名、票號、訂位代號及旅行社訂單編號已從公開版移除。完整資料請只保留在私人裝置與原訂位平台。</p>
+        </div>
+      </details>
+      <details>
+        <summary>洞爺飯店聯絡</summary>
+        <div class="detail-body">
+          <div class="booking-strip" style="margin-top:0">
+            <div><span>私人訂單與 PIN</span><b>已從公開版及程式碼移除</b></div>
+            <div><span>飯店電話</span><b>+81-142-751111</b></div>
+          </div>
+          <p class="privacy">需要管理訂位時，請由本人登入原訂房平台。</p>
+        </div>
+      </details>
+      <details>
+        <summary>重要搭機提醒</summary>
+        <div class="detail-body">
+          <ul>
+            <li>國際線建議於起飛前 2～3 小時抵達機場。</li>
+            <li>機票需依開立順序使用；若前一航段未使用，後續航段可能失效。</li>
+            <li>四位旅客目前皆未指定座位，出發前可再次確認選位。</li>
+            <li>護照建議確認回程日起仍有至少 6 個月效期。</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="budget">
+      <div class="section-head">
+        <div><p class="section-kicker">BUDGET</p><h2>目前已知費用</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="total-card card">
+        <div><h3>住宿與租車合計</h3><span style="color:rgba(255,255,255,.66)">三間住宿 74,575 ＋ 租車與其所列保障 10,095</span></div>
+        <div class="total">NT$84,670</div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="section-head">
+        <div><p class="section-kicker">READY TO GO</p><h2>出發前清單</h2></div>
+        <a class="section-top-link" href="#top">↑ 回到頁頭</a>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" data-check="passport"><span><b>確認四人護照效期</b><br><small class="muted">姓名拼音需與機票一致</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="seat"><span><b>完成四人選位</b><br><small class="muted">目前機票顯示尚未指定</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="flight"><span><b>下載機票與登機資料</b><br><small class="muted">另存於手機離線位置</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="hotel"><span><b>下載三間飯店確認單</b><br><small class="muted">保存訂單與入住憑證</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="cancel"><span><b>8/8 前確認洞爺訂單</b><br><small class="muted">免費取消期限 23:59</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="insurance"><span><b>旅平險與不便險</b><br><small class="muted">確認四位旅客保障</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="internet"><span><b>安裝兩張 Ubigi eSIM</b><br><small class="muted">兩位成人手機各自安裝並保存 QR code</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="transport"><span><b>確認城市間交通</b><br><small class="muted">札幌→函館→洞爺→新千歲</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="license"><span><b>駕照正本與日文譯本</b><br><small class="muted">取車時兩份都必須出示</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="rental-voucher"><span><b>列印租車憑證</b><br><small class="muted">私人訂單編號已從公開版移除</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="credit-card"><span><b>駕駛人實體信用卡</b><br><small class="muted">姓名一致、效期至少 6 個月</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="fuel"><span><b>還車前加滿油</b><br><small class="muted">保留最後一次加油收據與油表照片</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="taxfree"><span><b>免稅購物隨身帶護照</b><br><small class="muted">保留商品與收據至離境</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="pikmin-update"><span><b>更新 Pikmin Bloom</b><br><small class="muted">札幌 Walk Anytime 至少需 v143；出發前更新最新版</small></span></label>
+        <label class="check-item"><input type="checkbox" data-check="pikmin-space"><span><b>清出明信片容量</b><br><small class="muted">容量已滿將無法收到新明信片</small></span></label>
+      </div>
+      <div class="check-actions"><button class="soft-btn" type="button" onclick="clearChecks()">清除全部勾選</button></div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <p>2026 北海道家庭旅行 · 離線版行程手冊</p>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="回到表頭">↑ <span>表頭</span></a>
+  <div id="placeDialog" class="place-overlay" role="dialog" aria-modal="true" aria-labelledby="placeDialogName" aria-hidden="true" onclick="if(event.target===this) closePlace()">
+    <div class="place-overlay-panel">
+      <div class="place-dialog">
+        <small>この場所に行きたいです</small>
+        <h3 id="placeDialogName" lang="ja"></h3>
+        <p id="placeDialogAddress" lang="ja"></p>
+        <div class="dialog-actions">
+          <button class="show-btn" type="button" onclick="copyCurrentPlace()">日文をコピー</button>
+          <button class="soft-btn" type="button" onclick="closePlace()">關閉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const KEY = "hokkaido-2026-checks";
+    const boxes = [...document.querySelectorAll("[data-check]")];
+    function loadChecks() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+        boxes.forEach(box => box.checked = Boolean(saved[box.dataset.check]));
+      } catch (_) {}
+    }
+    function saveChecks() {
+      const state = {};
+      boxes.forEach(box => state[box.dataset.check] = box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {}
+    }
+    function clearChecks() {
+      boxes.forEach(box => box.checked = false);
+      saveChecks();
+      showToast("已清除全部勾選");
+    }
+    let currentPlaceText = "";
+    function showPlace(name, address) {
+      document.getElementById("placeDialogName").textContent = name;
+      document.getElementById("placeDialogAddress").textContent = address;
+      currentPlaceText = name + "\n" + address;
+      const overlay = document.getElementById("placeDialog");
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closePlace() {
+      const overlay = document.getElementById("placeDialog");
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    async function copyCurrentPlace() {
+      try {
+        await navigator.clipboard.writeText(currentPlaceText);
+        showToast("日文地點已複製");
+      } catch (_) {
+        showToast("請長按畫面上的日文複製");
+      }
+    }
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+    boxes.forEach(box => box.addEventListener("change", saveChecks));
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closePlace(); });
+    loadChecks();
+  </script>
+</body>
+</html>
